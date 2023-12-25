@@ -6,21 +6,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 public class User implements IModel {
     int id;
-    String username;
-    String email;
-    String password;
-    String phoneNumber;
-    String address;
+    UserCredentials userCredentials;
     String language;
     String template;
 
-    public User(int id, String username, String password, String phoneNumber, String address , String email , String language , String template) {
+    public User(int id,UserCredentials userCredentials, String language , String template) {
         this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
+        this.userCredentials = userCredentials;
         this.language = language;
         this.template = template;
     }
@@ -33,26 +25,11 @@ public class User implements IModel {
         this.id=id;
     }
 
-    public void copy(User newUser) {
-        this.username = newUser.getUsername();
-        this.password = newUser.getPassword();
-        this.phoneNumber = newUser.getPhoneNumber();
-        this.address = newUser.getAddress();
+    public void setUserCredentials(UserCredentials userCredentials) {
+        this.userCredentials = userCredentials;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getUsername() {
-        return username;
+    public UserCredentials getUserCredentials() {
+        return userCredentials;
     }
 }

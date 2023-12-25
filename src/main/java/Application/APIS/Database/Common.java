@@ -1,9 +1,11 @@
 package Application.APIS.Database;
 
+import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.Order;
 import Application.APIS.Orders.Model.ShoppingCartItem;
 import Application.APIS.Products.Model.Product;
 import Application.APIS.Users.Model.User;
+import Application.APIS.Users.Model.UserCredentials;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,8 +17,8 @@ import java.util.List;
 public class Common {
     public static List<User> users = new LinkedList<User>(
         List.of(
-            new User(1, "Abdelrhman", "admin", "0123456789", "Mokattam - Cairo" , "Example1@gmail.com" , "AR" , "SMS") ,
-            new User(2, "Atef", "user", "0123456789", "Madint Nasr - Cairo" , "Example2@gmail.com" , "EN" , "EMAIL")
+            new User(1, new UserCredentials("Abdelrhman", "admin", "0123456789", "Mokattam - Cairo" , "Example1@gmail.com") , "AR" , "SMS") ,
+            new User(2, new UserCredentials("Atef", "user", "0123456789", "Madint Nasr - Cairo" , "Example2@gmail.com") , "EN" , "EMAIL")
         )
     );
 
@@ -30,15 +32,6 @@ public class Common {
        )
     );
 
-    public static List<Order> orders = new LinkedList<Order>(
-        List.of(
-            new Order(1, 1, new Date(), "Waiting", 1,
-                    List.of(new ShoppingCartItem(20,1) , new ShoppingCartItem(20,2))
-            ),
-            new Order(2, 1, new Date(), "Waiting", 2,
-                     List.of(new ShoppingCartItem(2,4) , new ShoppingCartItem(3,5))
-            )
-        )
-    );
+    public static List<IOrder> orders = new LinkedList<IOrder>();
 
 }

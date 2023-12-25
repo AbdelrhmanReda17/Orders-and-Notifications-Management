@@ -1,5 +1,6 @@
 package Application.APIS.Orders.Controller;
 
+import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.Order;
 import Application.APIS.Orders.Service.OrderService;
 import Application.APIS.Users.UserRepository;
@@ -35,18 +36,18 @@ public class OrderController {
         }
     }
     @PostMapping("/")
-    public ResponseEntity<String> addOrder(@RequestBody Order person) {
+    public ResponseEntity<String> addOrder(@RequestBody IOrder order) {
         try {
-            orderService.addOrder(person);
+            orderService.addOrder(order);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.ok("Order added successfully");
     }
     @PatchMapping("/{id}")
-    public ResponseEntity<String> updateOrder(@PathVariable("id") int id, @RequestBody Order person) {
+    public ResponseEntity<String> updateOrder(@PathVariable("id") int id, @RequestBody IOrder order) {
         try {
-            orderService.updateOrder(id, person);
+            orderService.updateOrder(id, order);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
