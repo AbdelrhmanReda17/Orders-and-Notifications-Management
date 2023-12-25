@@ -1,4 +1,4 @@
-package Application.APIS.Database;
+package Application.Database;
 
 public interface IModel {
     public int getId();

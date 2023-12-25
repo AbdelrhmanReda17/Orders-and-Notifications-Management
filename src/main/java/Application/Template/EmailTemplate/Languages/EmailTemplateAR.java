@@ -8,7 +8,6 @@ public class EmailTemplateAR implements EmailTemplate {
     @Override
     public String getWelcomeMessage(String name) {
         return " مرحبًا في متجرنا، " + name;
-
     }
 
     @Override

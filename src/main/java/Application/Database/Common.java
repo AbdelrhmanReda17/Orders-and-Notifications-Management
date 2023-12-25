@@ -1,4 +1,4 @@
-package Application.APIS.Database;
+package Application.Database;
 
 import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.Order;
@@ -7,12 +7,10 @@ import Application.APIS.Products.Model.Product;
 import Application.APIS.Users.Model.DummyWallet;
 import Application.APIS.Users.Model.User;
 import Application.APIS.Users.Model.UserCredentials;
+import Application.Utilities.Notification;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 
 public class Common {
@@ -22,7 +20,6 @@ public class Common {
             new User(2, new UserCredentials("Atef", "user", "0123456789", "Madint Nasr - Cairo" , "Example2@gmail.com") , new DummyWallet(),"EN" , "EMAIL")
         )
     );
-
     public static List<Product> products = new LinkedList<Product>(
        List.of(
             new Product(1 , "Apple", "Apple Inc.", 1000, 100),
@@ -32,7 +29,10 @@ public class Common {
             new Product(5 , "Oppo", "Oppo Inc.", 1000, 100)
        )
     );
-
     public static List<IOrder> orders = new LinkedList<IOrder>();
+
+    public static PriorityQueue<Notification> notificationsQueue = new PriorityQueue<Notification>(
+        Comparator.comparing(Notification::getNotificationCounter)
+    );
 
 }

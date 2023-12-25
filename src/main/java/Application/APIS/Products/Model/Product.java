@@ -1,5 +1,5 @@
 package Application.APIS.Products.Model;
-import Application.APIS.Database.IModel;
+import Application.Database.IModel;
 
 
 public class Product implements IModel {

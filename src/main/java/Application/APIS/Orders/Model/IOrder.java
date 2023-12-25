@@ -1,6 +1,6 @@
 package Application.APIS.Orders.Model;
 
-import Application.APIS.Database.IModel;
+import Application.Database.IModel;
 
 public abstract class IOrder implements IModel {
     protected int id = 0;

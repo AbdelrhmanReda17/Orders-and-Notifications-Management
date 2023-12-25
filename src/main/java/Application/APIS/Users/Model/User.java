@@ -1,8 +1,6 @@
 package Application.APIS.Users.Model;
 
-import Application.APIS.Database.IModel;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import Application.Database.IModel;
 
 public class User implements IModel {
     int id;
