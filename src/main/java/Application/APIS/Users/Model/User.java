@@ -4,21 +4,25 @@ import Application.APIS.Database.IModel;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Users")
 public class User implements IModel {
-    @Id
     int id;
     String username;
+    String email;
     String password;
     String phoneNumber;
     String address;
+    String language;
+    String template;
 
-    public User(int id, String username, String password, String phoneNumber, String address) {
+    public User(int id, String username, String password, String phoneNumber, String address , String email , String language , String template) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
+        this.language = language;
+        this.template = template;
     }
     public int getId() {
         return id;

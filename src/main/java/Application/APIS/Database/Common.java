@@ -15,8 +15,8 @@ import java.util.List;
 public class Common {
     public static List<User> users = new LinkedList<User>(
         List.of(
-            new User(1, "Abdelrhman", "admin", "0123456789", "Mokattam - Cairo"),
-            new User(2, "Atef", "user", "0123456789", "Madint Nasr - Cairo")
+            new User(1, "Abdelrhman", "admin", "0123456789", "Mokattam - Cairo" , "Example1@gmail.com" , "AR" , "SMS") ,
+            new User(2, "Atef", "user", "0123456789", "Madint Nasr - Cairo" , "Example2@gmail.com" , "EN" , "EMAIL")
         )
     );
 

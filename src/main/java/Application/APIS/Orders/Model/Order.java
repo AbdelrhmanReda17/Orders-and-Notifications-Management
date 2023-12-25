@@ -3,24 +3,16 @@ package Application.APIS.Orders.Model;
 
 import Application.APIS.Database.IModel;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Document(collection = "Orders")
 public class Order implements IModel {
-    @Id
     private int id;
-    @Field("price")
     private double price;
-    @Field("date")
     private Date date;
-    @Field("status")
     private String status;
-    @Field("userId")
     private int userId;
     private List<ShoppingCartItem> products;
 

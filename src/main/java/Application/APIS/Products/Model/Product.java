@@ -1,12 +1,8 @@
 package Application.APIS.Products.Model;
-
 import Application.APIS.Database.IModel;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Products")
+
 public class Product implements IModel {
-    @Id
     int serialNumber;
     String name;
     String vendor;
@@ -25,9 +21,6 @@ public class Product implements IModel {
         this.name = newProduct.getName();
         this.price = newProduct.getPrice();
         this.quantity = newProduct.getQuantity();
-    }
-    public int getSerialNumber() {
-        return serialNumber;
     }
     public String getVendor() {
         return vendor;
