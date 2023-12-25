@@ -16,8 +16,8 @@ import java.util.*;
 public class Common {
     public static List<User> users = new LinkedList<User>(
         List.of(
-            new User(1, new UserCredentials("Abdelrhman", "admin", "0123456789", "Mokattam - Cairo" , "Example1@gmail.com") , new DummyWallet(),"AR" , "SMS") ,
-            new User(2, new UserCredentials("Atef", "user", "0123456789", "Madint Nasr - Cairo" , "Example2@gmail.com") , new DummyWallet(),"EN" , "EMAIL")
+            new User(1, new UserCredentials("Abdelrhman", "admin", "0123456789", "Mokattam - Cairo" , "Example1@gmail.com") , new DummyWallet(100),"AR" , "SMS") ,
+            new User(2, new UserCredentials("Atef", "user", "0123456789", "Madint Nasr - Cairo" , "Example2@gmail.com") , new DummyWallet(200),"EN" , "EMAIL")
         )
     );
     public static List<Product> products = new LinkedList<Product>(
