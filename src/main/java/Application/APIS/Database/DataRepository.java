@@ -1,21 +1,23 @@
 package Application.APIS.Database;
 
+import java.util.Iterator;
 import java.util.List;
 
 
 public class DataRepository<T , S> implements Repository<T , S> {
-    private List<T> data;
+    protected List<T> data;
     protected DataRepository(Class<T> clazz) {
       DatabaseFactory<T> databaseFactory = new DatabaseFactory<T>();
       data = databaseFactory.createDatabase(clazz);
     }
     @Override
     public void save(T object) {
+        data.add(object);
     }
 
     @Override
     public void delete(T object) {
-
+        data.remove(object);
     }
 
     @Override
@@ -32,7 +34,16 @@ public class DataRepository<T , S> implements Repository<T , S> {
 
     @Override
     public void update(T object) {
-
+        Iterator<T> itr = data.iterator();
+        while (itr.hasNext()) {
+            T item = itr.next();
+            if (((IModel) object).getId() == ((IModel) item).getId()) {
+                itr.remove();
+                data.add(object);
+                return;
+            }
+        }
+        System.out.println("Couldn't find this object to update");
     }
 
     @Override
@@ -42,46 +53,30 @@ public class DataRepository<T , S> implements Repository<T , S> {
 
     @Override
     public boolean existsById(S id) {
+        System.out.println("id: " + id);
+        for (T object : data) {
+            if (object instanceof IModel && ((IModel) object).getId() == Integer.parseInt(id.toString())) {
+                return true;
+            }
+        }
         return false;
     }
 
     @Override
     public void deleteById(S id) {
-
+        Iterator<T> itr = data.iterator();
+        while (itr.hasNext()) {
+            T item = itr.next();
+            if (Integer.parseInt(id.toString()) == ((IModel) item).getId()) {
+                itr.remove();
+                return;
+            }
+        }
+        System.out.println("Couldn't find this ID");
     }
 
     @Override
     public void deleteAll() {
-
-    }
-
-    @Override
-    public long count() {
-        return 0;
-    }
-
-    @Override
-    public void copy(T object) {
-
-    }
-
-    @Override
-    public void saveAll(T[] objects) {
-
-    }
-
-    @Override
-    public void updateAll(T[] objects) {
-
-    }
-
-    @Override
-    public void deleteAll(T[] objects) {
-
-    }
-
-    @Override
-    public void deleteByIds(S[] ids) {
-
+        data.clear();
     }
 }

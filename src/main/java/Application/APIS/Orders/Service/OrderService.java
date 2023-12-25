@@ -5,9 +5,6 @@ import Application.APIS.Orders.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
@@ -15,15 +12,14 @@ public class OrderService {
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
-    public Order getOrder(String id) {
-        return orderRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Order with id " + id + " does not exist"));
+    public Order getOrder(int id) {
+        return orderRepository.findById(id);
     }
-    public List<Order> getUserOrders(String userId) {
+    public Order getUserOrders(int userId) {
          try {
                 return orderRepository.findByUserId(userId);
             } catch (Exception e) {
-                return Collections.emptyList();
+                return null;
          }
     }
 
@@ -34,15 +30,14 @@ public class OrderService {
             throw new IllegalStateException("Order with id " + newOrder.getUserId() + " already exists");
         }
     }
-    public void deleteOrder(String id) {
+    public void deleteOrder(int id) {
         if(!orderRepository.existsById(id)) {
             throw new IllegalStateException("Order with id " + id + " does not exist");
         }
         orderRepository.deleteById(id);
     }
-    public void updateOrder(String id, Order newOrder) {
-        Order existingOrder = orderRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Order with id " + id + " does not exist"));
+    public void updateOrder(int id, Order newOrder) {
+        Order existingOrder = orderRepository.findById(id);
         existingOrder.copy(newOrder);
         orderRepository.save(existingOrder);
     }

@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Repository
-public class ProductRepository extends DataRepository<Product , String> {
+public class ProductRepository extends DataRepository<Product , Integer> {
     public ProductRepository() {
         super(Product.class);
     }
