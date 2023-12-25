@@ -2,9 +2,9 @@ package Application.APIS.Orders.Model;
 
 import java.util.List;
 
-public class ComplexOrder extends IOrder{
+public class ComponentOrder extends IOrder{
     public List<IOrder> orderList;
-    public ComplexOrder(int id,List<IOrder> orderList) {
+    public ComponentOrder(int id, List<IOrder> orderList) {
         this.id = id;
         this.orderList = orderList;
     }
@@ -20,7 +20,7 @@ public class ComplexOrder extends IOrder{
 
     @Override
     public void copy(IOrder newOrder) {
-        ComplexOrder complexOrder = (ComplexOrder) newOrder;
+        ComponentOrder complexOrder = (ComponentOrder) newOrder;
         this.id = complexOrder.getId();
         this.userId = complexOrder.getUserId();
         for (IOrder order: orderList) {
