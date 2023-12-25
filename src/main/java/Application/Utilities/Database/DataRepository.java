@@ -57,7 +57,6 @@ public class DataRepository<T , S> implements Repository<T , S> {
 
     @Override
     public boolean existsById(S id) {
-        System.out.println("id: " + id);
         for (T object : data) {
             if (object instanceof IModel && ((IModel) object).getId() == Integer.parseInt(id.toString())) {
                 return true;

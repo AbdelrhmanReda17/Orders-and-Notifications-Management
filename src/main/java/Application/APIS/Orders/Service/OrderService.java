@@ -25,6 +25,7 @@ public class OrderService {
 
     public void addOrder(IOrder newOrder) {
         try {
+            System.out.println(newOrder);
             orderRepository.save(newOrder);
         } catch (Exception e) {
             throw new IllegalStateException("Order with id " + newOrder.getId() + " already exists");

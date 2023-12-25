@@ -6,40 +6,30 @@ import java.util.Date;
 import java.util.List;
 
 public class CompoundOrder extends IOrder{
-    private double price;
-    private List<ShoppingCartItem> products;
+    private final double price;
+    private final List<ShoppingCartItem> products;
     public List<IOrder> orderList;
-    public CompoundOrder(int id,double price , Date date, String status, int userId , List<ShoppingCartItem> products , List<IOrder> orderList) {
-        super(id, date, status, userId);
+    public CompoundOrder(int id,double price ,int userId , List<ShoppingCartItem> products , List<IOrder> orderList) {
+        super(id, userId);
         this.price = price;
         this.products = products;
         this.userId = userId;
         this.orderList = orderList;
     }
+
+    public List<ShoppingCartItem> getProducts() {
+        return products;
+    }
+
+    @Override
+    public double getPrice() {
+        return price;
+    }
+
     public List<IOrder> getOrderList() {
         return orderList;
     }
-    public void addOrder(IOrder order) {
-        orderList.add(order);
-    }
-    public void removeOrder(IOrder order) {
-        orderList.remove(order);
-    }
-//    public void editOrder(IOrder order) {
-//        for (IOrder o : orderList) {
-//            if (o.getId() == order.getId()) {
-//                o.copy(order);
-//            }
-//        }
-//    }
-    @Override
-    public Double getTotalCost() {
-        double totalCost = 0f;
-        for (IOrder order : orderList) {
-            totalCost += order.getTotalCost();
-        }
-        return totalCost;
-    }
+
 
     @Override
     public void copy(IOrder newOrder) {
@@ -59,5 +49,18 @@ public class CompoundOrder extends IOrder{
     @Override
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        String result = "CompoundOrder : "+
+                "id = " + id +
+                ", price = " + price +
+                ", date = " + getDate() +
+                ", status = " + getStatus() +
+                ", userId = " + userId +
+                ", products = " + products + '\n' +
+                "orderList = " + orderList;
+            return result;
     }
 }

@@ -7,8 +7,8 @@ import java.util.List;
 public class SimpleOrder extends IOrder {
     private double price;
     private List<ShoppingCartItem> products;
-    public SimpleOrder(int id , double price, Date date, String status, int userId, List<ShoppingCartItem> products) {
-        super(id, date, status, userId);
+    public SimpleOrder(int id , double price, int userId, List<ShoppingCartItem> products) {
+        super(id, userId);
         this.price = price;
         this.userId = userId;
         this.products = products;
@@ -20,6 +20,7 @@ public class SimpleOrder extends IOrder {
         this.userId = simpleOrder.getUserId();
         this.products = simpleOrder.getProducts();
     }
+    @Override
     public double getPrice() {
         return price;
     }
@@ -36,7 +37,13 @@ public class SimpleOrder extends IOrder {
     }
 
     @Override
-    public Double getTotalCost() {
-        return price;
+    public String toString() {
+        return "\n" + "SimpleOrder : "  +
+                "price= " + price +
+                ", userId= " + userId +
+                ", date = " + getDate() +
+                ", status = " + getStatus() +
+                ", id= " + id+
+                ", products= " + products;
     }
 }

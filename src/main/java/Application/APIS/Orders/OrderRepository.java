@@ -9,7 +9,6 @@ public class OrderRepository extends DataRepository<IOrder, Integer> {
     public OrderRepository() {
         super(IOrder.class);
     }
-
     public IOrder findByUserId(Integer userId) {
         for (IOrder order : this.data) {
             if (order.getUserId().equals(userId)) {

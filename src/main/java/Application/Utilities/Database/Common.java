@@ -24,70 +24,51 @@ public class Common {
     );
     public static List<Product> products = new LinkedList<Product>(
        List.of(
-            new Product(1 , "Apple", "Apple Inc.", 1000, 100),
-            new Product(2 , "Samsung", "Samsung Inc.", 1000, 100),
-            new Product(3 , "Xiaomi", "Xiaomi Inc.", 1000, 100),
-            new Product(4 , "Huawei", "Huawei Inc.", 1000, 100),
-            new Product(5 , "Oppo", "Oppo Inc.", 1000, 100)
+            new Product(1, "Product 1", "Vendor", 100, 10),
+            new Product(2, "Product 2", "Vendor", 200, 20),
+            new Product(3, "Product 3", "Vendor", 300, 30),
+            new Product(4, "Product 4", "Vendor", 400, 40),
+            new Product(5, "Product 5", "Vendor", 500, 50),
+            new Product(6, "Product 6", "Vendor", 600, 60),
+            new Product(7, "Product 7", "Vendor", 700, 70),
+            new Product(8, "Product 8", "Vendor", 800, 80),
+            new Product(9, "Product 9", "Vendor", 900, 90),
+            new Product(10, "Product 10", "Vendor", 1000, 100),
+            new Product(11, "Product 11", "Vendor", 1100, 110)
        )
     );
     public static List<IOrder> orders = new LinkedList<IOrder>(
         List.of(
-            new SimpleOrder(1, 1, new Date(), "Pending" , 1 , List.of(
+            new SimpleOrder(1, 900,  1 , List.of(
                 new ShoppingCartItem(1, 1),
-                new ShoppingCartItem(2, 1),
-                new ShoppingCartItem(3, 1),
-                new ShoppingCartItem(4, 1),
-                new ShoppingCartItem(5, 1)
+                new ShoppingCartItem(2, 4)
             )),
-            new SimpleOrder(2, 2, new Date(), "Pending" , 2 , List.of(
-                new ShoppingCartItem(1, 1),
-                new ShoppingCartItem(2, 1),
-                new ShoppingCartItem(3, 1),
-                new ShoppingCartItem(4, 1),
-                new ShoppingCartItem(5, 1)
+            new SimpleOrder(2, 5300,  2 , List.of(
+                new ShoppingCartItem(10, 2),
+                new ShoppingCartItem(11, 3)
             )),
-            new SimpleOrder(3, 1, new Date(), "Pending" , 1 , List.of(
-                new ShoppingCartItem(1, 1),
-                new ShoppingCartItem(2, 1),
-                new ShoppingCartItem(3, 1),
-                new ShoppingCartItem(4, 1),
-                new ShoppingCartItem(5, 1)
+            new SimpleOrder(3, 1600,  3 , List.of(
+                new ShoppingCartItem(1, 6),
+                new ShoppingCartItem(2, 5)
             )),
             new CompoundOrder(
                 4,
+                900,
                 1,
-                new Date(),
-                "Pending",
-                3,
                 List.of(
                     new ShoppingCartItem(1, 1),
-                    new ShoppingCartItem(2, 1),
-                    new ShoppingCartItem(3, 1),
-                    new ShoppingCartItem(4, 1),
-                    new ShoppingCartItem(5, 1)
+                    new ShoppingCartItem(2, 4)
                 ),
                 List.of(
-                    new SimpleOrder(5, 1, new Date(), "Pending" , 1 , List.of(
+                    new SimpleOrder(5, 500,  3 , List.of(
                         new ShoppingCartItem(1, 1),
-                        new ShoppingCartItem(2, 2),
-                        new ShoppingCartItem(3, 3),
-                        new ShoppingCartItem(4, 5),
-                        new ShoppingCartItem(5, 4)
+                        new ShoppingCartItem(2, 2)
                     )),
-                    new SimpleOrder(6, 2, new Date(), "Pending" , 2 , List.of(
-                        new ShoppingCartItem(1, 1),
-                        new ShoppingCartItem(2, 1),
-                        new ShoppingCartItem(3, 1),
-                        new ShoppingCartItem(4, 1),
-                        new ShoppingCartItem(5, 1)
+                    new SimpleOrder(6, 800,  4 , List.of(
+                        new ShoppingCartItem(8, 1)
                     )),
-                    new SimpleOrder(7, 1, new Date(), "Pending" , 4 , List.of(
-                        new ShoppingCartItem(1, 1),
-                        new ShoppingCartItem(2, 1),
-                        new ShoppingCartItem(3, 1),
-                        new ShoppingCartItem(4, 1),
-                        new ShoppingCartItem(5, 1)
+                    new SimpleOrder(7, 1000, 2 , List.of(
+                        new ShoppingCartItem(5, 2)
                     ))
                 )
             )
