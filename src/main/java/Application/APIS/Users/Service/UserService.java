@@ -22,10 +22,14 @@ public class UserService {
     }
 
     public void updateUser(String id, User newUser) {
-        User existingUser = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("User with id " + id + " does not exist"));
-        existingUser.copy(newUser);
-        userRepository.save(existingUser);
+        try{
+            User existingUser = userRepository.findById(id);
+            existingUser.copy(newUser);
+            userRepository.save(existingUser);
+        }catch (Exception e){
+            throw new IllegalStateException("User with id " + id + " does not exist");
+        }
+
     }
 
     public void addUser(User newUser) {
@@ -37,8 +41,11 @@ public class UserService {
     }
 
     public User getUser(String id) {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("User with id " + id + " does not exist"));
+        try {
+            return userRepository.findById(id);
+        }catch(Exception e){
+              throw new IllegalStateException("User with id " + id + " does not exist");
+        }
     }
 
 }
