@@ -4,6 +4,7 @@ import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.Order;
 import Application.APIS.Orders.Model.ShoppingCartItem;
 import Application.APIS.Products.Model.Product;
+import Application.APIS.Users.Model.DummyWallet;
 import Application.APIS.Users.Model.User;
 import Application.APIS.Users.Model.UserCredentials;
 
@@ -17,8 +18,8 @@ import java.util.List;
 public class Common {
     public static List<User> users = new LinkedList<User>(
         List.of(
-            new User(1, new UserCredentials("Abdelrhman", "admin", "0123456789", "Mokattam - Cairo" , "Example1@gmail.com") , "AR" , "SMS") ,
-            new User(2, new UserCredentials("Atef", "user", "0123456789", "Madint Nasr - Cairo" , "Example2@gmail.com") , "EN" , "EMAIL")
+            new User(1, new UserCredentials("Abdelrhman", "admin", "0123456789", "Mokattam - Cairo" , "Example1@gmail.com") , new DummyWallet(),"AR" , "SMS") ,
+            new User(2, new UserCredentials("Atef", "user", "0123456789", "Madint Nasr - Cairo" , "Example2@gmail.com") , new DummyWallet(),"EN" , "EMAIL")
         )
     );
 

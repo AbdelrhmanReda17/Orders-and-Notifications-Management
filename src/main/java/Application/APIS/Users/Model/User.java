@@ -7,12 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User implements IModel {
     int id;
     UserCredentials userCredentials;
+    IWallet userWallet;
     String language;
     String template;
 
-    public User(int id,UserCredentials userCredentials, String language , String template) {
+    public User(int id,UserCredentials userCredentials,IWallet userWallet, String language , String template) {
         this.id = id;
         this.userCredentials = userCredentials;
+        this.userWallet = userWallet;
         this.language = language;
         this.template = template;
     }
