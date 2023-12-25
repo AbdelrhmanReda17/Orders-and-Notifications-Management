@@ -1,4 +1,4 @@
-package Application.Database;
+package Application.Utilities.Database;
 
 import java.util.List;
 

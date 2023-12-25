@@ -1,7 +1,7 @@
-package Application.Template.PhoneTemplate.Languages;
+package Application.Utilities.Template.PhoneTemplate.Languages;
 
-import Application.APIS.Orders.Model.Order;
-import Application.Template.PhoneTemplate.PhoneTemplate;
+import Application.APIS.Orders.Model.SimpleOrder;
+import Application.Utilities.Template.PhoneTemplate.PhoneTemplate;
 
 public class PhoneTemplateAR implements PhoneTemplate {
 
@@ -16,12 +16,12 @@ public class PhoneTemplateAR implements PhoneTemplate {
     }
 
     @Override
-    public String OrderMessage(String name, Order order) {
+    public String OrderMessage(String name, SimpleOrder order) {
         return "، تم تأكيد حجز الطلب برقم: " + order.getId() + ".";
     }
 
     @Override
-    public String FinishOrderMessage(String name, Order order) {
+    public String FinishOrderMessage(String name, SimpleOrder order) {
         return "مرحبًا " + name + "، تم إكمال طلبك (الرقم: " + order.getId() + ") بنجاح. شكرًا لتسوقك معنا!";
     }
 
@@ -31,7 +31,7 @@ public class PhoneTemplateAR implements PhoneTemplate {
     }
 
     @Override
-    public String CancelOrderMessage(String name, Order order) {
+    public String CancelOrderMessage(String name, SimpleOrder order) {
         return "إلغاء الطلب - رقم الطلب: " + order.getId() +
                 "\nعزيزي " + name + "،\n" +
                 "نأسف لإبلاغك بأن طلبك (الرقم: " + order.getId() + ") تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";

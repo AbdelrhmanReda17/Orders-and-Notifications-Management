@@ -1,7 +1,6 @@
 package Application.APIS.Orders.Service;
 
 import Application.APIS.Orders.Model.IOrder;
-import Application.APIS.Orders.Model.Order;
 import Application.APIS.Orders.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

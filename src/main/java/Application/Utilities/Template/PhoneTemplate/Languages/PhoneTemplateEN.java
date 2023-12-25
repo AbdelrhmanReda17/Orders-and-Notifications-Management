@@ -1,7 +1,7 @@
-package Application.Template.PhoneTemplate.Languages;
+package Application.Utilities.Template.PhoneTemplate.Languages;
 
-import Application.APIS.Orders.Model.Order;
-import Application.Template.PhoneTemplate.PhoneTemplate;
+import Application.APIS.Orders.Model.SimpleOrder;
+import Application.Utilities.Template.PhoneTemplate.PhoneTemplate;
 
 public class PhoneTemplateEN implements PhoneTemplate {
 
@@ -16,12 +16,12 @@ public class PhoneTemplateEN implements PhoneTemplate {
     }
 
     @Override
-    public String OrderMessage(String name, Order order) {
+    public String OrderMessage(String name, SimpleOrder order) {
         return "your booking of the order ID: "+ order.getId()+"is confirmed.";
     }
 
     @Override
-    public String FinishOrderMessage(String name, Order order) {
+    public String FinishOrderMessage(String name, SimpleOrder order) {
         return "Hello " + name + ", your order (ID: " + order.getId() + ") has been successfully completed. Thank you for shopping with us!";
     }
 
@@ -30,7 +30,7 @@ public class PhoneTemplateEN implements PhoneTemplate {
         return name + ", Unable to process the order at the moment.  please check our costumer service.";    }
 
     @Override
-    public String CancelOrderMessage(String name, Order order) {
+    public String CancelOrderMessage(String name, SimpleOrder order) {
         return "Order Cancellation - Order ID: " + order.getId() +
                 "\nDear " + name + ",\n" +
                 "We regret to inform you that your order (ID: " + order.getId() + ") has been canceled. If you have questions, please contact support. Thank you.";

@@ -1,6 +1,6 @@
 package Application.APIS.Users;
 
-import Application.Database.DataRepository;
+import Application.Utilities.Database.DataRepository;
 import Application.APIS.Users.Model.User;
 import org.springframework.stereotype.Repository;
 

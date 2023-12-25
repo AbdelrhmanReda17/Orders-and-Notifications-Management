@@ -1,6 +1,6 @@
 package Application.APIS.Users.Model;
 
-import Application.Database.IModel;
+import Application.Utilities.Database.IModel;
 
 public class User implements IModel {
     int id;

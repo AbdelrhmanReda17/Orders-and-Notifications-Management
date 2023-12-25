@@ -1,5 +1,5 @@
-package Application.Template.PhoneTemplate.Languages;
-import Application.Template.PhoneTemplate.PhoneTemplate;
+package Application.Utilities.Template.PhoneTemplate.Languages;
+import Application.Utilities.Template.PhoneTemplate.PhoneTemplate;
 
 public class PhoneTemplateFactory {
     public static PhoneTemplate getLanguageTemplate(String language) {

@@ -1,6 +1,6 @@
 package Application.APIS.Orders;
 
-import Application.Database.DataRepository;
+import Application.Utilities.Database.DataRepository;
 import Application.APIS.Orders.Model.IOrder;
 import org.springframework.stereotype.Repository;
 

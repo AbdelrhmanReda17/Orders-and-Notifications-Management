@@ -1,7 +1,6 @@
-package Application.Template.EmailTemplate.Languages;
+package Application.Utilities.Template.EmailTemplate.Languages;
 
-import Application.Template.EmailTemplate.EmailTemplate;
-import Application.Template.PhoneTemplate.Languages.PhoneTemplateAR;
+import Application.Utilities.Template.EmailTemplate.EmailTemplate;
 
 public class EmailTemplateFactory {
     public static EmailTemplate getLanguageTemplate(String language) {

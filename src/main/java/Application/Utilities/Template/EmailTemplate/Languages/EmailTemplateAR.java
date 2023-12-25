@@ -1,7 +1,7 @@
-package Application.Template.EmailTemplate.Languages;
+package Application.Utilities.Template.EmailTemplate.Languages;
 
-import Application.APIS.Orders.Model.Order;
-import Application.Template.EmailTemplate.EmailTemplate;
+import Application.APIS.Orders.Model.SimpleOrder;
+import Application.Utilities.Template.EmailTemplate.EmailTemplate;
 
 public class EmailTemplateAR implements EmailTemplate {
 
@@ -16,7 +16,7 @@ public class EmailTemplateAR implements EmailTemplate {
     }
 
     @Override
-    public String OrderMessage(String name, Order order) {
+    public String OrderMessage(String name, SimpleOrder order) {
         return "الموضوع: تأكيد الطلب - رقم الطلب: " + order.getId() +
                 "\n\nعزيزي " + name + "،\n\n" +
                 "تم تأكيد طلبك. رقم الطلب: " + order.getId() +
@@ -24,7 +24,7 @@ public class EmailTemplateAR implements EmailTemplate {
     }
 
     @Override
-    public String FinishOrderMessage(String name, Order order) {
+    public String FinishOrderMessage(String name, SimpleOrder order) {
         return "الموضوع: اكتمال الطلب - رقم الطلب: " + order.getId() +
                 "\n\nمرحبًا " + name + "،\n\n" +
                 "تم إكمال طلبك (الرقم: " + order.getId() + ") بنجاح. شكرًا لاختيارك لنا!";
@@ -38,7 +38,7 @@ public class EmailTemplateAR implements EmailTemplate {
     }
 
     @Override
-    public String CancelOrderMessage(String name, Order order) {
+    public String CancelOrderMessage(String name, SimpleOrder order) {
         return "الموضوع: إلغاء الطلب - رقم الطلب: " + order.getId() +
                 "\n\nعزيزي " + name + "،\n\n" +
                 "نأسف لإبلاغك أن طلبك (الرقم: " + order.getId() + ") تم إلغاؤه.\n" +

@@ -1,6 +1,6 @@
 package Application.APIS.Products;
 
-import Application.Database.DataRepository;
+import Application.Utilities.Database.DataRepository;
 import Application.APIS.Products.Model.Product;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package Application.Utilities;
+package Application.Utilities.Notification;
 
 public class Notification {
     private final int notificationCounter;
