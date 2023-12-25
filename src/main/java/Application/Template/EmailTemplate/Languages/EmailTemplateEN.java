@@ -36,4 +36,13 @@ public class EmailTemplateEN implements EmailTemplate {
                 "We apologize, but there was an error processing your order. Please contact customer support for assistance.";
 
     }
+
+    @Override
+    public String CancelOrderMessage(String name, Order order) {
+        return "Subject: Order Cancellation - Order ID: " + order.getId() +
+                "\n\nDear " + name + ",\n\n" +
+                "We regret to inform you that your order (ID: " + order.getId() + ") has been canceled.\n" +
+                "If you have any questions or concerns, please contact our customer support.\n" +
+                "Thank you for your understanding.";
+    }
 }

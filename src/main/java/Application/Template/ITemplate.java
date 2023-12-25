@@ -8,5 +8,6 @@ public interface ITemplate {
     public String OrderMessage(String name, Order order);
     public String FinishOrderMessage(String name, Order order);
     public String getErrorMessage(String name);
+    public String CancelOrderMessage (String name,Order order);
 
 }

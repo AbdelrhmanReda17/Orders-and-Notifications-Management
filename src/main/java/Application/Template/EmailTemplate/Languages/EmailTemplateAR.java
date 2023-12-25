@@ -37,4 +37,13 @@ public class EmailTemplateAR implements EmailTemplate {
                 "\n\nعزيزي " + name + "،\n\n" +
                 "نعتذر، ولكن حدث خطأ أثناء معالجة طلبك. يرجى الاتصال بخدمة العملاء للمساعدة.";
     }
+
+    @Override
+    public String CancelOrderMessage(String name, Order order) {
+        return "الموضوع: إلغاء الطلب - رقم الطلب: " + order.getId() +
+                "\n\nعزيزي " + name + "،\n\n" +
+                "نأسف لإبلاغك أن طلبك (الرقم: " + order.getId() + ") تم إلغاؤه.\n" +
+                "إذا كان لديك أي أسئلة أو استفسارات، يرجى الاتصال بدعم العملاء لدينا.\n" +
+                "شكرًا لتفهمك.";
+    }
 }

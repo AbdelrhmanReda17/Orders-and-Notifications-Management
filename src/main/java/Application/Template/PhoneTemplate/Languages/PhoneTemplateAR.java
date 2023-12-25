@@ -29,4 +29,12 @@ public class PhoneTemplateAR implements PhoneTemplate {
     public String getErrorMessage(String name) {
         return name + "، يرجى التحقق من رصيدك. غير قادر على معالجة الطلب في الوقت الحالي.";
     }
+
+    @Override
+    public String CancelOrderMessage(String name, Order order) {
+        return "إلغاء الطلب - رقم الطلب: " + order.getId() +
+                "\nعزيزي " + name + "،\n" +
+                "نأسف لإبلاغك بأن طلبك (الرقم: " + order.getId() + ") تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
+
+    }
 }
