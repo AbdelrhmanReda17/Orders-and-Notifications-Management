@@ -5,11 +5,11 @@ import Application.Database.IModel;
 public class User implements IModel {
     int id;
     UserCredentials userCredentials;
-    IWallet userWallet;
+    IPayment userWallet;
     String language;
     String template;
 
-    public User(int id,UserCredentials userCredentials,IWallet userWallet, String language , String template) {
+    public User(int id,UserCredentials userCredentials,IPayment userWallet, String language , String template) {
         this.id = id;
         this.userCredentials = userCredentials;
         this.userWallet = userWallet;

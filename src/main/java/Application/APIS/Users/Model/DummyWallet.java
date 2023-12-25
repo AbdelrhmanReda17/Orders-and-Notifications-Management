@@ -1,13 +1,18 @@
 package Application.APIS.Users.Model;
 
-public class DummyWallet implements IWallet{
+public class DummyWallet implements IPayment {
+    double balance = 0f;
     @Override
-    public void Deposit(Double amount) {
-
+    public void Deposit(double amount) {
+        balance += amount;
     }
 
     @Override
-    public void WithDraw(Double amount) {
-
+    public void WithDraw(double amount) {
+        if (balance >= amount) {
+            balance -= amount;
+        } else {
+            throw new IllegalStateException("Insufficient Funds!");
+        }
     }
 }
