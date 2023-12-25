@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public class DataRepository<T , S> implements Repository<T , S> {
-    private List<T> data;
+    protected List<T> data;
     protected DataRepository(Class<T> clazz) {
       DatabaseFactory<T> databaseFactory = new DatabaseFactory<T>();
       data = databaseFactory.createDatabase(clazz);

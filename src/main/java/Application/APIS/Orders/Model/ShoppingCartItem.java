@@ -1,19 +1,15 @@
 package Application.APIS.Orders.Model;
 
-import Application.APIS.Orders.ShoppingCartItemSerializer;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-@JsonSerialize(using = ShoppingCartItemSerializer.class)
 public class ShoppingCartItem {
-    private String productId;
+    private int productId;
     private int quantity;
 
-    public ShoppingCartItem(int quantity, String productId) {
+    public ShoppingCartItem(int quantity, int productId) {
         this.quantity = quantity;
         this.productId = productId;
     }
 
-    public String getProductId() {
+    public int getProductId() {
         return productId;
     }
 

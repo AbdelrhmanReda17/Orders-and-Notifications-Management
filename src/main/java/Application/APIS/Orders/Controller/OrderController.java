@@ -18,7 +18,7 @@ public class OrderController {
         this.orderService = orderService;
     }
     @GetMapping("/byUser/{userId}")
-    public ResponseEntity<Object> getUserOrders(@PathVariable("userId") String userId) {
+    public ResponseEntity<Object> getUserOrders(@PathVariable("userId") int userId) {
         try{
             return ResponseEntity.ok(orderService.getUserOrders(userId));
         } catch (Exception e) {
@@ -26,7 +26,7 @@ public class OrderController {
         }
     }
     @GetMapping("/byId/{id}")
-    public ResponseEntity<Object> getOrder(@PathVariable("id") String id) {
+    public ResponseEntity<Object> getOrder(@PathVariable("id") int id) {
         try {
             return ResponseEntity.ok(orderService.getOrder(id));
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class OrderController {
         return ResponseEntity.ok("Order added successfully");
     }
     @PatchMapping("/{id}")
-    public ResponseEntity<String> updateOrder(@PathVariable("id") String id, @RequestBody Order person) {
+    public ResponseEntity<String> updateOrder(@PathVariable("id") int id, @RequestBody Order person) {
         try {
             orderService.updateOrder(id, person);
         } catch (Exception e) {
@@ -53,7 +53,7 @@ public class OrderController {
 
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteOrder(@PathVariable("id") String id) {
+    public ResponseEntity<String> deleteOrder(@PathVariable("id") int id) {
         try{
             orderService.deleteOrder(id);
         } catch (Exception e) {

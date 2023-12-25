@@ -20,10 +20,10 @@ public class Order implements IModel {
     @Field("status")
     private String status;
     @Field("userId")
-    private String userId;
+    private int userId;
     private List<ShoppingCartItem> products;
 
-    public Order(int id ,double price, String date, String status, String userId, ArrayList<ShoppingCartItem> products) {
+    public Order(int id ,double price, String date, String status, int userId, ArrayList<ShoppingCartItem> products) {
         this.id = id;
         this.price = price;
         this.date = date;
@@ -39,7 +39,7 @@ public class Order implements IModel {
         this.products = order.getProducts();
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
