@@ -8,12 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import java.util.Date;
 import java.util.List;
 
-public class Order implements IModel {
-    private int id;
+public class Order extends IOrder {
     private double price;
     private Date date;
     private String status;
-    private int userId;
     private List<ShoppingCartItem> products;
 
     public Order(int id ,double price, Date date, String status, int userId, List<ShoppingCartItem> products) {
@@ -24,15 +22,14 @@ public class Order implements IModel {
         this.userId = userId;
         this.products = products;
     }
-    public void copy(Order order) {
-        this.price = order.getPrice();
-        this.date = order.getDate();
-        this.status = order.getStatus();
-        this.userId = order.getUserId();
-        this.products = order.getProducts();
-    }
-    public Integer getUserId() {
-        return userId;
+    @Override
+    public void copy(IOrder order) {
+        Order simpleOrder = (Order) order;
+        this.price = simpleOrder.getPrice();
+        this.date = simpleOrder.getDate();
+        this.status = simpleOrder.getStatus();
+        this.userId = simpleOrder.getUserId();
+        this.products = simpleOrder.getProducts();
     }
     public double getPrice() {
         return price;
@@ -60,5 +57,10 @@ public class Order implements IModel {
     @Override
     public void setId(int id) {
         this.id = id;
+    }
+
+    @Override
+    public Double getTotalCost() {
+        return price;
     }
 }

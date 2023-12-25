@@ -1,5 +1,6 @@
 package Application.APIS.Orders.Service;
 
+import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.Order;
 import Application.APIS.Orders.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +13,10 @@ public class OrderService {
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
-    public Order getOrder(int id) {
+    public IOrder getOrder(int id) {
         return orderRepository.findById(id);
     }
-    public Order getUserOrders(int userId) {
+    public IOrder getUserOrders(int userId) {
          try {
                 return orderRepository.findByUserId(userId);
             } catch (Exception e) {
@@ -23,11 +24,11 @@ public class OrderService {
          }
     }
 
-    public void addOrder(Order newOrder) {
+    public void addOrder(IOrder newOrder) {
         try {
             orderRepository.save(newOrder);
         } catch (Exception e) {
-            throw new IllegalStateException("Order with id " + newOrder.getUserId() + " already exists");
+            throw new IllegalStateException("Order with id " + newOrder.getId() + " already exists");
         }
     }
     public void deleteOrder(int id) {
@@ -36,9 +37,9 @@ public class OrderService {
         }
         orderRepository.deleteById(id);
     }
-    public void updateOrder(int id, Order newOrder) {
+    public void updateOrder(int id, IOrder newOrder) {
         try{
-            Order existingOrder = orderRepository.findById(id);
+            IOrder existingOrder = orderRepository.findById(id);
             existingOrder.copy(newOrder);
             orderRepository.save(existingOrder);
         } catch (Exception e) {
