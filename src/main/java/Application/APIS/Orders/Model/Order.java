@@ -1,6 +1,7 @@
 package Application.APIS.Orders.Model;
 
 
+import Application.APIS.Database.IModel;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -9,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "Orders")
-public class Order {
+public class Order implements IModel {
     @Id
-    private String id;
+    private int id;
     @Field("price")
     private double price;
     @Field("date")
@@ -22,7 +23,7 @@ public class Order {
     private String userId;
     private List<ShoppingCartItem> products;
 
-    public Order(String id ,double price, String date, String status, String userId, ArrayList<ShoppingCartItem> products) {
+    public Order(int id ,double price, String date, String status, String userId, ArrayList<ShoppingCartItem> products) {
         this.id = id;
         this.price = price;
         this.date = date;
@@ -58,5 +59,15 @@ public class Order {
     public String toString() {
         return "Order [date=" + date + ", id=" + id + ", items=" + products + ", price=" + price + ", status=" + status
                 + ", userId=" + userId + "]";
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 }

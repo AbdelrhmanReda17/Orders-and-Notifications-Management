@@ -23,42 +23,42 @@ public class ProductController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
+//
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getProduct(String id) {
+    public ResponseEntity<Object> getProduct(@PathVariable("id")  String id) {
         try {
             return ResponseEntity.ok(productService.getProduct(id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
-    @PostMapping("/")
-    public ResponseEntity<String> addProduct(@RequestBody Product product) {
-        try {
-             productService.addProduct(product);
-        } catch (Exception e) {
-            return ResponseEntity.ok(e.getMessage());
-        }
-        return ResponseEntity.ok("Product added successfully");
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable("id") String id) {
-        try{
-            productService.deleteProduct(id);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return ResponseEntity.ok("Product deleted successfully");
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateProduct(@PathVariable("id") String id, @RequestBody Product product) {
-        try {
-            productService.updateProduct(id, product);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-        return ResponseEntity.ok("Product updated successfully");
-    }
+//
+//    @PostMapping("/")
+//    public ResponseEntity<String> addProduct(@RequestBody Product product) {
+//        try {
+//             productService.addProduct(product);
+//        } catch (Exception e) {
+//            return ResponseEntity.ok(e.getMessage());
+//        }
+//        return ResponseEntity.ok("Product added successfully");
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public ResponseEntity<String> deleteProduct(@PathVariable("id") String id) {
+//        try{
+//            productService.deleteProduct(id);
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body(e.getMessage());
+//        }
+//        return ResponseEntity.ok("Product deleted successfully");
+//    }
+//    @PutMapping("/{id}")
+//    public ResponseEntity<String> updateProduct(@PathVariable("id") String id, @RequestBody Product product) {
+//        try {
+//            productService.updateProduct(id, product);
+//        } catch (Exception e) {
+//            return ResponseEntity.badRequest().body(e.getMessage());
+//        }
+//        return ResponseEntity.ok("Product updated successfully");
+//    }
 }

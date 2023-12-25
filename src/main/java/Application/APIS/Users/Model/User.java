@@ -19,11 +19,9 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.address = address;
     }
-
     public String getId() {
         return id;
     }
-
     public void copy(User newUser) {
         this.username = newUser.getUsername();
         this.password = newUser.getPassword();
