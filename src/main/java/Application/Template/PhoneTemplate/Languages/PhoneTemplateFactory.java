@@ -4,7 +4,7 @@ import Application.Template.PhoneTemplate.PhoneTemplate;
 public class PhoneTemplateFactory {
     public static PhoneTemplate getLanguageTemplate(String language) {
         if (language.equals("EN")) {
-            return new PhoneTemplateAR();
+            return new PhoneTemplateEN();
         } else if (language.equals("AR")) {
             return new PhoneTemplateAR();
         } else {

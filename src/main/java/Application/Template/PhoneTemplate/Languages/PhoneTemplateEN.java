@@ -7,26 +7,25 @@ public class PhoneTemplateEN implements PhoneTemplate {
 
     @Override
     public String getWelcomeMessage(String name) {
-        return null;
+        return "Welcome "+name+", How can we help you";
     }
 
     @Override
     public String getExitMessage(String name) {
-        return null;
+        return "thank you for using our store :)";
     }
 
     @Override
     public String OrderMessage(String name, Order order) {
-        return null;
+        return "your booking of the order ID: "+ order.getId()+"is confirmed.";
     }
 
     @Override
     public String FinishOrderMessage(String name, Order order) {
-        return null;
+        return "Hello " + name + ", your order (ID: " + order.getId() + ") has been successfully completed. Thank you for shopping with us!";
     }
 
     @Override
     public String getErrorMessage(String name) {
-        return null;
-    }
+        return name + ", Unable to process the order at the moment.  please check our costumer service.";    }
 }

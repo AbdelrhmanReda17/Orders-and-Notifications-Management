@@ -7,26 +7,34 @@ public class EmailTemplateAR implements EmailTemplate {
 
     @Override
     public String getWelcomeMessage(String name) {
-        return null;
+        return " مرحبًا في متجرنا، " + name;
+
     }
 
     @Override
     public String getExitMessage(String name) {
-        return null;
+        return " شكرًا لزيارة متجرنا، " + name;
     }
 
     @Override
     public String OrderMessage(String name, Order order) {
-        return null;
+        return "الموضوع: تأكيد الطلب - رقم الطلب: " + order.getId() +
+                "\n\nعزيزي " + name + "،\n\n" +
+                "تم تأكيد طلبك. رقم الطلب: " + order.getId() +
+                "\nشكرًا لتسوقك معنا!";
     }
 
     @Override
     public String FinishOrderMessage(String name, Order order) {
-        return null;
+        return "الموضوع: اكتمال الطلب - رقم الطلب: " + order.getId() +
+                "\n\nمرحبًا " + name + "،\n\n" +
+                "تم إكمال طلبك (الرقم: " + order.getId() + ") بنجاح. شكرًا لاختيارك لنا!";
     }
 
     @Override
     public String getErrorMessage(String name) {
-        return null;
+        return "الموضوع: خطأ في معالجة الطلب - " + name +
+                "\n\nعزيزي " + name + "،\n\n" +
+                "نعتذر، ولكن حدث خطأ أثناء معالجة طلبك. يرجى الاتصال بخدمة العملاء للمساعدة.";
     }
 }
