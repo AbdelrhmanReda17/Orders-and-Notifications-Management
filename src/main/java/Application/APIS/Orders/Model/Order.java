@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Document(collection = "Orders")
@@ -16,14 +17,14 @@ public class Order implements IModel {
     @Field("price")
     private double price;
     @Field("date")
-    private String date;
+    private Date date;
     @Field("status")
     private String status;
     @Field("userId")
     private int userId;
     private List<ShoppingCartItem> products;
 
-    public Order(int id ,double price, String date, String status, int userId, ArrayList<ShoppingCartItem> products) {
+    public Order(int id ,double price, Date date, String status, int userId, List<ShoppingCartItem> products) {
         this.id = id;
         this.price = price;
         this.date = date;
@@ -38,15 +39,13 @@ public class Order implements IModel {
         this.userId = order.getUserId();
         this.products = order.getProducts();
     }
-
     public Integer getUserId() {
         return userId;
     }
-
     public double getPrice() {
         return price;
     }
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
     public String getStatus() {

@@ -45,7 +45,6 @@ public class Product implements IModel {
     public int getId() {
         return serialNumber;
     }
-
     @Override
     public void setId(int id) {
         this.serialNumber = id;

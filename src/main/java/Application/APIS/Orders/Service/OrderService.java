@@ -19,7 +19,7 @@ public class OrderService {
          try {
                 return orderRepository.findByUserId(userId);
             } catch (Exception e) {
-                return null;
+                throw new IllegalStateException("Could not get orders");
          }
     }
 
@@ -37,8 +37,13 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
     public void updateOrder(int id, Order newOrder) {
-        Order existingOrder = orderRepository.findById(id);
-        existingOrder.copy(newOrder);
-        orderRepository.save(existingOrder);
+        try{
+            Order existingOrder = orderRepository.findById(id);
+            existingOrder.copy(newOrder);
+            orderRepository.save(existingOrder);
+        } catch (Exception e) {
+            throw new IllegalStateException("Order with id " + id + " does not exist");
+        }
+
     }
 }

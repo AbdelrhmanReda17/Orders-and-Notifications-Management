@@ -23,9 +23,9 @@ public class ProductController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-//
+
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getProduct(@PathVariable("id")  String id) {
+    public ResponseEntity<Object> getProduct(@PathVariable("id")  int id) {
         try {
             return ResponseEntity.ok(productService.getProduct(id));
         } catch (Exception e) {

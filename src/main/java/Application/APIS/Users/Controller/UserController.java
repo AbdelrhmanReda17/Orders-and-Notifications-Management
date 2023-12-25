@@ -14,7 +14,7 @@ public class UserController  {
         this.userService = userService;
     }
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getUser(@PathVariable String id) {
+    public ResponseEntity<Object> getUser(@PathVariable int id) {
         try {
             return ResponseEntity.ok(userService.getUser(id));
         } catch (Exception e) {
@@ -23,7 +23,7 @@ public class UserController  {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateUser(@PathVariable("id") String id, @RequestBody User user) {
+    public ResponseEntity<String> updateUser(@PathVariable("id") int id, @RequestBody User user) {
         try {
             userService.updateUser(id, user);
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class UserController  {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
+    public ResponseEntity<String> deleteUser(@PathVariable("id") int id) {
         try{
             userService.deleteUser(id);
         } catch (Exception e) {

@@ -1,8 +1,8 @@
 package Application.APIS.Orders.Model;
 
 public class ShoppingCartItem {
-    private int productId;
-    private int quantity;
+    private final int productId;
+    private final int quantity;
 
     public ShoppingCartItem(int quantity, int productId) {
         this.quantity = quantity;

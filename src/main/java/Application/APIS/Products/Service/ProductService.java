@@ -23,30 +23,37 @@ public class ProductService {
             throw new IllegalStateException("Could not get products");
         }
     }
-//    public void deleteProduct(String id) {
-//        if(!productRepository.existsById(id)) {
-//            throw new IllegalStateException("Product with id " + id + " does not exist");
-//        }
-//        productRepository.deleteById(id);
-//    }
-//
-//    public void updateProduct(String id, Product newProduct) {
-//        Product existingProduct = productRepository.findById(id)
-//                .orElseThrow(() -> new IllegalStateException("Product with id " + id + " does not exist"));
-//        existingProduct.copy(newProduct);
-//        productRepository.save(existingProduct);
-//    }
-//
-//    public void addProduct(Product newProduct) {
-//        try {
-//            productRepository.save(newProduct);
-//        } catch (Exception e) {
-//            throw new IllegalStateException("Product with id " + newProduct.getId() + " already exists");
-//        }
-//    }
-//
-    public Product getProduct(String id) {
-        return productRepository.findById(id);
+    public void deleteProduct(int id) {
+        if(!productRepository.existsById(id)) {
+            throw new IllegalStateException("Product with id " + id + " does not exist");
+        }
+        productRepository.deleteById(id);
+    }
+
+    public void updateProduct(int id, Product newProduct) {
+        try{
+            Product existingProduct = productRepository.findById(id);
+            existingProduct.copy(newProduct);
+            productRepository.save(existingProduct);
+        } catch (Exception e) {
+            throw new IllegalStateException("Product with id " + id + " does not exist");
+        }
+    }
+
+    public void addProduct(Product newProduct) {
+        try {
+            productRepository.save(newProduct);
+        } catch (Exception e) {
+            throw new IllegalStateException("Product with id " + newProduct.getId() + " already exists");
+        }
+    }
+
+    public Product getProduct(int id) {
+        try {
+            return productRepository.findById(id);
+        } catch (Exception e) {
+            throw new IllegalStateException("Product with id " + id + " does not exist");
+        }
     }
 
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public class UserRepository extends DataRepository<User, String> {
+public class UserRepository extends DataRepository<User, Integer> {
     public UserRepository() {
         super(User.class);
     }

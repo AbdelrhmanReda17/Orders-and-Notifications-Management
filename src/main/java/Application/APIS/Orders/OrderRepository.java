@@ -10,8 +10,8 @@ import java.util.List;
 
 @Repository
 public class OrderRepository extends DataRepository<Order, Integer> {
-    protected OrderRepository(Class<Order> clazz) {
-        super(clazz);
+    public OrderRepository() {
+        super(Order.class);
     }
 
     public Order findByUserId(Integer userId) {
@@ -20,6 +20,6 @@ public class OrderRepository extends DataRepository<Order, Integer> {
                 return order;
             }
         }
-        return null;
+        throw new IllegalStateException("Couldn't find this ID");
     }
 }

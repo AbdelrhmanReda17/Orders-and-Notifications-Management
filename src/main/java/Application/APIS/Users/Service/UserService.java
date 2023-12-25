@@ -14,14 +14,14 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public void deleteUser(String id) {
+    public void deleteUser(int id) {
         if(!userRepository.existsById(id)) {
             throw new IllegalStateException("User with id " + id + " does not exist");
         }
         userRepository.deleteById(id);
     }
 
-    public void updateUser(String id, User newUser) {
+    public void updateUser(int id, User newUser) {
         try{
             User existingUser = userRepository.findById(id);
             existingUser.copy(newUser);
@@ -40,7 +40,7 @@ public class UserService {
         }
     }
 
-    public User getUser(String id) {
+    public User getUser(int id) {
         try {
             return userRepository.findById(id);
         }catch(Exception e){
