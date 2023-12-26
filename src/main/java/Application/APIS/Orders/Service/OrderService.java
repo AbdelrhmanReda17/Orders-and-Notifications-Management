@@ -1,5 +1,6 @@
 package Application.APIS.Orders.Service;
 
+import Application.APIS.Notifications.Service.NotificationsService;
 import Application.APIS.Orders.Model.IOrder;
 import Application.ApplicationManager.OrderProcessorFactory;
 import Application.APIS.Orders.Model.OrderState;
@@ -36,9 +37,9 @@ public class OrderService {
                 throw new IllegalStateException("Order with id " + newOrder.getId() + " already exists");
             }
             ApplicationManager orderProcessor = OrderProcessorFactory.CreateOrderProcessor(newOrder);
-            orderProcessor.placeOrder(newOrder , false);
+            orderProcessor.ManageOrder(newOrder , false,OrderState.Placed);
             orderRepository.save(newOrder);
-            executorService.schedule(()->shipOrder(newOrder), 10, TimeUnit.SECONDS);
+            executorService.schedule(()->ApplicationManager.shipOrder(newOrder), 10, TimeUnit.SECONDS);
         } catch (Exception e) {
             throw new IllegalStateException(e.getMessage());
         }
@@ -49,15 +50,12 @@ public class OrderService {
         }
         IOrder order = orderRepository.findById(id);
         if (!order.getStatus().equals(OrderState.Placement)) {
+            ApplicationManager orderProcessor = OrderProcessorFactory.CreateOrderProcessor(order);
+            orderProcessor.ManageOrder(order,false,OrderState.Cancelled);
             orderRepository.deleteById(id);
             return;
         }
         throw new IllegalStateException("Order with id " + id + " is already shipped and Cannot be cancelled");
     }
-    public void shipOrder(IOrder order) {
-        if(!orderRepository.existsById(order.getId())) {
-            throw new IllegalStateException("Order with id " + order.getId() + " does not exist");
-        }
-        order.setStatus(OrderState.Placement);
-    }
+
 }

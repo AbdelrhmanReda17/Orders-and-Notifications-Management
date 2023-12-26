@@ -1,9 +1,22 @@
 package Application.ApplicationManager;
 
 import Application.APIS.Orders.Model.IOrder;
+import Application.APIS.Orders.Model.OrderState;
 import Application.APIS.Users.Model.User;
 
 public class SimpleOrderManager extends ApplicationManager {
+
+    @Override
+    public void CancelHandler(IOrder order, boolean isCompound) {
+        try {
+            User user = userRepository.findById(order.getUserId());
+            user.getPayment().Deposit(order.getPrice());
+            order.setStatus(OrderState.Cancelled);
+        }
+        catch (Exception e) {
+            throw new IllegalStateException(e.getMessage());
+        }
+    }
 
     @Override
     public void Process(IOrder newOrder , boolean isCompound) {
