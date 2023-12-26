@@ -25,6 +25,7 @@ public class SimpleOrder extends IOrder {
     public double getPrice() {
         return price;
     }
+    @Override
     public List<ShoppingCartItem> getProducts() {
         return products;
     }

@@ -1,14 +1,14 @@
 package Application.APIS.Orders.Model.OrderProcessors;
 
+import Application.APIS.Notifications.Controller.NotificationsController;
 import Application.APIS.Orders.Model.CompoundOrder;
 import Application.APIS.Orders.Model.IOrder;
-import Application.APIS.Notifications.Service.NotificationsService;
 import Application.APIS.Users.Model.User;
 import Application.APIS.Notifications.Model.Notification;
 import Application.Utilities.Template.ITemplate;
 import Application.Utilities.Template.TemplateFactory;
 
-public class CompoundOrderProcessor implements IOrderProcessor{
+public class CompoundOrderProcessor extends IOrderProcessor{
     @Override
     public void Process(IOrder newOrder , boolean isCompound) {
         try {
@@ -28,13 +28,8 @@ public class CompoundOrderProcessor implements IOrderProcessor{
                 order.setPrice(order.getPrice() + (OrderFees / (((CompoundOrder) newOrder).getOrderList().size() + 1)));
                 OrderProcessorFactory.CreateOrderProcessor(order).Process(order , true);
             }
-            ITemplate template = TemplateFactory.createTemplate(user.getTemplate() , user.getLanguage());
-            NotificationsService.addNotification(
-                    new Notification(
-                   template.OrderMessage(user.getUserCredentials().getUsername() , newOrder , false) ,
-                   template.OrderMessage(user.getUserCredentials().getUsername() , newOrder , true),
-                   user)
-            );
+            createOrderNotification(newOrder, user);
+
         } catch (Exception e) {
             throw new IllegalStateException(e.getMessage());
         }

@@ -1,5 +1,6 @@
 package Application.APIS.Orders.Model.OrderProcessors;
 
+import Application.APIS.Notifications.Controller.NotificationsController;
 import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Notifications.Service.NotificationsService;
 import Application.APIS.Users.Model.User;
@@ -7,20 +8,14 @@ import Application.APIS.Notifications.Model.Notification;
 import Application.Utilities.Template.ITemplate;
 import Application.Utilities.Template.TemplateFactory;
 
-public class SimpleOrderProcessor implements IOrderProcessor{
+public class SimpleOrderProcessor extends IOrderProcessor{
 
     @Override
     public void Process(IOrder newOrder , boolean isCompound) {
         try {
             User user = userRepository.findById(newOrder.getUserId());
             user.getPayment().WithDraw(user,newOrder.getPrice() + (isCompound ? 0 : OrderFees));
-            ITemplate template = TemplateFactory.createTemplate(user.getTemplate() , user.getLanguage());
-            NotificationsService.addNotification(
-                    new Notification(
-                            template.OrderMessage(user.getUserCredentials().getUsername() , newOrder , false) ,
-                            template.OrderMessage(user.getUserCredentials().getUsername() , newOrder , true) ,
-                             user)
-            );
+            createOrderNotification(newOrder, user);
         }
         catch (Exception e) {
             throw new IllegalStateException(e.getMessage());

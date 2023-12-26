@@ -3,11 +3,22 @@ import Application.Utilities.Database.IModel;
 
 
 public class Product implements IModel {
+    static int idCounter = 0;
     int serialNumber;
     String name;
     String vendor;
     double price;
     int quantity;
+    public Product() {
+        this.serialNumber = idCounter++;
+    }
+    public Product( String name, String vendor, double price, int quantity) {
+        this.serialNumber = idCounter++;
+        this.name = name;
+        this.vendor = vendor;
+        this.price = price;
+        this.quantity = quantity;
+    }
     public Product(int serialNumber, String name, String vendor, double price, int quantity) {
         this.serialNumber = serialNumber;
         this.name = name;
@@ -21,12 +32,14 @@ public class Product implements IModel {
         this.price = newProduct.getPrice();
         this.quantity = newProduct.getQuantity();
     }
+
+    public String getName() {
+        return name;
+    }
     public String getVendor() {
         return vendor;
     }
-    private String getName() {
-        return name;
-    }
+
     public int getQuantity() {
         return quantity;
     }

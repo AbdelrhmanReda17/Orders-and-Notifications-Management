@@ -25,6 +25,7 @@ public abstract class IOrder implements IModel {
         this.status = OrderState.Placed;
         this.userId = userId;
     }
+    public abstract List<ShoppingCartItem> getProducts();
     public abstract double getPrice();
     public abstract void setPrice(double price);
     public abstract void copy(IOrder newOrder);

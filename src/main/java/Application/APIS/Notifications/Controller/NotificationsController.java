@@ -11,24 +11,30 @@ import java.util.Map;
 @RestController
 @RequestMapping("api/notifications")
 public class NotificationsController  {
+    static NotificationsService notificationsService;
+    public NotificationsController(NotificationsService NotificationsService) {
+        notificationsService = NotificationsService;
+    }
     @RequestMapping("getMostNotifications")
     public ResponseEntity<Object> getMostNoficaitions() {
         try {
-            return ResponseEntity.ok(NotificationsService.getMostNotifications());
+            return ResponseEntity.ok(notificationsService.getMostNotifications());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
     @RequestMapping("getNotifications")
     public ResponseEntity<Map<Notification,Integer>> getNoficaitions() {
         try {
-            return ResponseEntity.ok(NotificationsService.getNotifications());
+            return ResponseEntity.ok(notificationsService.getNotifications());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }
     }
 
+    public static void addNotification(Notification notification) {
+        notificationsService.addNotification(notification);
+    }
 }
 
 // http://localhost:8080/api/orders/

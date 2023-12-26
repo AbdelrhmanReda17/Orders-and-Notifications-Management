@@ -8,13 +8,13 @@ public class Notification implements IModel  {
     private static int notificationNumber = 0;
     private final String notificationMessageTemplate;
     private int notificationId = 0;
-    public Notification(String message, String notificationMessageTemplate, User user) {
+    public Notification(String message, String notificationMessageTemplate) {
         this.notificationMessage = message;
         this.notificationMessageTemplate = notificationMessageTemplate;
-        notificationId = notificationNumber;
-        user.addNotification(notificationId);
         notificationNumber++;
+        notificationId = notificationNumber;
     }
+
     public String getNotificationMessage() {
         return notificationMessageTemplate;
     }

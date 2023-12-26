@@ -20,7 +20,7 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
         super(Notification.class);
     }
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-    private static final Map<Notification , Integer> notificationsSentQueue = new HashMap<>();
+    private final Map<Notification , Integer> notificationsSentQueue = new HashMap<>();
 
     public void save(Notification notification) {
         data.add(notification);

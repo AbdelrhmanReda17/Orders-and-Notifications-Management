@@ -12,58 +12,23 @@ import java.util.Map;
 
 @Service
 public class NotificationsService {
-    private static NotificationsRepository notificationsRepository;
+    private final NotificationsRepository notificationsRepository;
     @Autowired
     public NotificationsService(NotificationsRepository notificationsRepository) {
-        NotificationsService.notificationsRepository = notificationsRepository;
+        this.notificationsRepository = notificationsRepository;
     }
-    public static void addNotification(Notification notification) {
-        notificationsRepository.save(notification);
-        AppendToFile(notification);
+    public void addNotification(Notification notification) {
+        this.notificationsRepository.save(notification);
     }
-    public static Map<Notification, Integer> getNotifications() {
-        return notificationsRepository.getAll();
+    public Map<Notification, Integer> getNotifications() {
+        return this.notificationsRepository.getAll();
     }
-    public static Notification getMostNotifications() {
-        Notification ntf = notificationsRepository.getMostNotification();
+    public Notification getMostNotifications() {
+        Notification ntf = this.notificationsRepository.getMostNotification();
         if(ntf == null){
             throw new IllegalArgumentException("No notifications found");
         }else{
             return ntf;
-        }
-    }
-    public static void AppendToFile(Notification notification) {
-        try {
-            FileWriter fw = new FileWriter("notifications.txt", true);
-            PrintWriter pw = new PrintWriter(fw);
-            pw.println(notification.getNotificationMessage());
-            pw.close();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
-    public static void RemoveFromFile(Notification notificationToRemove) {
-        try {
-            File inputFile = new File("notifications.txt");
-            File tempFile = new File("temp.txt");
-
-            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-            PrintWriter writer = new PrintWriter(new FileWriter(tempFile));
-
-            String lineToRemove = notificationToRemove.getNotificationMessage();
-            String currentLine;
-
-            while ((currentLine = reader.readLine()) != null) {
-                if (currentLine.equals(lineToRemove)) continue;
-                writer.println(currentLine);
-            }
-
-            writer.close();
-            reader.close();
-
-            tempFile.renameTo(inputFile);
-        } catch (Exception e) {
-            System.out.println(e);
         }
     }
 }

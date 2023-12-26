@@ -24,17 +24,17 @@ public class Common {
     );
     public static List<Product> products = new LinkedList<Product>(
        List.of(
-            new Product(1, "Product 1", "Vendor", 100, 10),
-            new Product(2, "Product 2", "Vendor", 200, 20),
-            new Product(3, "Product 3", "Vendor", 300, 30),
-            new Product(4, "Product 4", "Vendor", 400, 40),
-            new Product(5, "Product 5", "Vendor", 500, 50),
-            new Product(6, "Product 6", "Vendor", 600, 60),
-            new Product(7, "Product 7", "Vendor", 700, 70),
-            new Product(8, "Product 8", "Vendor", 800, 80),
-            new Product(9, "Product 9", "Vendor", 900, 90),
-            new Product(10, "Product 10", "Vendor", 1000, 100),
-            new Product(11, "Product 11", "Vendor", 1100, 110)
+            new Product( "Product 1", "Vendor", 100, 10),
+            new Product( "Product 2", "Vendor", 200, 20),
+            new Product( "Product 3", "Vendor", 300, 30),
+            new Product( "Product 4", "Vendor", 400, 40),
+            new Product( "Product 5", "Vendor", 500, 50),
+            new Product( "Product 6", "Vendor", 600, 60),
+            new Product( "Product 7", "Vendor", 700, 70),
+            new Product("Product 8", "Vendor", 800, 80),
+            new Product( "Product 9", "Vendor", 900, 90),
+            new Product( "Product 10", "Vendor", 1000, 100),
+            new Product( "Product 11", "Vendor", 1100, 110)
        )
     );
     public static List<IOrder> orders = new LinkedList<IOrder>(
@@ -74,8 +74,6 @@ public class Common {
             )
         )
     );
-    public static List<Notification> notificationsSent = new LinkedList<Notification>();
-    public static List<Integer> notificationsCounter = new LinkedList<Integer>();
     public static List<Notification> notificationsQueue = new LinkedList<Notification>();
 
 }

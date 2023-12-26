@@ -34,7 +34,7 @@ public class ProductService {
         try{
             Product existingProduct = productRepository.findById(id);
             existingProduct.copy(newProduct);
-            productRepository.save(existingProduct);
+            productRepository.update(existingProduct);
         } catch (Exception e) {
             throw new IllegalStateException("Product with id " + id + " does not exist");
         }

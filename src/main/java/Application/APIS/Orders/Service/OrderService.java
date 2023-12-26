@@ -31,7 +31,6 @@ public class OrderService {
                 throw new IllegalStateException("Could not get orders");
          }
     }
-
     public void addOrder(IOrder newOrder) {
         try {
             if(orderRepository.existsById(newOrder.getId())) {

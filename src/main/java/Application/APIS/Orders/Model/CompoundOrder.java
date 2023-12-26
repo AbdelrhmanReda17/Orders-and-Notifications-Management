@@ -22,7 +22,7 @@ public class CompoundOrder extends IOrder{
         this.orderList = orderList;
     }
 
-
+    @Override
     public List<ShoppingCartItem> getProducts() {
         return products;
     }
@@ -38,7 +38,6 @@ public class CompoundOrder extends IOrder{
             order.setStatus(status);
         }
     }
-
     public List<IOrder> getOrderList() {
         return orderList;
     }
@@ -46,7 +45,6 @@ public class CompoundOrder extends IOrder{
     public void setPrice(double price) {
         this.price = price;
     }
-
     @Override
     public void copy(IOrder newOrder) {
         CompoundOrder complexOrder = (CompoundOrder) newOrder;
