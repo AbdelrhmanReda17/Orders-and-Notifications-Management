@@ -30,6 +30,11 @@ public class SimpleOrder extends IOrder {
     }
 
     @Override
+    public void setStatus(OrderState status) {
+        this.status = status;
+    }
+
+    @Override
     public String toString() {
         return "\n" + "SimpleOrder : "  +
                 "price= " + price +
