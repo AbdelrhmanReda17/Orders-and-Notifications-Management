@@ -7,12 +7,13 @@ import java.util.List;
 public class SimpleOrder extends IOrder {
     private double price;
     private List<ShoppingCartItem> products;
-    public SimpleOrder(double price, int userId, List<ShoppingCartItem> products) {
-        super( userId);
+    public SimpleOrder(int id , double price, int userId, List<ShoppingCartItem> products) {
+        super(id , userId);
         this.price = price;
         this.userId = userId;
         this.products = products;
     }
+
     @Override
     public void copy(IOrder order) {
         SimpleOrder simpleOrder = (SimpleOrder) order;
@@ -27,14 +28,6 @@ public class SimpleOrder extends IOrder {
     public List<ShoppingCartItem> getProducts() {
         return products;
     }
-    @Override
-    public int getId() {
-        return id;
-    }
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
 
     @Override
     public String toString() {
@@ -46,4 +39,17 @@ public class SimpleOrder extends IOrder {
                 ", id= " + id+
                 ", products= " + products;
     }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setProducts(List<ShoppingCartItem> products) {
+        this.products = products;
+    }
+
 }

@@ -1,42 +1,38 @@
 package Application.APIS.Orders.Model;
 
-import Application.APIS.Users.Model.User;
 import Application.Utilities.Database.IModel;
+import Application.Utilities.Deserializers.OrderDeserializer;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;
+import java.util.List;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = CompoundOrder.class , name = "CompoundOrder"),
-        @JsonSubTypes.Type(value = SimpleOrder.class , name = "SimpleOrder")
-})
+@JsonDeserialize(using = OrderDeserializer.class)
 public abstract class IOrder implements IModel {
-    private static int counter = 0;
     protected int id;
-    private Date date;
-    private String status;
+    private final Date date;
+    private final String status;
     protected int userId;
-    public IOrder(int userId) {
-        id = counter;
-        counter++;
+    public IOrder() {
+        this.date = new Date();
+        this.status = "placed";
+    }
+    public IOrder(int id ,int userId) {
+        this.id = id;
         this.date = new Date();
         this.status = "placed";
         this.userId = userId;
     }
     public abstract double getPrice();
     public abstract void copy(IOrder newOrder);
-
     public Date getDate() {
         return date;
     }
-
     public String getStatus() {
         return status;
     }
-
     public Integer getUserId() {
         return userId;
     }
@@ -44,12 +40,27 @@ public abstract class IOrder implements IModel {
     public int getId() {
         return id;
     }
-
     @Override
     public void setId(int id) {
         this.id = id;
     }
-
     @Override
     public abstract String toString();
+
+    public void setDate(Date date) {
+        date = date;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setStatus(String status) {
+        status = status;
+    }
+
+    public void setPrice(double price) {
+        price = price;
+    }
+
 }

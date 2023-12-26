@@ -2,6 +2,7 @@ package Application.APIS.Orders.Controller;
 
 import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Service.OrderService;
+import Application.APIS.Users.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,13 +33,13 @@ public class OrderController {
         }
     }
     @PostMapping("/")
-    public ResponseEntity<String> addOrder(@RequestBody IOrder order) {
+    public ResponseEntity<Object> addOrder(@RequestBody IOrder order) {
         try {
-            IOrder savedOrder = orderService.addOrder(order);
+            orderService.addOrder(order);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.ok("Order added successfully");
+        return ResponseEntity.ok(order);
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteOrder(@PathVariable("id") int id) {

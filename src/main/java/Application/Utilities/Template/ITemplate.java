@@ -1,13 +1,14 @@
 package Application.Utilities.Template;
 
+import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.SimpleOrder;
 
 public interface ITemplate {
-    public String getWelcomeMessage(String name);
-    public String getExitMessage(String name);
-    public String OrderMessage(String name, SimpleOrder order);
-    public String FinishOrderMessage(String name, SimpleOrder order);
-    public String getErrorMessage(String name);
-    public String CancelOrderMessage (String name, SimpleOrder order);
+    public String getWelcomeMessage(String name , boolean isTemp);
+    public String getExitMessage(String name , boolean isTemp);
+    public String OrderMessage(String name, IOrder order , boolean isTemp);
+    public String FinishOrderMessage(String name, IOrder order , boolean isTemp);
+    public String getErrorMessage(String name , boolean isTemp);
+    public String CancelOrderMessage (String name, IOrder order , boolean isTemp);
 
 }

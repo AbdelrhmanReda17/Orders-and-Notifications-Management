@@ -1,16 +1,21 @@
 package Application.APIS.Orders.Model;
 
 import Application.APIS.Products.Model.Product;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;
 import java.util.List;
 
+
 public class CompoundOrder extends IOrder{
     private final double price;
     private final List<ShoppingCartItem> products;
+
     public List<IOrder> orderList;
-    public CompoundOrder(double price ,int userId , List<ShoppingCartItem> products , List<IOrder> orderList) {
-        super( userId);
+    public CompoundOrder(int id , double price ,int userId , List<ShoppingCartItem> products , List<IOrder> orderList) {
+        super(id , userId);
         this.price = price;
         this.products = products;
         this.userId = userId;
@@ -39,16 +44,6 @@ public class CompoundOrder extends IOrder{
         for (IOrder order: orderList) {
             complexOrder.copy(order);
         }
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

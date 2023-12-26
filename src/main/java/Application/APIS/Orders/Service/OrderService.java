@@ -1,9 +1,9 @@
 package Application.APIS.Orders.Service;
 
 import Application.APIS.Orders.Model.IOrder;
-import Application.APIS.Orders.Model.OrderProcessorFactory;
+import Application.APIS.Orders.Model.OrderProcessors.OrderProcessorFactory;
 import Application.APIS.Orders.OrderRepository;
-import Application.Utilities.OrderProcessors.IOrderProcessor;
+import Application.APIS.Orders.Model.OrderProcessors.IOrderProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,16 +25,17 @@ public class OrderService {
          }
     }
 
-    public IOrder addOrder(IOrder newOrder) {
+    public void addOrder(IOrder newOrder) {
         try {
+            if(orderRepository.existsById(newOrder.getId())) {
+                throw new IllegalStateException("Order with id " + newOrder.getId() + " already exists");
+            }
             IOrderProcessor orderProcessor = OrderProcessorFactory.CreateOrderProcessor(newOrder);
             orderProcessor.Process(newOrder);
             orderRepository.save(newOrder);
-
         } catch (Exception e) {
             throw new IllegalStateException(e.getMessage());
         }
-        return newOrder;
     }
     public void deleteOrder(int id) {
         if(!orderRepository.existsById(id)) {

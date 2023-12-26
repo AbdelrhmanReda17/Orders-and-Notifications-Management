@@ -15,7 +15,6 @@ public class Product implements IModel {
         this.price = price;
         this.quantity = quantity;
     }
-
     public void copy(Product newProduct) {
         this.vendor = newProduct.getVendor();
         this.name = newProduct.getName();
@@ -35,11 +34,12 @@ public class Product implements IModel {
         return price;
     }
     @Override
-    public int getId() {
-        return serialNumber;
-    }
-    @Override
     public void setId(int id) {
         this.serialNumber = id;
     }
+    @Override
+    public int getId() {
+        return serialNumber;
+    }
+
 }

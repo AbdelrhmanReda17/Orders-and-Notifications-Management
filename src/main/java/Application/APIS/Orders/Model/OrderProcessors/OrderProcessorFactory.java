@@ -1,8 +1,6 @@
-package Application.APIS.Orders.Model;
+package Application.APIS.Orders.Model.OrderProcessors;
 
-import Application.Utilities.OrderProcessors.CompoundOrderProcessor;
-import Application.Utilities.OrderProcessors.IOrderProcessor;
-import Application.Utilities.OrderProcessors.SimpleOrderProcessor;
+import Application.APIS.Orders.Model.IOrder;
 
 public class OrderProcessorFactory {
     public static IOrderProcessor CreateOrderProcessor(IOrder order) {

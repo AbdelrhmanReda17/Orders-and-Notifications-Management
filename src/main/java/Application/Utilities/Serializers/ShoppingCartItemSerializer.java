@@ -1,4 +1,4 @@
-package Application.Utilities.Deserializers;
+package Application.Utilities.Serializers;
 
 import Application.APIS.Orders.Model.ShoppingCartItem;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
 
-public class ShoppingCartItemDeserializer extends JsonSerializer<ShoppingCartItem> {
+public class ShoppingCartItemSerializer extends JsonSerializer<ShoppingCartItem> {
     @Override
     public void serialize(ShoppingCartItem shoppingCartItem, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
         jsonGenerator.writeStartObject();

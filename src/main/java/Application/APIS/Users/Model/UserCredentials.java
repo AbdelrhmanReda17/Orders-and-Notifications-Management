@@ -6,17 +6,17 @@ public class UserCredentials {
     String password;
     String phoneNumber;
     String address;
+    String city;
     String country;
-    String state;
 
-    public UserCredentials(String username, String password, String phoneNumber, String state , String country , String address , String email) {
+    public UserCredentials(String username, String password, String phoneNumber, String country ,String city ,  String address , String email) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
         this.country = country;
-        this.state = state;
+        this.city = city;
     }
 
     public void copy(UserCredentials newUserCredentials) {
@@ -25,7 +25,7 @@ public class UserCredentials {
         this.phoneNumber = newUserCredentials.getPhoneNumber();
         this.address = newUserCredentials.getAddress();
         this.country = newUserCredentials.getCountry();
-        this.state = newUserCredentials.getState();
+        this.city = newUserCredentials.getCity();
         this.email = newUserCredentials.getEmail();
     }
 
@@ -53,7 +53,7 @@ public class UserCredentials {
         return country;
     }
 
-    public String getState() {
-        return state;
+    public String getCity() {
+        return city;
     }
 }

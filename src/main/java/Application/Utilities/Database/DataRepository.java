@@ -11,15 +11,13 @@ public class DataRepository<T , S> implements Repository<T , S> {
       data = databaseFactory.createDatabase(clazz);
     }
     @Override
-    public T save(T object) {
+    public void save(T object) {
         for (T item : data) {
             if (((IModel) object).getId() == ((IModel) item).getId()) {
-                throw new IllegalStateException("Order with id " + ((IModel) object).getId() + " already exists");
+                throw new IllegalStateException("Object is  already exists");
             }
         }
-
         data.add(object);
-        return data.getLast();
     }
 
     @Override
@@ -29,13 +27,12 @@ public class DataRepository<T , S> implements Repository<T , S> {
 
     @Override
     public T findById(S id) {
-        System.out.println("id: " + id);
         for (T object : data) {
             if (object instanceof IModel && ((IModel) object).getId() == Integer.parseInt(id.toString())) {
                 return object;
             }
         }
-        throw new IllegalStateException("Couldn't find this ID");
+        throw new IllegalStateException("Couldn't find this Object");
     }
 
     @Override
@@ -49,7 +46,7 @@ public class DataRepository<T , S> implements Repository<T , S> {
                 return;
             }
         }
-        throw new IllegalStateException("Couldn't find this ID");
+        throw new IllegalStateException("Couldn't find this Object");
     }
 
     @Override
@@ -77,7 +74,7 @@ public class DataRepository<T , S> implements Repository<T , S> {
                 return;
             }
         }
-        throw new IllegalStateException("Couldn't find this ID");
+        throw new IllegalStateException("Couldn't find this Object");
     }
 
     @Override

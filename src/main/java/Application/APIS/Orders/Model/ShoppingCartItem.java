@@ -1,12 +1,13 @@
 package Application.APIS.Orders.Model;
 
-import Application.Utilities.Deserializers.ShoppingCartItemDeserializer;
+import Application.Utilities.Serializers.ShoppingCartItemSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-@JsonSerialize(using = ShoppingCartItemDeserializer.class)
+@JsonSerialize(using = ShoppingCartItemSerializer.class)
 public class ShoppingCartItem {
-    private final int productId;
-    private final int quantity;
+    private int productId;
+    private int quantity;
+    public ShoppingCartItem() {}
 
     public ShoppingCartItem(int quantity, int productId) {
         this.quantity = quantity;

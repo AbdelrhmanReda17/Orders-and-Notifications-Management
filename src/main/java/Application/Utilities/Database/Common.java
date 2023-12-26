@@ -5,10 +5,10 @@ import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.ShoppingCartItem;
 import Application.APIS.Orders.Model.SimpleOrder;
 import Application.APIS.Products.Model.Product;
-import Application.APIS.Users.Model.DummyWallet;
+import Application.APIS.Users.Model.Payment.DummyWallet;
 import Application.APIS.Users.Model.User;
 import Application.APIS.Users.Model.UserCredentials;
-import Application.Utilities.Notification.Notification;
+import Application.APIS.Notifications.Model.Notification;
 
 import java.util.*;
 
@@ -16,10 +16,10 @@ import java.util.*;
 public class Common {
     public static List<User> users = new LinkedList<User>(
         List.of(
-            new User(1, new UserCredentials("Abdelrhman", "admin", "0123456789",  "Egypt" , "Cairo" , "Mokattam" , "Example1@gmail.com") , new DummyWallet(100),"AR" , "SMS") ,
-            new User(2, new UserCredentials("Atef", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example2@gmail.com") , new DummyWallet(200),"EN" , "EMAIL"),
-            new User(3, new UserCredentials("Ahmed", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example3@gmail.com") , new DummyWallet(200),"EN" , "EMAIL"),
-            new User(4, new UserCredentials("Mohamed", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example4@gmail.com") , new DummyWallet(200),"EN" , "SMS")
+            new User(1, new UserCredentials("Abdelrhman", "admin", "0123456789",  "Egypt" , "Cairo" , "Mokattam" , "Example1@gmail.com") , new DummyWallet(100),"AR" , "SMS") , // 90
+            new User(2, new UserCredentials("Atef", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example2@gmail.com") , new DummyWallet(200),"EN" , "EMAIL"), // 190
+            new User(3, new UserCredentials("Ahmed", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example3@gmail.com") , new DummyWallet(200),"AR" , "EMAIL"), // 190
+            new User(4, new UserCredentials("Mohamed", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example4@gmail.com") , new DummyWallet(200),"AR" , "SMS") // 190
         )
     );
     public static List<Product> products = new LinkedList<Product>(
@@ -39,19 +39,20 @@ public class Common {
     );
     public static List<IOrder> orders = new LinkedList<IOrder>(
         List.of(
-            new SimpleOrder( 900,  1 , List.of(
+            new SimpleOrder(0, 900,  1 , List.of(
                 new ShoppingCartItem(1, 1),
                 new ShoppingCartItem(2, 4)
             )),
-            new SimpleOrder( 5300,  2 , List.of(
+            new SimpleOrder(1, 5300,  2 , List.of(
                 new ShoppingCartItem(10, 2),
                 new ShoppingCartItem(11, 3)
             )),
-            new SimpleOrder( 1600,  3 , List.of(
+            new SimpleOrder(2, 1600,  3 , List.of(
                 new ShoppingCartItem(1, 6),
                 new ShoppingCartItem(2, 5)
             )),
             new CompoundOrder(
+                    3,
                 900,
                 1,
                 List.of(
@@ -59,23 +60,22 @@ public class Common {
                     new ShoppingCartItem(2, 4)
                 ),
                 List.of(
-                    new SimpleOrder( 500,  3 , List.of(
+                    new SimpleOrder(3,500,  3 , List.of(
                         new ShoppingCartItem(1, 1),
                         new ShoppingCartItem(2, 2)
                     )),
-                    new SimpleOrder(800,  4 , List.of(
+                    new SimpleOrder(3,800,  4 , List.of(
                         new ShoppingCartItem(8, 1)
                     )),
-                    new SimpleOrder( 1000, 2 , List.of(
+                    new SimpleOrder( 3,1000, 2 , List.of(
                         new ShoppingCartItem(5, 2)
                     ))
                 )
             )
         )
     );
-
-    public static PriorityQueue<Notification> notificationsQueue = new PriorityQueue<Notification>(
-        Comparator.comparing(Notification::getNotificationCounter)
-    );
+    public static List<Notification> notificationsSent = new LinkedList<Notification>();
+    public static List<Integer> notificationsCounter = new LinkedList<Integer>();
+    public static List<Notification> notificationsQueue = new LinkedList<Notification>();
 
 }
