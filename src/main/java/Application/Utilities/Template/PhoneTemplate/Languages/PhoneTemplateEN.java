@@ -12,7 +12,7 @@ public class PhoneTemplateEN extends PhoneTemplate {
     public String PlaceOrderMessage(String name, List<Product> products, boolean isTemp) {
         StringBuilder productsString = GetProductList(products);
 
-        return " your booking of the item" + (products.size() == 1 ? "" : "s")  + productsString  +" is confirmed.";
+        return " your booking of the item" + (products.size() == 1 ? " " : "s ")  + productsString  +" is confirmed.";
     }
     @Override
     public String PlacementOrderMessage(String name, List<Product> products , boolean isTemp) {
@@ -21,6 +21,6 @@ public class PhoneTemplateEN extends PhoneTemplate {
     @Override
     public String CancelOrderMessage(String name, List<Product> products , boolean isTemp) {
         StringBuilder productsString = GetProductList(products);
-        return "We regret to inform you that your order for the item" + (products.size() == 1 ? "" : "s")  + productsString  +" has been canceled. If you have questions, please contact support. Thank you.";
+        return "We regret to inform you that your order for the item" + (products.size() == 1 ? " " : "s ")  + productsString  +" has been canceled. If you have questions, please contact support. Thank you.";
     }
 }

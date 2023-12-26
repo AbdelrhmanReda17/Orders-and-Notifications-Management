@@ -14,7 +14,7 @@ public class EmailTemplateAR extends EmailTemplate{
         if (isTemp) {
             return "عزيزي {س} ، تم تأكيد حجز  الطلب للمنتج {ص}. شكرًا لتسوقك معنا!";
         } else {
-            return "عزيزي" + name + "، تم تأكيد حجز الطلب " + "للمنتج" + (products.size() == 1 ? "" : "ات")  + productsString  + ".";
+            return "عزيزي" + name + "، تم تأكيد حجز الطلب " + "للمنتج" + (products.size() == 1 ? " " : "ات ")  + productsString  + ".";
         }
     }
 
@@ -24,7 +24,7 @@ public class EmailTemplateAR extends EmailTemplate{
         if (isTemp) {
             return "عزيزي {س} ، تم أكمال طلبك للمنتج {ص} بنجاح. شكرًا لتسوقك معنا!";
         } else {
-            return "عزيزي" + name + "، تم إكمال طلبك " + "للمنتج" + (products.size() == 1 ? "" : "ات")  + productsString  + " بنجاح. شكرًا لتسوقك معنا!";
+            return "عزيزي" + name + "، تم إكمال طلبك " + "للمنتج" + (products.size() == 1 ? " " : "ات ")  + productsString  + " بنجاح. شكرًا لتسوقك معنا!";
         }
     }
 
@@ -34,7 +34,7 @@ public class EmailTemplateAR extends EmailTemplate{
         if (isTemp) {
             return "عزيزي {س} ، نأسف لإبلاغك بأن طلبك للمنتج {ص} تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
         } else {
-            return "عزيزي" + name + "، نأسف لإبلاغك بأن طلبك" + "للمنتج" + (products.size() == 1 ? "" : "ات") + productsString + " تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
+            return "عزيزي" + name + "، نأسف لإبلاغك بأن طلبك" + "للمنتج" + (products.size() == 1 ? " " : "ات ") + productsString + " تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
         }
     }
 }

@@ -16,7 +16,7 @@ public class PhoneTemplateAR extends PhoneTemplate {
         if(isTemp){
             return "تم تأكيد حجز طلبك للمنتج {ص}, شكرًا لتسوقك معنا!";
         }else{
-            return " تم تأكيد حجز الطلب برقم: " + "للمنتج" + (products.size() == 1 ? "" : "ات")  + productsString  + ".";
+            return " تم تأكيد حجز الطلب برقم: " + "للمنتج" + (products.size() == 1 ? " " : "ات ")  + productsString  + ".";
         }
     }
 
@@ -26,7 +26,7 @@ public class PhoneTemplateAR extends PhoneTemplate {
         if (isTemp){
             return "تم إكمال طلبك للمنتج {ص} بنجاح, شكرًا لتسوقك معنا!";
         }else{
-            return "، تم إكمال طلبك" + "للمنتج" + (products.size() == 1 ? "" : "ات")  + productsString  + " بنجاح. شكرًا لتسوقك معنا!";
+            return "، تم إكمال طلبك" + "للمنتج" + (products.size() == 1 ? " " : "ات ")  + productsString  + " بنجاح. شكرًا لتسوقك معنا!";
 
         }
     }
@@ -37,7 +37,7 @@ public class PhoneTemplateAR extends PhoneTemplate {
         if(isTemp)
             return "نأسف لإبلاغك بأن طلبك للمنتج {ص} تم إلغاؤه, إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
         else
-            return "نأسف لإبلاغك بأن طلبك" + "للمنتج" + (products.size() == 1 ? "" : "ات")  + productsString  + "تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
+            return "نأسف لإبلاغك بأن طلبك" + "للمنتج" + (products.size() == 1 ? " " : "ات ")  + productsString  + "تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
 
     }
 }
