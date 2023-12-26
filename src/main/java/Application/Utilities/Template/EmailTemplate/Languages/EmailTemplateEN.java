@@ -21,7 +21,7 @@ public class EmailTemplateEN extends EmailTemplate {
         if(isTemp)
             return "Dear {x}, Your booking of the item. {x} is confirmed, Thank you for shopping with us!";
         else{
-            return "Dear "+name+", Your booking of the item" + (products.size() == 1 ? "" : "s")  + productsString  +" is confirmed, Thank you for shopping with us!";
+            return "Dear "+name+", Your booking of the item" + (products.size() == 1 ? " " : "s ")  + productsString  +" is confirmed, Thank you for shopping with us!";
 
         }
     }
@@ -32,7 +32,7 @@ public class EmailTemplateEN extends EmailTemplate {
         if(isTemp)
             return "Dear {x}, Your booking of the item {x} is Shipped . Thank you for choosing us!";
         else{
-            return "Dear "+name+", Your booking of the item" + (products.size() == 1 ? "" : "s")  + productsString  +" is Shipped . Thank you for choosing us!";
+            return "Dear "+name+", Your booking of the item" + (products.size() == 1 ? " " : "s ")  + productsString  +" is Shipped . Thank you for choosing us!";
         }
     }
     @Override
@@ -41,7 +41,7 @@ public class EmailTemplateEN extends EmailTemplate {
         if (isTemp)
             return "Dear {x}, We regret to inform you that your order for item {x} has been canceled.\n" + "If you have questions, please contact support. Thank you.";
         else{
-            return "Dear "+name+", We regret to inform you that your order for the item" + (products.size() == 1 ? "" : "s")  + productsString  +" has been canceled.\n" +
+            return "Dear "+name+", We regret to inform you that your order for the item" + (products.size() == 1 ? " " : "s ")  + productsString  +" has been canceled.\n" +
                     "If you have questions, please contact support. Thank you.";
         }
     }
