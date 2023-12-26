@@ -11,13 +11,15 @@ public class DataRepository<T , S> implements Repository<T , S> {
       data = databaseFactory.createDatabase(clazz);
     }
     @Override
-    public void save(T object) {
+    public T save(T object) {
         for (T item : data) {
             if (((IModel) object).getId() == ((IModel) item).getId()) {
-                throw new IllegalStateException("This ID already exists");
+                throw new IllegalStateException("Order with id " + ((IModel) object).getId() + " already exists");
             }
         }
+
         data.add(object);
+        return data.getLast();
     }
 
     @Override

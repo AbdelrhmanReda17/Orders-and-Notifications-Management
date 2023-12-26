@@ -7,8 +7,8 @@ import java.util.List;
 public class SimpleOrder extends IOrder {
     private double price;
     private List<ShoppingCartItem> products;
-    public SimpleOrder(int id , double price, int userId, List<ShoppingCartItem> products) {
-        super(id, userId);
+    public SimpleOrder(double price, int userId, List<ShoppingCartItem> products) {
+        super( userId);
         this.price = price;
         this.userId = userId;
         this.products = products;

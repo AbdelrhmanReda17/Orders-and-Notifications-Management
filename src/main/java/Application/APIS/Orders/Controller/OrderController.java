@@ -34,7 +34,7 @@ public class OrderController {
     @PostMapping("/")
     public ResponseEntity<String> addOrder(@RequestBody IOrder order) {
         try {
-            orderService.addOrder(order);
+            IOrder savedOrder = orderService.addOrder(order);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

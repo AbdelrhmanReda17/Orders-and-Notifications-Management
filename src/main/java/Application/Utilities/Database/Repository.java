@@ -4,7 +4,7 @@ import java.util.List;
 
 @org.springframework.stereotype.Repository
 public interface Repository<T , S> {
-    public void save(T object);
+    public T save(T object);
     public void delete(T object);
     public T findById(S id);
     public void update(T object);

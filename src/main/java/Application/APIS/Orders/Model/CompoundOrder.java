@@ -9,8 +9,8 @@ public class CompoundOrder extends IOrder{
     private final double price;
     private final List<ShoppingCartItem> products;
     public List<IOrder> orderList;
-    public CompoundOrder(int id,double price ,int userId , List<ShoppingCartItem> products , List<IOrder> orderList) {
-        super(id, userId);
+    public CompoundOrder(double price ,int userId , List<ShoppingCartItem> products , List<IOrder> orderList) {
+        super( userId);
         this.price = price;
         this.products = products;
         this.userId = userId;

@@ -39,20 +39,19 @@ public class Common {
     );
     public static List<IOrder> orders = new LinkedList<IOrder>(
         List.of(
-            new SimpleOrder(1, 900,  1 , List.of(
+            new SimpleOrder( 900,  1 , List.of(
                 new ShoppingCartItem(1, 1),
                 new ShoppingCartItem(2, 4)
             )),
-            new SimpleOrder(2, 5300,  2 , List.of(
+            new SimpleOrder( 5300,  2 , List.of(
                 new ShoppingCartItem(10, 2),
                 new ShoppingCartItem(11, 3)
             )),
-            new SimpleOrder(3, 1600,  3 , List.of(
+            new SimpleOrder( 1600,  3 , List.of(
                 new ShoppingCartItem(1, 6),
                 new ShoppingCartItem(2, 5)
             )),
             new CompoundOrder(
-                4,
                 900,
                 1,
                 List.of(
@@ -60,14 +59,14 @@ public class Common {
                     new ShoppingCartItem(2, 4)
                 ),
                 List.of(
-                    new SimpleOrder(5, 500,  3 , List.of(
+                    new SimpleOrder( 500,  3 , List.of(
                         new ShoppingCartItem(1, 1),
                         new ShoppingCartItem(2, 2)
                     )),
-                    new SimpleOrder(6, 800,  4 , List.of(
+                    new SimpleOrder(800,  4 , List.of(
                         new ShoppingCartItem(8, 1)
                     )),
-                    new SimpleOrder(7, 1000, 2 , List.of(
+                    new SimpleOrder( 1000, 2 , List.of(
                         new ShoppingCartItem(5, 2)
                     ))
                 )

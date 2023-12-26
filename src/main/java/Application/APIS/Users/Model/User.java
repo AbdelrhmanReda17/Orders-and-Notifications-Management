@@ -32,4 +32,8 @@ public class User implements IModel {
     public UserCredentials getUserCredentials() {
         return userCredentials;
     }
+
+    public IPayment getWallet() {
+        return userWallet;
+    }
 }

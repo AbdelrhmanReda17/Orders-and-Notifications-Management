@@ -1,5 +1,6 @@
 package Application.APIS.Orders.Model;
 
+import Application.APIS.Users.Model.User;
 import Application.Utilities.Database.IModel;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -13,12 +14,14 @@ import java.util.Date;
         @JsonSubTypes.Type(value = SimpleOrder.class , name = "SimpleOrder")
 })
 public abstract class IOrder implements IModel {
-    protected int id = 0;
+    private static int counter = 0;
+    protected int id;
     private Date date;
     private String status;
     protected int userId;
-    public IOrder(int id,int userId) {
-        this.id = id;
+    public IOrder(int userId) {
+        id = counter;
+        counter++;
         this.date = new Date();
         this.status = "placed";
         this.userId = userId;

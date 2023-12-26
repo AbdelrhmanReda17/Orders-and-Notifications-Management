@@ -11,11 +11,11 @@ public class DummyWallet implements IPayment {
     }
 
     @Override
-    public void WithDraw(double amount) {
+    public void WithDraw(User user,double amount) {
         if (balance >= amount) {
             balance -= amount;
-        } else {
-            throw new IllegalStateException("Insufficient Funds!");
+            return;
         }
+        throw new IllegalStateException("Insufficient Funds! for " + "(" + user.getId() + ")" + user.userCredentials.username);
     }
 }
