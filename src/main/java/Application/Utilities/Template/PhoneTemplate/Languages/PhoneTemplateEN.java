@@ -22,7 +22,7 @@ public class PhoneTemplateEN implements PhoneTemplate {
     }
     @Override
     public String getType() {
-        return "PHONE-EN";
+        return "PHONE-EN.txt";
     }
     @Override
     public String FinishOrderMessage(String name, IOrder order , boolean isTemp) {
