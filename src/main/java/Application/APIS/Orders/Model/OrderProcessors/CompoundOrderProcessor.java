@@ -10,11 +10,10 @@ import Application.Utilities.Template.TemplateFactory;
 
 public class CompoundOrderProcessor implements IOrderProcessor{
     @Override
-    public void Process(IOrder newOrder) {
+    public void Process(IOrder newOrder , boolean isCompound) {
         try {
-            CompoundOrder compoundOrder = (CompoundOrder) newOrder;
             User user = userRepository.findById(newOrder.getUserId());
-            for(IOrder order : compoundOrder.getOrderList()){
+            for(IOrder order : ((CompoundOrder) newOrder).getOrderList()){
                 User dummmyUser = userRepository.findById(order.getUserId());
                 if(!dummmyUser.getUserCredentials().getCountry().equals(user.getUserCredentials().getCountry())){
                     throw new IllegalStateException("Orders in compound order must be from the same country");
@@ -23,15 +22,17 @@ public class CompoundOrderProcessor implements IOrderProcessor{
                     throw new IllegalStateException("Orders in compound order must be from the same city");
                 }
             }
-            user.getPayment().WithDraw(user, compoundOrder.getPrice());
-            for (IOrder order : compoundOrder.getOrderList()) {
-                OrderProcessorFactory.CreateOrderProcessor(order).Process(order);
+            newOrder.setPrice(newOrder.getPrice() + (OrderFees / (((CompoundOrder) newOrder).getOrderList().size() + 1)));
+            user.getPayment().WithDraw(user, newOrder.getPrice());
+            for (IOrder order : ((CompoundOrder) newOrder).getOrderList()) {
+                order.setPrice(order.getPrice() + (OrderFees / (((CompoundOrder) newOrder).getOrderList().size() + 1)));
+                OrderProcessorFactory.CreateOrderProcessor(order).Process(order , true);
             }
             ITemplate template = TemplateFactory.createTemplate(user.getTemplate() , user.getLanguage());
             NotificationsService.addNotification(
                     new Notification(
-                   template.OrderMessage(user.getUserCredentials().getUsername() ,newOrder , false ) ,
-                   template.OrderMessage(user.getUserCredentials().getUsername() ,newOrder , true ),
+                   template.OrderMessage(user.getUserCredentials().getUsername() , newOrder , false) ,
+                   template.OrderMessage(user.getUserCredentials().getUsername() , newOrder , true),
                    user)
             );
         } catch (Exception e) {

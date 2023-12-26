@@ -16,10 +16,10 @@ import java.util.*;
 public class Common {
     public static List<User> users = new LinkedList<User>(
         List.of(
-            new User(1, new UserCredentials("Abdelrhman", "admin", "0123456789",  "Egypt" , "Cairo" , "Mokattam" , "Example1@gmail.com") , new DummyWallet(100),"AR" , "SMS") , // 90
-            new User(2, new UserCredentials("Atef", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example2@gmail.com") , new DummyWallet(200),"EN" , "EMAIL"), // 190
-            new User(3, new UserCredentials("Ahmed", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example3@gmail.com") , new DummyWallet(200),"AR" , "EMAIL"), // 190
-            new User(4, new UserCredentials("Mohamed", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example4@gmail.com") , new DummyWallet(200),"AR" , "SMS") // 190
+            new User(1, new UserCredentials("Abdelrhman", "admin", "0123456789",  "Egypt" , "Cairo" , "Mokattam" , "Example1@gmail.com") , new DummyWallet(1000),"AR" , "SMS") , // 90
+            new User(2, new UserCredentials("Atef", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example2@gmail.com") , new DummyWallet(2000),"EN" , "EMAIL"), // 190
+            new User(3, new UserCredentials("Ahmed", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example3@gmail.com") , new DummyWallet(3000),"AR" , "EMAIL"), // 190
+            new User(4, new UserCredentials("Mohamed", "user", "0123456789", "Egypt" , "Cairo" , "Madint Nasr"  , "Example4@gmail.com") , new DummyWallet(4000),"AR" , "SMS") // 190
         )
     );
     public static List<Product> products = new LinkedList<Product>(

@@ -10,16 +10,16 @@ import Application.Utilities.Template.TemplateFactory;
 public class SimpleOrderProcessor implements IOrderProcessor{
 
     @Override
-    public void Process(IOrder newOrder) {
+    public void Process(IOrder newOrder , boolean isCompound) {
         try {
             User user = userRepository.findById(newOrder.getUserId());
-            user.getPayment().WithDraw(user,newOrder.getPrice());
+            user.getPayment().WithDraw(user,newOrder.getPrice() + (isCompound ? 0 : OrderFees));
             ITemplate template = TemplateFactory.createTemplate(user.getTemplate() , user.getLanguage());
             NotificationsService.addNotification(
                     new Notification(
-                    template.OrderMessage(user.getUserCredentials().getUsername() ,newOrder , false ) ,
-                            template.OrderMessage(user.getUserCredentials().getUsername() ,newOrder , true ),
-                            user)
+                            template.OrderMessage(user.getUserCredentials().getUsername() , newOrder , false) ,
+                            template.OrderMessage(user.getUserCredentials().getUsername() , newOrder , true) ,
+                             user)
             );
         }
         catch (Exception e) {

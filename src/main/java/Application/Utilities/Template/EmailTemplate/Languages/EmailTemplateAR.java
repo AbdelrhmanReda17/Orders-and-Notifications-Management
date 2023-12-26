@@ -37,6 +37,11 @@ public class EmailTemplateAR implements EmailTemplate {
     }
 
     @Override
+    public String getType() {
+        return "EMAIL-AR";
+    }
+
+    @Override
     public String FinishOrderMessage(String name, IOrder order , boolean isTemp) {
       if (isTemp)
             return "الموضوع: إكمال الطلب - رقم الطلب: {ص}" +

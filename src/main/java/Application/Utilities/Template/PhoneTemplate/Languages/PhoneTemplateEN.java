@@ -20,7 +20,10 @@ public class PhoneTemplateEN implements PhoneTemplate {
     public String OrderMessage(String name, IOrder order, boolean isTemp) {
         return "your booking of the order ID: "+ order.getId()+"is confirmed.";
     }
-
+    @Override
+    public String getType() {
+        return "PHONE-EN";
+    }
     @Override
     public String FinishOrderMessage(String name, IOrder order , boolean isTemp) {
         return "Hello " + name + ", your order (ID: " + order.getId() + ") has been successfully completed. Thank you for shopping with us!";

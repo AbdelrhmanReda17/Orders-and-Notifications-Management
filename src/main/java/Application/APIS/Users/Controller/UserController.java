@@ -22,6 +22,17 @@ public class UserController  {
         }
     }
 
+
+
+    @GetMapping("/")
+    public ResponseEntity<Object> getUsers() {
+        try {
+            return ResponseEntity.ok(userService.getUsers());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable("id") int id, @RequestBody User user) {
         try {

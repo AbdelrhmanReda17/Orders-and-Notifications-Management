@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.util.Map;
 
 
 @Service
@@ -19,6 +20,9 @@ public class NotificationsService {
     public static void addNotification(Notification notification) {
         notificationsRepository.save(notification);
         AppendToFile(notification);
+    }
+    public static Map<Notification, Integer> getNotifications() {
+        return notificationsRepository.getAll();
     }
     public static Notification getMostNotifications() {
         Notification ntf = notificationsRepository.getMostNotification();

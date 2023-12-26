@@ -6,6 +6,7 @@ import Application.Utilities.Template.ITemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executors;
@@ -18,21 +19,17 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
     public NotificationsRepository() {
         super(Notification.class);
     }
-
+    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     private static final Map<Notification , Integer> notificationsSentQueue = new HashMap<>();
 
     public void save(Notification notification) {
         data.add(notification);
-        System.out.println("Notification added");
-        ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.schedule(this::popNotification, 10, TimeUnit.SECONDS);
-        System.out.println("Notification scheduled to be removed in 10 seconds");
-        executorService.shutdown();
-
+        executorService.schedule(() -> popNotification(notification), 10, TimeUnit.SECONDS);
     }
-    public void popNotification() {
-        Notification notification = data.remove(0);
+    public void popNotification(Notification notification) {
+        data.remove(notification);
         notification.setNotificationMessage(null);
+        notification.setId(0);
         for (Notification n : notificationsSentQueue.keySet()){
             if(Objects.equals(n.getNotificationMessage(), notification.getNotificationMessage())) {
                 notificationsSentQueue.put(n, notificationsSentQueue.get(n) + 1);
@@ -53,6 +50,9 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
             }
         }
         return notification;
+    }
+    public Map<Notification , Integer> getAll() {
+        return notificationsSentQueue;
     }
 
 }

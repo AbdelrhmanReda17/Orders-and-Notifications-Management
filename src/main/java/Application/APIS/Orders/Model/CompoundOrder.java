@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class CompoundOrder extends IOrder{
-    private final double price;
+    private double price;
     private final List<ShoppingCartItem> products;
 
     public List<IOrder> orderList;
@@ -21,6 +21,7 @@ public class CompoundOrder extends IOrder{
         this.userId = userId;
         this.orderList = orderList;
     }
+
 
     public List<ShoppingCartItem> getProducts() {
         return products;
@@ -35,6 +36,9 @@ public class CompoundOrder extends IOrder{
         return orderList;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     @Override
     public void copy(IOrder newOrder) {

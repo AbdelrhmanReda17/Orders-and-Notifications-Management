@@ -31,7 +31,7 @@ public class OrderService {
                 throw new IllegalStateException("Order with id " + newOrder.getId() + " already exists");
             }
             IOrderProcessor orderProcessor = OrderProcessorFactory.CreateOrderProcessor(newOrder);
-            orderProcessor.Process(newOrder);
+            orderProcessor.Process(newOrder , false);
             orderRepository.save(newOrder);
         } catch (Exception e) {
             throw new IllegalStateException(e.getMessage());

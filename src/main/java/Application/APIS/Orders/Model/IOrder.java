@@ -26,6 +26,7 @@ public abstract class IOrder implements IModel {
         this.userId = userId;
     }
     public abstract double getPrice();
+    public abstract void setPrice(double price);
     public abstract void copy(IOrder newOrder);
     public Date getDate() {
         return date;
@@ -47,20 +48,5 @@ public abstract class IOrder implements IModel {
     @Override
     public abstract String toString();
 
-    public void setDate(Date date) {
-        date = date;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public void setStatus(String status) {
-        status = status;
-    }
-
-    public void setPrice(double price) {
-        price = price;
-    }
 
 }

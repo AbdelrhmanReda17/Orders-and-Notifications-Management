@@ -20,6 +20,10 @@ public class EmailTemplateEN implements EmailTemplate {
             return "Dear "+name +", Thank you for visiting our store. ";
     }
     @Override
+    public String getType() {
+        return "EMAIL-EN";
+    }
+    @Override
     public String OrderMessage(String name, IOrder order , boolean isTemp) {
         if (isTemp)
             return "Subject: Order Confirmation - Order ID: {x}" +

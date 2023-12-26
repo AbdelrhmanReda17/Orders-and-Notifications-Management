@@ -39,7 +39,10 @@ public class PhoneTemplateAR implements PhoneTemplate {
             return "، تم إكمال طلبك (الرقم: " + order.getId() + ") بنجاح. شكرًا لتسوقك معنا!";
         }
     }
-
+    @Override
+    public String getType() {
+        return "PHONE-AR";
+    }
     @Override
     public String getErrorMessage(String name , boolean isTemp) {
         if(isTemp)

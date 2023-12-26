@@ -6,6 +6,7 @@ import Application.APIS.Users.Model.User;
 import Application.APIS.Users.UserRepository;
 
 public interface IOrderProcessor {
+    double OrderFees = 120;
     UserRepository userRepository = new UserRepository();
-    public void Process(IOrder newOrder);
+    public void Process(IOrder newOrder , boolean isCompound);
 }

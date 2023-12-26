@@ -14,6 +14,10 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
+    public Iterable<User> getUsers() {
+        return userRepository.findAll();
+    }
+
     public void deleteUser(int id) {
         if(!userRepository.existsById(id)) {
             throw new IllegalStateException("User with id " + id + " does not exist");

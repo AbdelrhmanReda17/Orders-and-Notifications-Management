@@ -9,6 +9,5 @@ public class OrderProcessorFactory {
             case "CompoundOrder" -> new CompoundOrderProcessor();
             default -> null;
         };
-
     }
 }

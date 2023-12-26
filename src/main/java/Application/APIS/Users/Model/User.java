@@ -8,13 +8,14 @@ import Application.Utilities.Database.IModel;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = DummyWallet.class , name = "DummyWallet"),
-})
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
+
+
 public class User implements IModel{
     int id;
-    int NotificationCount = 0;
+    List<Integer> notifications;
     UserCredentials userCredentials;
     IPayment payment;
     String language;
@@ -25,15 +26,19 @@ public class User implements IModel{
         this.payment = payment;
         this.language = language;
         this.template = template;
+        this.notifications = new LinkedList<>();
     }
     public int getId() {
         return id;
     }
-    public void setNotificationCount(int notificationCount) {
-        NotificationCount = notificationCount;
+    public List<Integer> getNotifications() {
+        return notifications;
     }
-    public int getNotificationCount() {
-        return NotificationCount;
+    public void setNotifications(List<Integer> notifications) {
+        this.notifications = notifications;
+    }
+    public void addNotification(int notificationId) {
+        this.notifications.add(notificationId);
     }
     @Override
     public void setId(int id) {

@@ -13,9 +13,6 @@ public abstract class IPayment {
     double balance = 0f;
     public abstract void Deposit(double amount);
     public abstract void WithDraw(User user, double amount);
-    public String getPaymentType() {
-        return this.getClass().getSimpleName();
-    }
     public double getBalance() {
         return balance;
     }
