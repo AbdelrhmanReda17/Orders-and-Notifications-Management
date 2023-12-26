@@ -15,27 +15,7 @@ import java.util.Scanner;
 public class EmailTemplateEN implements EmailTemplate {
 
     @Override
-    public String getWelcomeMessage(String name , boolean isTemp) throws FileNotFoundException {
-        if(isTemp)
-            return "Dear {x} , Welcome to Our Store.";
-        else{
-            return "Dear "+ name +" , Welcome to Our Store.";
-        }
-    }
-    @Override
-    public String getExitMessage(String name , boolean isTemp) throws FileNotFoundException {
-        if(isTemp)
-            return "Dear {x} , Thank you for visiting our store.";
-        else{
-            return "Dear "+name+" , Thank you for visiting our store.";
-
-        }}
-    @Override
-    public String getType() {
-        return "EMAIL-EN.txt";
-    }
-    @Override
-    public String OrderMessage(String name, IOrder order , boolean isTemp) throws FileNotFoundException {
+    public String PlaceOrderMessage(String name, IOrder order , boolean isTemp) throws FileNotFoundException {
         if (isTemp)
             return "Subject: Order Confirmation - Order ID: {x}" +
                     "\n\nDear {x},\n\n" +
@@ -54,7 +34,7 @@ public class EmailTemplateEN implements EmailTemplate {
         }
     }
     @Override
-    public String FinishOrderMessage(String name, IOrder order , boolean isTemp) throws FileNotFoundException {
+    public String PlacementOrderMessage(String name, IOrder order , boolean isTemp) throws FileNotFoundException {
         if(isTemp)
             return "Subject: Order Completion - Order ID: {x}" +
                     "\n\nDear {x},\n\n" +
@@ -63,18 +43,6 @@ public class EmailTemplateEN implements EmailTemplate {
             return "Subject: Order Completion - Order ID: "+order.getId()+
                     "\n\nDear"+name+",\n\n" +
                     "Your order (ID: "+order.getId()+") has been completed successfully. Thank you for choosing us!";
-        }
-    }
-    @Override
-    public String getErrorMessage(String name , boolean isTemp) throws FileNotFoundException {
-        if (isTemp)
-            return "Subject: Order Processing Error - {x}" +
-                    "\n\nDear {x},\n\n" +
-                    "We apologize, but there was an error processing your order. Please contact customer support for assistance.";
-        else{
-            return "Subject: Order Processing Error - "+name+
-                    "\n\nDear "+name+",\n\n" +
-                    "We apologize, but there was an error processing your order. Please contact customer support for assistance.";
         }
     }
     @Override

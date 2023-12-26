@@ -14,11 +14,11 @@ public abstract class IOrderProcessor {
     double OrderFees = 120;
     UserRepository userRepository = new UserRepository();
     public abstract void Process(IOrder newOrder , boolean isCompound);
-    static void createOrderNotification(IOrder newOrder, User user) throws FileNotFoundException {
+    public static void createOrderNotification(IOrder newOrder, User user) throws FileNotFoundException {
         ITemplate template = TemplateFactory.createTemplate(user.getTemplate() , user.getLanguage());
         Notification notification = new Notification(
-                template.OrderMessage(user.getUserCredentials().getUsername() , newOrder , false),
-                template.OrderMessage(user.getUserCredentials().getUsername() , newOrder , true)
+                template.PlaceOrderMessage(user.getUserCredentials().getUsername() , newOrder , false),
+                template.PlaceOrderMessage(user.getUserCredentials().getUsername() , newOrder , true)
         );
         user.addNotification(notification.getId());
         NotificationsController.addNotification(notification);

@@ -6,24 +6,9 @@ import Application.Utilities.Template.PhoneTemplate.PhoneTemplate;
 
 public class PhoneTemplateAR implements PhoneTemplate {
 
-    @Override
-    public String getWelcomeMessage(String name , boolean isTemp) {
-        if(isTemp)
-            return " مرحبًا في متجرنا , {س}";
-        else
-            return " مرحبًا في متجرنا، " + name;
-    }
 
     @Override
-    public String getExitMessage(String name , boolean isTemp) {
-        if(isTemp)
-            return "شكرًا لزيارة متجرنا , {س}";
-        else
-            return "شكرًا لزيارة متجرنا، " + name;
-    }
-
-    @Override
-    public String OrderMessage(String name, IOrder order , boolean isTemp) {
+    public String PlaceOrderMessage(String name, IOrder order , boolean isTemp) {
         if(isTemp){
             return "، تم تأكيد حجز الطلب برقم: {س}.";
         }else{
@@ -32,23 +17,12 @@ public class PhoneTemplateAR implements PhoneTemplate {
     }
 
     @Override
-    public String FinishOrderMessage(String name, IOrder order , boolean isTemp) {
+    public String PlacementOrderMessage(String name, IOrder order , boolean isTemp) {
         if (isTemp){
             return "، تم إكمال طلبك (الرقم: {ص}) بنجاح. شكرًا لتسوقك معنا!";
         }else{
             return "، تم إكمال طلبك (الرقم: " + order.getId() + ") بنجاح. شكرًا لتسوقك معنا!";
         }
-    }
-    @Override
-    public String getType() {
-        return "PHONE-AR";
-    }
-    @Override
-    public String getErrorMessage(String name , boolean isTemp) {
-        if(isTemp)
-            return "، يرجى التحقق من رصيدك. غير قادر على معالجة الطلب في الوقت الحالي.";
-        else
-            return "، يرجى التحقق من رصيدك. غير قادر على معالجة الطلب في الوقت الحالي.";
     }
 
     @Override

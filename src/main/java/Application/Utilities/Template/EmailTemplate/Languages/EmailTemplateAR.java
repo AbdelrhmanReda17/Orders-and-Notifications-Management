@@ -7,23 +7,7 @@ import Application.Utilities.Template.EmailTemplate.EmailTemplate;
 public class EmailTemplateAR implements EmailTemplate {
 
     @Override
-    public String getWelcomeMessage(String name , boolean isTemp) {
-        if(isTemp)
-            return " مرحبًا في متجرنا , {س}";
-        else
-            return " مرحبًا في متجرنا، " + name;
-    }
-
-    @Override
-    public String getExitMessage(String name , boolean isTemp) {
-        if(isTemp)
-            return "شكرًا لزيارة متجرنا , {س}";
-        else
-            return "شكرًا لزيارة متجرنا، " + name;
-    }
-
-    @Override
-    public String OrderMessage(String name, IOrder order , boolean isTemp) {
+    public String PlaceOrderMessage(String name, IOrder order , boolean isTemp) {
         if(isTemp)
             return "الموضوع: تأكيد الطلب - رقم الطلب: {ص}" +
                     "\n\nعزيزي {س}،\n\n" +
@@ -36,13 +20,9 @@ public class EmailTemplateAR implements EmailTemplate {
                     "\nشكرًا لتسوقك معنا!";
     }
 
-    @Override
-    public String getType() {
-        return "EMAIL-AR";
-    }
 
     @Override
-    public String FinishOrderMessage(String name, IOrder order , boolean isTemp) {
+    public String PlacementOrderMessage(String name, IOrder order , boolean isTemp) {
       if (isTemp)
             return "الموضوع: إكمال الطلب - رقم الطلب: {ص}" +
                     "\n\nعزيزي {س}،\n\n" +
@@ -53,17 +33,6 @@ public class EmailTemplateAR implements EmailTemplate {
                     "تم إكمال طلبك (الرقم: " + order.getId() + ") بنجاح. شكرًا لاختيارك لنا!";
     }
 
-    @Override
-    public String getErrorMessage(String name , boolean isTemp) {
-        if (isTemp)
-            return "الموضوع: خطأ في معالجة الطلب - {ص}" +
-                    "\n\nعزيزي {س}،\n\n" +
-                    "نعتذر، ولكن حدث خطأ في معالجة طلبك. يرجى الاتصال بدعم العملاء للحصول على المساعدة.";
-        else
-            return "الموضوع: خطأ في معالجة الطلب - " + name +
-                    "\n\nعزيزي " + name + "،\n\n" +
-                    "نعتذر، ولكن حدث خطأ في معالجة طلبك. يرجى الاتصال بدعم العملاء للحصول على المساعدة.";
-    }
 
     @Override
     public String CancelOrderMessage(String name, IOrder order , boolean isTemp) {
