@@ -41,10 +41,10 @@ public class OrderController {
         }
         return ResponseEntity.ok(order);
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteOrder(@PathVariable("id") int id) {
+    @DeleteMapping("/{id}/cancelOrder")
+    public ResponseEntity<String> cancelOrder(@PathVariable("id") int id) {
         try{
-            orderService.deleteOrder(id);
+            orderService.cancelOrder(id);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

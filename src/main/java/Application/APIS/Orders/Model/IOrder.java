@@ -13,16 +13,16 @@ import java.util.List;
 public abstract class IOrder implements IModel {
     protected int id;
     private final Date date;
-    private final String status;
+    protected OrderState status;
     protected int userId;
     public IOrder() {
         this.date = new Date();
-        this.status = "placed";
+        this.status = OrderState.Placed;
     }
     public IOrder(int id ,int userId) {
         this.id = id;
         this.date = new Date();
-        this.status = "placed";
+        this.status = OrderState.Placed;
         this.userId = userId;
     }
     public abstract double getPrice();
@@ -31,9 +31,10 @@ public abstract class IOrder implements IModel {
     public Date getDate() {
         return date;
     }
-    public String getStatus() {
+    public OrderState getStatus() {
         return status;
     }
+    public abstract void setStatus(OrderState status);
     public Integer getUserId() {
         return userId;
     }

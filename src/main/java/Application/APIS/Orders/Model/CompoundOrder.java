@@ -31,6 +31,13 @@ public class CompoundOrder extends IOrder{
     public double getPrice() {
         return price;
     }
+    @Override
+    public void setStatus(OrderState status) {
+        this.status = status;
+        for (IOrder order :orderList) {
+            order.setStatus(status);
+        }
+    }
 
     public List<IOrder> getOrderList() {
         return orderList;
