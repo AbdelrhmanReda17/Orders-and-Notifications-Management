@@ -1,14 +1,13 @@
 package Application.APIS.Orders.Service;
 
 import Application.APIS.Orders.Model.IOrder;
-import Application.APIS.Orders.Model.OrderProcessors.OrderProcessorFactory;
+import Application.ApplicationManager.OrderProcessorFactory;
 import Application.APIS.Orders.Model.OrderState;
 import Application.APIS.Orders.OrderRepository;
-import Application.APIS.Orders.Model.OrderProcessors.IOrderProcessor;
+import Application.ApplicationManager.ApplicationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -36,8 +35,8 @@ public class OrderService {
             if(orderRepository.existsById(newOrder.getId())) {
                 throw new IllegalStateException("Order with id " + newOrder.getId() + " already exists");
             }
-            IOrderProcessor orderProcessor = OrderProcessorFactory.CreateOrderProcessor(newOrder);
-            orderProcessor.Process(newOrder , false);
+            ApplicationManager orderProcessor = OrderProcessorFactory.CreateOrderProcessor(newOrder);
+            orderProcessor.placeOrder(newOrder , false);
             orderRepository.save(newOrder);
             executorService.schedule(()->shipOrder(newOrder), 10, TimeUnit.SECONDS);
         } catch (Exception e) {
@@ -49,7 +48,7 @@ public class OrderService {
             throw new IllegalStateException("Order with id " + id + " does not exist");
         }
         IOrder order = orderRepository.findById(id);
-        if (!order.getStatus().equals(OrderState.Shipped)) {
+        if (!order.getStatus().equals(OrderState.Placement)) {
             orderRepository.deleteById(id);
             return;
         }
@@ -59,6 +58,6 @@ public class OrderService {
         if(!orderRepository.existsById(order.getId())) {
             throw new IllegalStateException("Order with id " + order.getId() + " does not exist");
         }
-        order.setStatus(OrderState.Shipped);
+        order.setStatus(OrderState.Placement);
     }
 }

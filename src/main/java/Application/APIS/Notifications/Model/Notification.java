@@ -4,7 +4,7 @@ import Application.APIS.Users.Model.User;
 import Application.Utilities.Database.IModel;
 
 public class Notification implements IModel  {
-    private String notificationMessage;
+    public String notificationMessage;
     private static int notificationNumber = 0;
     private final String notificationMessageTemplate;
     private int notificationId = 0;
@@ -18,6 +18,7 @@ public class Notification implements IModel  {
     public String getNotificationMessage() {
         return notificationMessageTemplate;
     }
+
     public void setNotificationMessage(String notificationMessage) {
         this.notificationMessage = notificationMessage;
     }

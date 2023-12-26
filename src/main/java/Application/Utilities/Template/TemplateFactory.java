@@ -1,11 +1,14 @@
 package Application.Utilities.Template;
 
 import Application.APIS.Orders.Model.IOrder;
+import Application.APIS.Orders.Model.OrderState;
+import Application.APIS.Products.Model.Product;
 import Application.Utilities.Template.EmailTemplate.Languages.EmailTemplateFactory;
 import Application.Utilities.Template.PhoneTemplate.Languages.PhoneTemplateFactory;
 
 import java.io.FileNotFoundException;
 import java.util.AbstractMap;
+import java.util.List;
 import java.util.Map;
 
 public class TemplateFactory {
@@ -17,15 +20,15 @@ public class TemplateFactory {
         };
     }
 
-    public static Map.Entry<String, String> createOrderNotification(ITemplate template, String messageType, String name, IOrder order) throws FileNotFoundException {
-        switch (messageType) {
-            case "Placed" -> {
+    public static Map.Entry<String, String> createOrderNotification(OrderState state, ITemplate template, String name, List<Product> order)  {
+        switch (state) {
+            case Placed -> {
                 return new AbstractMap.SimpleEntry<>(template.PlaceOrderMessage(name, order, false), template.PlaceOrderMessage(name, order, true));
             }
-            case "Canceled" -> {
+            case Placement -> {
                 return new AbstractMap.SimpleEntry<>(template.CancelOrderMessage(name, order, false), template.PlaceOrderMessage(name, order, true));
             }
-            case "Placement" -> {
+            case Cancelled -> {
                 return new AbstractMap.SimpleEntry<>(template.PlacementOrderMessage(name, order, false), template.PlacementOrderMessage(name, order, true));
             }
             default -> {

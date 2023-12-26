@@ -7,10 +7,10 @@ import java.io.FileNotFoundException;
 
 public class EmailTemplateFactory {
     public static EmailTemplate getLanguageTemplate(String language) throws FileNotFoundException {
-        if (language.equals("EN.txt")) {
+        if (language.equals("EN")) {
             return new EmailTemplateEN();
         } else if (language.equals("AR")) {
-            return new EmailTemplateEN();
+            return new EmailTemplateAR();
         } else {
             return null;
         }

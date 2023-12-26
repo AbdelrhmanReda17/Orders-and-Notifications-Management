@@ -1,5 +1,6 @@
 package Application.APIS.Notifications;
 
+import Application.ApplicationManager.ApplicationManager;
 import Application.Utilities.Database.DataRepository;
 import Application.APIS.Notifications.Model.Notification;
 import Application.Utilities.Template.ITemplate;
@@ -23,6 +24,7 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
     private final Map<Notification , Integer> notificationsSentQueue = new HashMap<>();
 
     public void save(Notification notification) {
+        ApplicationManager.AppendToFile(notification);
         data.add(notification);
         executorService.schedule(() -> popNotification(notification), 10, TimeUnit.SECONDS);
     }
@@ -51,8 +53,12 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
         }
         return notification;
     }
-    public Map<Notification , Integer> getAll() {
-        return notificationsSentQueue;
+    public Map<String , Integer> getAll() {
+        Map<String , Integer> notificationsSent = new HashMap<>();
+        for (Notification n :  notificationsSentQueue.keySet()){
+            notificationsSent.put(n.getNotificationMessage() , notificationsSentQueue.get(n));
+        }
+        return notificationsSent;
     }
 
 }

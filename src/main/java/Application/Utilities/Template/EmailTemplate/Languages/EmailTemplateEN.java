@@ -9,56 +9,40 @@ import Application.Utilities.Template.EmailTemplate.EmailTemplate;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class EmailTemplateEN implements EmailTemplate {
+public class EmailTemplateEN extends EmailTemplate {
 
     @Override
-    public String PlaceOrderMessage(String name, IOrder order , boolean isTemp) throws FileNotFoundException {
-        if (isTemp)
-            return "Subject: Order Confirmation - Order ID: {x}" +
-                    "\n\nDear {x},\n\n" +
-                    "Your order has been confirmed. Order ID: {x}" +
-                    "\nThank you for shopping with us!";
-        else{
-//            String msg = "Subject: Order Confirmation - Order ID:"+order.getId()+"\n\nDear "+name+",\n\nYour booking of";
-//                    for(ShoppingCartItem p :order.getProducts()){
-//
-//                    }
-//
-//
-//                    " has been confirmed. Order ID: {x}" +
-//                    "\nThank you for shopping with us!";
-            return "";
-        }
-    }
-    @Override
-    public String PlacementOrderMessage(String name, IOrder order , boolean isTemp) throws FileNotFoundException {
+    public String PlaceOrderMessage(String name, List<Product> products , boolean isTemp)  {
+        StringBuilder productsString = GetProductList(products);
         if(isTemp)
-            return "Subject: Order Completion - Order ID: {x}" +
-                    "\n\nDear {x},\n\n" +
-                    "Your order (ID: {x}) has been completed successfully. Thank you for choosing us!";
+            return "Dear {x}, Your booking of the item. {x} is confirmed, Thank you for shopping with us!";
         else{
-            return "Subject: Order Completion - Order ID: "+order.getId()+
-                    "\n\nDear"+name+",\n\n" +
-                    "Your order (ID: "+order.getId()+") has been completed successfully. Thank you for choosing us!";
+            return "Dear "+name+", Your booking of the item" + (products.size() == 1 ? "" : "s")  + productsString  +" is confirmed, Thank you for shopping with us!";
+
         }
     }
     @Override
-    public String CancelOrderMessage(String name, IOrder order , boolean isTemp) throws FileNotFoundException {
-        if (isTemp)
-            return "Subject: Order Cancellation - Order ID: {x}" +
-                    "\n\nDear {x},\n\n" +
-                    "We regret to inform you that your order (ID: {x}) has been canceled.\n" +
-                    "If you have any questions or concerns, please contact our customer support.\n" +
-                    "Thank you for your understanding.";
+    public String PlacementOrderMessage(String name, List<Product> products, boolean isTemp)  {
+        StringBuilder productsString = GetProductList(products);
+
+        if(isTemp)
+            return "Dear {x}, Your booking of the item {x} is Shipped . Thank you for choosing us!";
         else{
-            return "Subject: Order Cancellation - Order ID: "+order.getId()+
-                    "\n\nDear "+name+",\n\n" +
-                    "We regret to inform you that your order (ID: "+order .getId()+") has been canceled.\n" +
-                    "If you have any questions or concerns, please contact our customer support.\n" +
-                    "Thank you for your understanding.";
+            return "Dear "+name+", Your booking of the item" + (products.size() == 1 ? "" : "s")  + productsString  +" is Shipped . Thank you for choosing us!";
+        }
+    }
+    @Override
+    public String CancelOrderMessage(String name, List<Product> products , boolean isTemp)  {
+        StringBuilder productsString = GetProductList(products);
+        if (isTemp)
+            return "Dear {x}, We regret to inform you that your order for item {x} has been canceled.\n" + "If you have questions, please contact support. Thank you.";
+        else{
+            return "Dear "+name+", We regret to inform you that your order for the item" + (products.size() == 1 ? "" : "s")  + productsString  +" has been canceled.\n" +
+                    "If you have questions, please contact support. Thank you.";
         }
     }
 }

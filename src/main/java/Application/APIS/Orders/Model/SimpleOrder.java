@@ -13,7 +13,6 @@ public class SimpleOrder extends IOrder {
         this.userId = userId;
         this.products = products;
     }
-
     @Override
     public void copy(IOrder order) {
         SimpleOrder simpleOrder = (SimpleOrder) order;

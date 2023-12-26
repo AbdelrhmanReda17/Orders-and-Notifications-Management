@@ -2,24 +2,25 @@ package Application.Utilities.Template.PhoneTemplate.Languages;
 
 import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.SimpleOrder;
+import Application.APIS.Products.Model.Product;
 import Application.Utilities.Template.PhoneTemplate.PhoneTemplate;
 
-public class PhoneTemplateEN implements PhoneTemplate {
+import java.util.List;
 
+public class PhoneTemplateEN extends PhoneTemplate {
     @Override
-    public String PlaceOrderMessage(String name, IOrder order, boolean isTemp) {
-        return "your booking of the order ID: "+ order.getId()+"is confirmed.";
+    public String PlaceOrderMessage(String name, List<Product> products, boolean isTemp) {
+        StringBuilder productsString = GetProductList(products);
+
+        return " your booking of the item" + (products.size() == 1 ? "" : "s")  + productsString  +" is confirmed.";
     }
     @Override
-    public String PlacementOrderMessage(String name, IOrder order , boolean isTemp) {
-        return "Hello " + name + ", your order (ID: " + order.getId() + ") has been successfully completed. Thank you for shopping with us!";
+    public String PlacementOrderMessage(String name, List<Product> products , boolean isTemp) {
+        return "Hello " + name + ", your order has been successfully completed. Thank you for shopping with us!";
     }
-
     @Override
-    public String CancelOrderMessage(String name, IOrder order , boolean isTemp) {
-        return "Order Cancellation - Order ID: " + order.getId() +
-                "\nDear " + name + ",\n" +
-                "We regret to inform you that your order (ID: " + order.getId() + ") has been canceled. If you have questions, please contact support. Thank you.";
-
+    public String CancelOrderMessage(String name, List<Product> products , boolean isTemp) {
+        StringBuilder productsString = GetProductList(products);
+        return "We regret to inform you that your order for the item" + (products.size() == 1 ? "" : "s")  + productsString  +" has been canceled. If you have questions, please contact support. Thank you.";
     }
 }

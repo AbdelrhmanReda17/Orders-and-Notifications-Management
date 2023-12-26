@@ -1,42 +1,4 @@
-الموضوع: تأكيد الطلب - رقم الطلب: {ص}
-
-عزيزي {س}،
-
-تم تأكيد طلبك. رقم الطلب: {ص}
-شكرًا لتسوقك معنا!
-، تم تأكيد حجز الطلب برقم: {س}.
-Subject: Order Confirmation - Order ID: {x}
-
-Dear {x},
-
-Your order has been confirmed. Order ID: {x}
-Thank you for shopping with us!
-، تم تأكيد حجز الطلب برقم: {س}.
-الموضوع: تأكيد الطلب - رقم الطلب: {ص}
-
-عزيزي {س}،
-
-تم تأكيد طلبك. رقم الطلب: {ص}
-شكرًا لتسوقك معنا!
-، تم تأكيد حجز الطلب برقم: {س}.
-Subject: Order Confirmation - Order ID: {x}
-
-Dear {x},
-
-Your order has been confirmed. Order ID: {x}
-Thank you for shopping with us!
-، تم تأكيد حجز الطلب برقم: {س}.
-الموضوع: تأكيد الطلب - رقم الطلب: {ص}
-
-عزيزي {س}،
-
-تم تأكيد طلبك. رقم الطلب: {ص}
-شكرًا لتسوقك معنا!
-، تم تأكيد حجز الطلب برقم: {س}.
-Subject: Order Confirmation - Order ID: {x}
-
-Dear {x},
-
-Your order has been confirmed. Order ID: {x}
-Thank you for shopping with us!
-، تم تأكيد حجز الطلب برقم: {س}.
+عزيزيAhmed، تم تأكيد حجز الطلب للمنتجاتProduct 2, Product 3.
+ تم تأكيد حجز الطلب برقم: للمنتجProduct 2.
+Dear Atef, Your booking of the itemProduct 3 is confirmed, Thank you for shopping with us!
+ تم تأكيد حجز الطلب برقم: للمنتجاتProduct 2, Product 5.

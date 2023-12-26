@@ -17,10 +17,7 @@ public class NotificationsService {
     public NotificationsService(NotificationsRepository notificationsRepository) {
         this.notificationsRepository = notificationsRepository;
     }
-    public void addNotification(Notification notification) {
-        this.notificationsRepository.save(notification);
-    }
-    public Map<Notification, Integer> getNotifications() {
+    public Map<String, Integer> getNotifications() {
         return this.notificationsRepository.getAll();
     }
     public Notification getMostNotifications() {

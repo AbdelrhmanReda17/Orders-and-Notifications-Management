@@ -24,16 +24,12 @@ public class NotificationsController  {
         }
     }
     @RequestMapping("getNotifications")
-    public ResponseEntity<Map<Notification,Integer>> getNoficaitions() {
+    public ResponseEntity<Map<String,Integer>> getNoficaitions() {
         try {
             return ResponseEntity.ok(notificationsService.getNotifications());
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }
-    }
-
-    public static void addNotification(Notification notification) {
-        notificationsService.addNotification(notification);
     }
 }
 
