@@ -1,29 +1,25 @@
-package Application.Utilities.Template.EmailTemplate;
+package Application.Utilities.Template.EmailTemplate.Languages;
 
 import Application.APIS.Orders.Model.IOrder;
+import Application.APIS.Orders.Model.ShoppingCartItem;
 import Application.APIS.Orders.Model.SimpleOrder;
+import Application.APIS.Products.Model.Product;
 import Application.Utilities.Template.EmailTemplate.EmailTemplate;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class EmailTemplateEN implements EmailTemplate {
-    File language ;
 
-    EmailTemplateEN(String lang) throws FileNotFoundException {
-        String dir="/Languages/"+lang;
-        language = new File(dir);
-    }
     @Override
     public String getWelcomeMessage(String name , boolean isTemp) throws FileNotFoundException {
         if(isTemp)
             return "Dear {x} , Welcome to Our Store.";
         else{
-            String msg;
-            msg =FileParser.parse("WELCOMEMSG",language);
-
-            return msg.replaceAll("\\{N\\}", name);
+            return "Dear "+ name +" , Welcome to Our Store.";
         }
     }
     @Override
@@ -31,9 +27,8 @@ public class EmailTemplateEN implements EmailTemplate {
         if(isTemp)
             return "Dear {x} , Thank you for visiting our store.";
         else{
-            String msg;
-            msg =FileParser.parse("EXITMSG",language);
-            return msg.replaceAll("\\{N\\}", name);
+            return "Dear "+name+" , Thank you for visiting our store.";
+
         }}
     @Override
     public String getType() {
@@ -47,10 +42,15 @@ public class EmailTemplateEN implements EmailTemplate {
                     "Your order has been confirmed. Order ID: {x}" +
                     "\nThank you for shopping with us!";
         else{
-            String msg;
-            msg =FileParser.parse("ORDERMSG",language);
-            msg=msg.replaceAll("\\{I\\}", String.valueOf(order.getId()));
-            return msg.replaceAll("\\{N\\}", name);
+//            String msg = "Subject: Order Confirmation - Order ID:"+order.getId()+"\n\nDear "+name+",\n\nYour booking of";
+//                    for(ShoppingCartItem p :order.getProducts()){
+//
+//                    }
+//
+//
+//                    " has been confirmed. Order ID: {x}" +
+//                    "\nThank you for shopping with us!";
+            return "";
         }
     }
     @Override
@@ -60,10 +60,9 @@ public class EmailTemplateEN implements EmailTemplate {
                     "\n\nDear {x},\n\n" +
                     "Your order (ID: {x}) has been completed successfully. Thank you for choosing us!";
         else{
-            String msg;
-            msg =FileParser.parse("FINISHORDERMSG",language);
-            msg=msg.replaceAll("\\{I\\}", String.valueOf(order.getId()));
-            return msg.replaceAll("\\{N\\}", name);
+            return "Subject: Order Completion - Order ID: "+order.getId()+
+                    "\n\nDear"+name+",\n\n" +
+                    "Your order (ID: "+order.getId()+") has been completed successfully. Thank you for choosing us!";
         }
     }
     @Override
@@ -73,9 +72,9 @@ public class EmailTemplateEN implements EmailTemplate {
                     "\n\nDear {x},\n\n" +
                     "We apologize, but there was an error processing your order. Please contact customer support for assistance.";
         else{
-            String msg;
-            msg =FileParser.parse("ERRORMSG",language);
-            return msg.replaceAll("\\{N\\}", name);
+            return "Subject: Order Processing Error - "+name+
+                    "\n\nDear "+name+",\n\n" +
+                    "We apologize, but there was an error processing your order. Please contact customer support for assistance.";
         }
     }
     @Override
@@ -87,10 +86,11 @@ public class EmailTemplateEN implements EmailTemplate {
                     "If you have any questions or concerns, please contact our customer support.\n" +
                     "Thank you for your understanding.";
         else{
-            String msg;
-            msg =FileParser.parse("CANCELMSG",language);
-            msg=msg.replaceAll("\\{I\\}", String.valueOf(order.getId()));
-            return msg.replaceAll("\\{N\\}", name);
+            return "Subject: Order Cancellation - Order ID: "+order.getId()+
+                    "\n\nDear "+name+",\n\n" +
+                    "We regret to inform you that your order (ID: "+order .getId()+") has been canceled.\n" +
+                    "If you have any questions or concerns, please contact our customer support.\n" +
+                    "Thank you for your understanding.";
         }
     }
 }

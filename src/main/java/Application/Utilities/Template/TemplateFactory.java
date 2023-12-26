@@ -1,6 +1,6 @@
 package Application.Utilities.Template;
 
-import Application.Utilities.Template.EmailTemplate.EmailTemplateFactory;
+import Application.Utilities.Template.EmailTemplate.Languages.EmailTemplateFactory;
 import Application.Utilities.Template.PhoneTemplate.Languages.PhoneTemplateFactory;
 
 import java.io.FileNotFoundException;

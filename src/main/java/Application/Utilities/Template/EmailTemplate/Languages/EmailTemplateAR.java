@@ -1,4 +1,4 @@
-package Application.Utilities.Template.EmailTemplate;
+package Application.Utilities.Template.EmailTemplate.Languages;
 
 import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.SimpleOrder;
