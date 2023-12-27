@@ -1,17 +1,9 @@
 package Application.Utilities.Template.EmailTemplate.Languages;
 
-import Application.APIS.Orders.Model.IOrder;
-import Application.APIS.Orders.Model.ShoppingCartItem;
-import Application.APIS.Orders.Model.SimpleOrder;
+
 import Application.APIS.Products.Model.Product;
 import Application.Utilities.Template.EmailTemplate.EmailTemplate;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
 
 public class EmailTemplateEN extends EmailTemplate {
 

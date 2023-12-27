@@ -6,7 +6,7 @@ import Application.Utilities.Template.EmailTemplate.Languages.EmailTemplateEN;
 import java.io.FileNotFoundException;
 
 public class EmailTemplateFactory {
-    public static EmailTemplate getLanguageTemplate(String language) throws FileNotFoundException {
+    public static EmailTemplate getLanguageTemplate(String language) {
         if (language.equals("EN")) {
             return new EmailTemplateEN();
         } else if (language.equals("AR")) {

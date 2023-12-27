@@ -1,16 +1,13 @@
 package Application.APIS.Users.Model;
 
-import Application.APIS.Orders.Model.CompoundOrder;
-import Application.APIS.Orders.Model.SimpleOrder;
-import Application.APIS.Users.Model.Payment.DummyWallet;
+
 import Application.APIS.Users.Model.Payment.IPayment;
 import Application.Utilities.Database.IModel;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
+
 
 
 public class User implements IModel{
@@ -44,9 +41,7 @@ public class User implements IModel{
     public void setId(int id) {
         this.id=id;
     }
-    public void setUserCredentials(UserCredentials userCredentials) {
-        this.userCredentials = userCredentials;
-    }
+
     public UserCredentials getUserCredentials() {
         return userCredentials;
     }

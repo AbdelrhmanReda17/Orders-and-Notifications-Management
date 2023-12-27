@@ -3,7 +3,6 @@ package Application.APIS.Users.Model.Payment;
 import Application.APIS.Users.Model.User;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "paymentType")
 @JsonSubTypes({

@@ -1,10 +1,8 @@
 package Application.APIS.Orders.Controller;
 
-import Application.APIS.Notifications.Model.Notification;
-import Application.APIS.Notifications.Service.NotificationsService;
+
 import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Service.OrderService;
-import Application.APIS.Users.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,7 +40,7 @@ public class OrderController {
         }
         return ResponseEntity.ok(order);
     }
-    @DeleteMapping("/{id}/cancelOrder")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> cancelOrder(@PathVariable("id") int id) {
         try{
             orderService.cancelOrder(id);

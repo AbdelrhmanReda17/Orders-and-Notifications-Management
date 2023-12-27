@@ -7,7 +7,7 @@ import java.util.List;
 public class DataRepository<T , S> implements Repository<T , S> {
     protected List<T> data;
     protected DataRepository(Class<T> clazz) {
-      DatabaseFactory<T> databaseFactory = new DatabaseFactory<T>();
+      DatabaseFactory<T> databaseFactory = new DatabaseFactory<>();
       data = databaseFactory.createDatabase(clazz);
     }
     @Override
@@ -75,10 +75,5 @@ public class DataRepository<T , S> implements Repository<T , S> {
             }
         }
         throw new IllegalStateException("Couldn't find this Object");
-    }
-
-    @Override
-    public void deleteAll() {
-        data.clear();
     }
 }

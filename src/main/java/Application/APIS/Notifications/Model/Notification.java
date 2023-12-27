@@ -1,6 +1,5 @@
 package Application.APIS.Notifications.Model;
 
-import Application.APIS.Users.Model.User;
 import Application.Utilities.Database.IModel;
 
 public class Notification implements IModel  {

@@ -1,18 +1,15 @@
 package Application.Utilities.Template;
 
-import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.OrderState;
 import Application.APIS.Products.Model.Product;
 import Application.Utilities.Template.EmailTemplate.Languages.EmailTemplateFactory;
 import Application.Utilities.Template.PhoneTemplate.Languages.PhoneTemplateFactory;
-
-import java.io.FileNotFoundException;
 import java.util.AbstractMap;
 import java.util.List;
 import java.util.Map;
 
 public class TemplateFactory {
-    public static ITemplate createTemplate(String templateType, String language) throws FileNotFoundException {
+    public static ITemplate createTemplate(String templateType, String language){
         return switch (templateType) {
             case "SMS" -> PhoneTemplateFactory.getLanguageTemplate(language);
             case "EMAIL" -> EmailTemplateFactory.getLanguageTemplate(language);
@@ -25,10 +22,10 @@ public class TemplateFactory {
             case Placed -> {
                 return new AbstractMap.SimpleEntry<>(template.PlaceOrderMessage(name, order, false), template.PlaceOrderMessage(name, order, true));
             }
-            case Placement -> {
+            case Cancelled -> {
                 return new AbstractMap.SimpleEntry<>(template.CancelOrderMessage(name, order, false), template.PlaceOrderMessage(name, order, true));
             }
-            case Cancelled -> {
+            case Placement -> {
                 return new AbstractMap.SimpleEntry<>(template.PlacementOrderMessage(name, order, false), template.PlacementOrderMessage(name, order, true));
             }
             default -> {

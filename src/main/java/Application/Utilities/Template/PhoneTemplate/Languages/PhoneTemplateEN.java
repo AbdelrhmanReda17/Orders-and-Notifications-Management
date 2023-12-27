@@ -1,7 +1,5 @@
 package Application.Utilities.Template.PhoneTemplate.Languages;
 
-import Application.APIS.Orders.Model.IOrder;
-import Application.APIS.Orders.Model.SimpleOrder;
 import Application.APIS.Products.Model.Product;
 import Application.Utilities.Template.PhoneTemplate.PhoneTemplate;
 

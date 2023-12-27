@@ -3,20 +3,20 @@ package Application.ApplicationManager;
 import Application.APIS.Orders.Model.CompoundOrder;
 import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.OrderState;
-import Application.APIS.Products.Model.Product;
 import Application.APIS.Users.Model.User;
-
-import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class CompoundOrderManager extends ApplicationManager {
     @Override
     public void CancelHandler(IOrder order, boolean isCompound) {
         try {
+            if(order.getStatus() == OrderState.Placement){ return; }
             User user = userRepository.findById(order.getUserId());
             user.getPayment().Deposit(order.getPrice());
             for (IOrder o : ((CompoundOrder) order).getOrderList()) {
-                OrderProcessorFactory.CreateOrderProcessor(order).ManageOrder(order, true,OrderState.Cancelled);
+                OrderProcessorFactory.CreateOrderProcessor(o).ManageOrder(o, true,OrderState.Cancelled);
             }
+
             order.setStatus(OrderState.Cancelled);
         } catch (Exception e) {
             throw new IllegalStateException(e.getMessage());
@@ -43,6 +43,7 @@ public class CompoundOrderManager extends ApplicationManager {
                 order.setPrice(order.getPrice() + (OrderFees / (((CompoundOrder) newOrder).getOrderList().size() + 1)));
                 OrderProcessorFactory.CreateOrderProcessor(order).ManageOrder(order, true,OrderState.Placed);
             }
+            executorService.schedule(()->ApplicationManager.shipOrder(newOrder), 10, TimeUnit.SECONDS);
         } catch (Exception e) {
             throw new IllegalStateException(e.getMessage());
         }

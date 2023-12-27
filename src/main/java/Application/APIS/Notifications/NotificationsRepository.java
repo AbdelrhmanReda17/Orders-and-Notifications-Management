@@ -3,11 +3,9 @@ package Application.APIS.Notifications;
 import Application.ApplicationManager.ApplicationManager;
 import Application.Utilities.Database.DataRepository;
 import Application.APIS.Notifications.Model.Notification;
-import Application.Utilities.Template.ITemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executors;

@@ -1,6 +1,5 @@
 package Application.APIS.Notifications.Controller;
 
-import Application.APIS.Notifications.Model.Notification;
 import Application.APIS.Notifications.Service.NotificationsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,7 @@ public class NotificationsController  {
     public NotificationsController(NotificationsService NotificationsService) {
         notificationsService = NotificationsService;
     }
-    @RequestMapping("getMostNotifications")
+    @RequestMapping("/getMostNotifications")
     public ResponseEntity<Object> getMostNoficaitions() {
         try {
             return ResponseEntity.ok(notificationsService.getMostNotifications());
@@ -23,7 +22,7 @@ public class NotificationsController  {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    @RequestMapping("getNotifications")
+    @RequestMapping("/")
     public ResponseEntity<Map<String,Integer>> getNoficaitions() {
         try {
             return ResponseEntity.ok(notificationsService.getNotifications());

@@ -2,11 +2,9 @@ package Application.APIS.Notifications.Model;
 
 import Application.APIS.Orders.Model.OrderState;
 import Application.APIS.Products.Model.Product;
-import Application.APIS.Users.Model.User;
 import Application.Utilities.Template.ITemplate;
 import Application.Utilities.Template.TemplateFactory;
 
-import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Objects;
 

@@ -1,7 +1,6 @@
 package Application.Utilities.Template.EmailTemplate.Languages;
 
-import Application.APIS.Orders.Model.IOrder;
-import Application.APIS.Orders.Model.SimpleOrder;
+
 import Application.APIS.Products.Model.Product;
 import Application.Utilities.Template.EmailTemplate.EmailTemplate;
 
@@ -34,7 +33,7 @@ public class EmailTemplateAR extends EmailTemplate{
         if (isTemp) {
             return "عزيزي {س} ، نأسف لإبلاغك بأن طلبك للمنتج {ص} تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
         } else {
-            return "عزيزي" + name + "، نأسف لإبلاغك بأن طلبك" + "للمنتج" + (products.size() == 1 ? " " : "ات ") + productsString + " تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
+            return "عزيزي" + name + "، نأسف لإبلاغك بأن طلبك " + "للمنتج" + (products.size() == 1 ? " " : "ات ") + productsString + " تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
         }
     }
 }

@@ -2,8 +2,6 @@ package Application.APIS.Orders.Model;
 
 import Application.Utilities.Database.IModel;
 import Application.Utilities.Deserializers.OrderDeserializer;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Date;

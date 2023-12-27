@@ -1,11 +1,6 @@
 package Application.APIS.Orders.Model;
 
-import Application.APIS.Products.Model.Product;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import java.util.Date;
 import java.util.List;
 
 
@@ -57,7 +52,7 @@ public class CompoundOrder extends IOrder{
 
     @Override
     public String toString() {
-        String result = "CompoundOrder : "+
+        return "CompoundOrder : "+
                 "id = " + id +
                 ", price = " + price +
                 ", date = " + getDate() +
@@ -65,6 +60,5 @@ public class CompoundOrder extends IOrder{
                 ", userId = " + userId +
                 ", products = " + products + '\n' +
                 "orderList = " + orderList;
-            return result;
     }
 }

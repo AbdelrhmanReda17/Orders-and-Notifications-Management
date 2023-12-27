@@ -1,6 +1,5 @@
 package Application.APIS.Orders.Service;
 
-import Application.APIS.Notifications.Service.NotificationsService;
 import Application.APIS.Orders.Model.IOrder;
 import Application.ApplicationManager.OrderProcessorFactory;
 import Application.APIS.Orders.Model.OrderState;
@@ -9,14 +8,11 @@ import Application.ApplicationManager.ApplicationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+
 
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     @Autowired
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -39,7 +35,6 @@ public class OrderService {
             ApplicationManager orderProcessor = OrderProcessorFactory.CreateOrderProcessor(newOrder);
             orderProcessor.ManageOrder(newOrder , false,OrderState.Placed);
             orderRepository.save(newOrder);
-            executorService.schedule(()->ApplicationManager.shipOrder(newOrder), 10, TimeUnit.SECONDS);
         } catch (Exception e) {
             throw new IllegalStateException(e.getMessage());
         }

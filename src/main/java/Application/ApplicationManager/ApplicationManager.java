@@ -1,6 +1,5 @@
 package Application.ApplicationManager;
 
-import Application.APIS.Notifications.Controller.NotificationsController;
 import Application.APIS.Notifications.Model.Notification;
 import Application.APIS.Notifications.Model.NotificationFactory;
 import Application.APIS.Notifications.NotificationsRepository;
@@ -14,14 +13,14 @@ import Application.APIS.Users.Model.User;
 import Application.APIS.Users.UserRepository;
 import Application.Utilities.Template.ITemplate;
 import Application.Utilities.Template.TemplateFactory;
-import org.springframework.core.annotation.Order;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public abstract class ApplicationManager {
     double OrderFees = 120;
@@ -29,15 +28,11 @@ public abstract class ApplicationManager {
     static ProductRepository productRepository = new ProductRepository();
     static NotificationsRepository notificationsRepository = new NotificationsRepository();
     static OrderRepository orderRepository = new OrderRepository();
+    protected final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
     public void ManageOrder(IOrder newOrder , boolean isCompound, OrderState status){
-        List<Product> products = new LinkedList<>();
-        for(ShoppingCartItem product : newOrder.getProducts()){
-            products.add(productRepository.findById(product.getProductId()));
-            if(Objects.equals(status, OrderState.Placed) && products.get(products.size() - 1).getQuantity() < product.getQuantity()){
-                throw new IllegalStateException("Not enough quantity for product " + products.get(products.size() - 1).getName());
-            }
-        }
+        if(newOrder.getStatus() != OrderState.Placed){ return; }
+        List<Product> products = getProducts(newOrder.getProducts() , status);
         try{
             if (Objects.equals(status, OrderState.Cancelled)) {
                 CancelHandler(newOrder,isCompound);
@@ -46,23 +41,34 @@ public abstract class ApplicationManager {
             }
             for(int i = 0 ; i < newOrder.getProducts().size() ; i++){
                 Product product1 = products.get(i);
-                if (Objects.equals(status, OrderState.Placed)) {
-                    product1.setQuantity(product1.getQuantity() - newOrder.getProducts().get(i).getQuantity());
-                } else {
+                if (Objects.equals(status, OrderState.Cancelled)) {
                     product1.setQuantity(product1.getQuantity() + newOrder.getProducts().get(i).getQuantity());
+                } else {
+                    product1.setQuantity(product1.getQuantity() - newOrder.getProducts().get(i).getQuantity());
                 }
                 products.set(i , product1);
                 productRepository.update(product1);
             }
-            createOrderNotification(OrderState.Placed, products , userRepository.findById(newOrder.getUserId()));
+            createOrderNotification(status, products , userRepository.findById(newOrder.getUserId()));
         }catch (Exception e){
             throw new IllegalStateException(e.getMessage());
         }
     }
 
+    public static List<Product> getProducts(List<ShoppingCartItem> ShoppingCartItems , OrderState status){
+        List<Product> products = new LinkedList<>();
+        for(ShoppingCartItem product : ShoppingCartItems){
+            products.add(productRepository.findById(product.getProductId()));
+            if(!Objects.equals(status, OrderState.Cancelled) && !Objects.equals(status , OrderState.Placement) && products.get(products.size() - 1).getQuantity() < product.getQuantity()){
+                throw new IllegalStateException("Not enough quantity for product " + products.get(products.size() - 1).getName());
+            }
+        }
+        return products;
+    }
+
     public abstract void CancelHandler(IOrder order, boolean isCompound);
     public abstract void Process(IOrder order , boolean isCompound);
-    public static void createOrderNotification(OrderState Type, List<Product> products, User user) throws FileNotFoundException {
+    public static void createOrderNotification(OrderState Type, List<Product> products, User user) {
         ITemplate template = TemplateFactory.createTemplate(user.getTemplate() , user.getLanguage());
         Notification notification = NotificationFactory.CreateNotification(Type , template , products , user.getUserCredentials().getUsername() );
         user.addNotification(notification.getId());
@@ -79,14 +85,16 @@ public abstract class ApplicationManager {
             pw.println(notification.notificationMessage);
             pw.close();
         } catch (Exception e) {
-            System.out.println(e);
+            throw new IllegalStateException(e.getMessage());
         }
     }
-
     public static void shipOrder(IOrder order) {
         if(!orderRepository.existsById(order.getId())) {
             throw new IllegalStateException("Order with id " + order.getId() + " does not exist");
         }
-        order.setStatus(OrderState.Placement);
+        if(!order.getStatus().equals(OrderState.Cancelled)) {
+            order.setStatus(OrderState.Placement);
+            createOrderNotification(OrderState.Placement, getProducts(order.getProducts() , order.getStatus()) , userRepository.findById(order.getUserId()));
+        }
     }
 }

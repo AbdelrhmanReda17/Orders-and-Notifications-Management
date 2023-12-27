@@ -1,7 +1,6 @@
 package Application.APIS.Orders.Model;
 
 
-import java.util.Date;
 import java.util.List;
 
 public class SimpleOrder extends IOrder {
@@ -43,10 +42,6 @@ public class SimpleOrder extends IOrder {
                 ", status = " + getStatus() +
                 ", id= " + id+
                 ", products= " + products;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public void setPrice(double price) {

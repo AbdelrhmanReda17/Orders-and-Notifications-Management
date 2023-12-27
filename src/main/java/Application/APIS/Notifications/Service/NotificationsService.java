@@ -2,11 +2,9 @@ package Application.APIS.Notifications.Service;
 
 import Application.APIS.Notifications.Model.Notification;
 import Application.APIS.Notifications.NotificationsRepository;
-import Application.Utilities.Template.ITemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
 import java.util.Map;
 
 

@@ -4,6 +4,8 @@ import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.OrderState;
 import Application.APIS.Users.Model.User;
 
+import java.util.concurrent.TimeUnit;
+
 public class SimpleOrderManager extends ApplicationManager {
 
     @Override
@@ -23,6 +25,7 @@ public class SimpleOrderManager extends ApplicationManager {
         try {
             User user = userRepository.findById(newOrder.getUserId());
             user.getPayment().WithDraw(user,newOrder.getPrice() + (isCompound ? 0 : OrderFees));
+            executorService.schedule(()->ApplicationManager.shipOrder(newOrder), 10, TimeUnit.SECONDS);
         }
         catch (Exception e) {
             throw new IllegalStateException(e.getMessage());
