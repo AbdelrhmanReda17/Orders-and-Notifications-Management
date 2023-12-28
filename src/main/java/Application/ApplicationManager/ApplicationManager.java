@@ -30,15 +30,20 @@ public abstract class ApplicationManager {
     static OrderRepository orderRepository = new OrderRepository();
     protected final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
+    public void ProcessManager(User user, OrderState status, IOrder newOrder, boolean isCompound)  {
+        if (Objects.equals(status, OrderState.Cancelled)) {
+            CancelHandler(newOrder,isCompound);
+        } else {
+            Process(newOrder, isCompound, user);
+        }
+    }
+
     public void ManageOrder(IOrder newOrder , boolean isCompound, OrderState status){
         if(newOrder.getStatus() != OrderState.Placed){ return; }
         List<Product> products = getProducts(newOrder.getProducts() , status);
         try{
-            if (Objects.equals(status, OrderState.Cancelled)) {
-                CancelHandler(newOrder,isCompound);
-            } else {
-                Process(newOrder, isCompound);
-            }
+            User user = userRepository.findById(newOrder.getUserId());
+            ProcessManager(user , status , newOrder , isCompound);
             for(int i = 0 ; i < newOrder.getProducts().size() ; i++){
                 Product product1 = products.get(i);
                 if (Objects.equals(status, OrderState.Cancelled)) {
@@ -49,11 +54,13 @@ public abstract class ApplicationManager {
                 products.set(i , product1);
                 productRepository.update(product1);
             }
-            createOrderNotification(status, products , userRepository.findById(newOrder.getUserId()));
+            createOrderNotification(status, products , user);
         }catch (Exception e){
             throw new IllegalStateException(e.getMessage());
         }
     }
+
+    public abstract void VerifyOrder(IOrder order, User user);
 
     public static List<Product> getProducts(List<ShoppingCartItem> ShoppingCartItems , OrderState status){
         List<Product> products = new LinkedList<>();
@@ -66,8 +73,9 @@ public abstract class ApplicationManager {
         return products;
     }
 
+
     public abstract void CancelHandler(IOrder order, boolean isCompound);
-    public abstract void Process(IOrder order , boolean isCompound);
+    public abstract void Process(IOrder order , boolean isCompound, User user);
     public static void createOrderNotification(OrderState Type, List<Product> products, User user) {
         ITemplate template = TemplateFactory.createTemplate(user.getTemplate() , user.getLanguage());
         Notification notification = NotificationFactory.CreateNotification(Type , template , products , user.getUserCredentials().getUsername() );

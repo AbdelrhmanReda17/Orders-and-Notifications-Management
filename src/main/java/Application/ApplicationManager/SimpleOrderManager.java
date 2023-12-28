@@ -21,9 +21,16 @@ public class SimpleOrderManager extends ApplicationManager {
     }
 
     @Override
-    public void Process(IOrder newOrder , boolean isCompound) {
+    public void VerifyOrder(IOrder order, User user) {
+        if (user.getPayment().getBalance() < order.getPrice()) {
+            throw new IllegalStateException("Insufficient Funds for " + user.getUserCredentials().getUsername() + " who has id (" + user.getId() + ")");
+        }
+    }
+
+    @Override
+    public void Process(IOrder newOrder , boolean isCompound, User user) {
         try {
-            User user = userRepository.findById(newOrder.getUserId());
+            VerifyOrder(newOrder, user);
             user.getPayment().WithDraw(user,newOrder.getPrice() + (isCompound ? 0 : OrderFees));
             executorService.schedule(()->ApplicationManager.shipOrder(newOrder), 10, TimeUnit.SECONDS);
         }
