@@ -24,10 +24,20 @@ public class ProductController {
         }
     }
 
+
     @GetMapping("/{id}")
     public ResponseEntity<Object> getProduct(@PathVariable("id")  int id) {
         try {
             return ResponseEntity.ok(productService.getProduct(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{category}")
+    public ResponseEntity<Object> getProductsByCategory(@PathVariable("category") String category) {
+        try {
+            return ResponseEntity.ok(productService.getProductsByCategory(category));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -56,4 +56,11 @@ public class ProductService {
         }
     }
 
+    public List<Product> getProductsByCategory(String category) {
+        try {
+            return productRepository.findByCategory(category);
+        } catch (Exception e) {
+            throw new IllegalStateException("Could not get products");
+        }
+    }
 }
