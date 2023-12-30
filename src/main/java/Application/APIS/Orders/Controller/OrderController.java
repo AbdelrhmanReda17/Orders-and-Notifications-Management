@@ -31,7 +31,7 @@ public class OrderController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    @PostMapping("/")
+    @PostMapping("/placeOrder/")
     public ResponseEntity<Object> addOrder(@RequestBody IOrder order) {
         try {
             orderService.addOrder(order);
@@ -40,15 +40,31 @@ public class OrderController {
         }
         return ResponseEntity.ok(order);
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> cancelOrder(@PathVariable("id") int id) {
+    @DeleteMapping("/cancelOrder/{id}")
+    public ResponseEntity<Object> deleteOrder(@PathVariable("id") int id) {
         try{
-            orderService.cancelOrder(id);
+            return ResponseEntity.ok(orderService.deleteOrder(id));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.ok("Order deleted successfully");
     }
+    @PutMapping("/cancelShipping/{id}")
+    public ResponseEntity<Object> cancelShipmentOrder(@PathVariable("id") int id) {
+        try {
+            return ResponseEntity.ok(orderService.cancelShipmentOrder(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+    @PutMapping("/confirmShipping/{id}")
+    public ResponseEntity<Object> ConfirmShipping(@PathVariable("id") int id) {
+        try {
+            return ResponseEntity.ok(orderService.placementOrder(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 }
 
 

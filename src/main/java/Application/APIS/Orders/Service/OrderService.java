@@ -1,13 +1,11 @@
 package Application.APIS.Orders.Service;
 
 import Application.APIS.Orders.Model.IOrder;
-import Application.ApplicationManager.OrderProcessorFactory;
 import Application.APIS.Orders.Model.OrderState;
 import Application.APIS.Orders.OrderRepository;
-import Application.ApplicationManager.ApplicationManager;
+import Application.Managers.ApplicationManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 
 @Service
@@ -28,29 +26,37 @@ public class OrderService {
          }
     }
     public void addOrder(IOrder newOrder) {
-        try {
-            if(orderRepository.existsById(newOrder.getId())) {
-                throw new IllegalStateException("Order with id " + newOrder.getId() + " already exists");
-            }
-            ApplicationManager orderProcessor = OrderProcessorFactory.CreateOrderProcessor(newOrder);
-            orderProcessor.ManageOrder(newOrder , false,OrderState.Placed);
-            orderRepository.save(newOrder);
-        } catch (Exception e) {
-            throw new IllegalStateException(e.getMessage());
-        }
+        newOrder.setId(orderRepository.getNextId());
+        ApplicationManager.ManageOrder(newOrder ,OrderState.Placed);
+        orderRepository.save(newOrder);
     }
-    public void cancelOrder(int id) {
+    public IOrder deleteOrder(int id) {
         if(!orderRepository.existsById(id)) {
             throw new IllegalStateException("Order with id " + id + " does not exist");
         }
         IOrder order = orderRepository.findById(id);
-        if (!order.getStatus().equals(OrderState.Placement)) {
-            ApplicationManager orderProcessor = OrderProcessorFactory.CreateOrderProcessor(order);
-            orderProcessor.ManageOrder(order,false,OrderState.Cancelled);
-            orderRepository.deleteById(id);
-            return;
-        }
-        throw new IllegalStateException("Order with id " + id + " is already shipped and Cannot be cancelled");
+        ApplicationManager.ManageOrder(order,OrderState.Cancelled);
+        orderRepository.deleteById(id);
+        return order;
     }
 
+    public IOrder cancelShipmentOrder(int id) {
+        if(!orderRepository.existsById(id)) {
+            throw new IllegalStateException("Order with id " + id + " does not exist");
+        }
+        IOrder order = orderRepository.findById(id);
+        ApplicationManager.ManageOrder(order,OrderState.CancelShipping);
+        orderRepository.update(order);
+        return order;
+    }
+
+    public IOrder placementOrder(int id) {
+        if(!orderRepository.existsById(id)) {
+            throw new IllegalStateException("Order with id " + id + " does not exist");
+        }
+        IOrder order = orderRepository.findById(id);
+        ApplicationManager.ManageOrder(order,OrderState.Shipping);
+        orderRepository.update(order);
+        return order;
+    }
 }

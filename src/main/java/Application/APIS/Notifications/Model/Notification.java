@@ -2,7 +2,7 @@ package Application.APIS.Notifications.Model;
 
 import Application.Utilities.Database.IModel;
 
-public class Notification implements IModel  {
+public class Notification implements IModel<Integer>  {
     public String notificationMessage;
     private static int notificationNumber = 0;
     private final String notificationMessageTemplate;
@@ -23,11 +23,11 @@ public class Notification implements IModel  {
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return notificationId;
     }
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.notificationId = id;
     }
 }

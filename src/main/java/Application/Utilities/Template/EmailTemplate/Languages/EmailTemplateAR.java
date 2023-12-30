@@ -36,4 +36,8 @@ public class EmailTemplateAR extends EmailTemplate{
             return "عزيزي" + name + "، نأسف لإبلاغك بأن طلبك " + "للمنتج" + (products.size() == 1 ? " " : "ات ") + productsString + " تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.";
         }
     }
+    @Override
+    public String CancelShippingOrderMessage(String name, List<Product> products, boolean isTemp) {
+        return "CancelShippingOrderMessage";
+    }
 }

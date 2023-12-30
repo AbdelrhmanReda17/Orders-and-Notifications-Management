@@ -25,8 +25,11 @@ public class TemplateFactory {
             case Cancelled -> {
                 return new AbstractMap.SimpleEntry<>(template.CancelOrderMessage(name, order, false), template.PlaceOrderMessage(name, order, true));
             }
-            case Placement -> {
+            case Shipping -> {
                 return new AbstractMap.SimpleEntry<>(template.PlacementOrderMessage(name, order, false), template.PlacementOrderMessage(name, order, true));
+            }
+            case CancelShipping -> {
+                return new AbstractMap.SimpleEntry<>(template.CancelShippingOrderMessage(name, order, false), template.CancelShippingOrderMessage(name, order, true));
             }
             default -> {
                 return null;

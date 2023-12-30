@@ -1,6 +1,6 @@
 package Application.APIS.Notifications;
 
-import Application.ApplicationManager.ApplicationManager;
+import Application.Managers.ApplicationManager;
 import Application.Utilities.Database.DataRepository;
 import Application.APIS.Notifications.Model.Notification;
 import org.springframework.stereotype.Repository;
@@ -19,12 +19,12 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
         super(Notification.class);
     }
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-    private final Map<Notification , Integer> notificationsSentQueue = new HashMap<>();
+    private static final Map<Notification , Integer> notificationsSentQueue = new HashMap<>();
 
     public void save(Notification notification) {
         ApplicationManager.AppendToFile(notification);
         data.add(notification);
-        executorService.schedule(() -> popNotification(notification), 10, TimeUnit.SECONDS);
+        executorService.schedule(() -> popNotification(notification), 2, TimeUnit.SECONDS);
     }
     public void popNotification(Notification notification) {
         data.remove(notification);

@@ -6,10 +6,16 @@ import java.util.List;
 public class SimpleOrder extends IOrder {
     private double price;
     private List<ShoppingCartItem> products;
-    public SimpleOrder(int id , double price, int userId, List<ShoppingCartItem> products) {
-        super(id , userId);
+    public SimpleOrder(double price, int userId, List<ShoppingCartItem> products) {
+        super(userId);
         this.price = price;
         this.userId = userId;
+        this.products = products;
+    }
+
+    public SimpleOrder(int id, int userId, double price, List<ShoppingCartItem> products) {
+        super(id, userId);
+        this.price = price;
         this.products = products;
     }
     @Override
@@ -31,6 +37,16 @@ public class SimpleOrder extends IOrder {
     @Override
     public void setStatus(OrderState status) {
         this.status = status;
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     @Override

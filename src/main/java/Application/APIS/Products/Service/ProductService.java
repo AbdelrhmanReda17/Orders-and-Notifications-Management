@@ -60,7 +60,7 @@ public class ProductService {
         try {
             return productRepository.findByCategory(category);
         } catch (Exception e) {
-            throw new IllegalStateException("Could not get products");
+            throw new IllegalStateException("Empty category or category does not exist");
         }
     }
 }

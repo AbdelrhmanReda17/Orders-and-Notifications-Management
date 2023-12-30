@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class DataRepository<T , S> implements Repository<T , S> {
+public class DataRepository<T extends IModel<S> , S> implements Repository<T , S> {
     protected List<T> data;
     protected DataRepository(Class<T> clazz) {
       DatabaseFactory<T> databaseFactory = new DatabaseFactory<>();
@@ -13,12 +13,11 @@ public class DataRepository<T , S> implements Repository<T , S> {
     @Override
     public void save(T object) {
         for (T item : data) {
-            if (((IModel) object).getId() == ((IModel) item).getId()) {
+            if (object.getId() == item.getId()) {
 
                 throw new IllegalStateException("Object is  already exists");
             }
         }
-
         data.add(object);
     }
 
@@ -30,7 +29,7 @@ public class DataRepository<T , S> implements Repository<T , S> {
     @Override
     public T findById(S id) {
         for (T object : data) {
-            if (object instanceof IModel && ((IModel) object).getId() == Integer.parseInt(id.toString())) {
+            if (object.getId() == id) {
                 return object;
             }
         }
@@ -42,7 +41,7 @@ public class DataRepository<T , S> implements Repository<T , S> {
         Iterator<T> itr = data.iterator();
         while (itr.hasNext()) {
             T item = itr.next();
-            if (((IModel) object).getId() == ((IModel) item).getId()) {
+            if (object.getId() == item.getId()) {
                 itr.remove();
                 data.add(object);
                 return;
@@ -59,7 +58,7 @@ public class DataRepository<T , S> implements Repository<T , S> {
     @Override
     public boolean existsById(S id) {
         for (T object : data) {
-            if (object instanceof IModel && ((IModel) object).getId() == Integer.parseInt(id.toString())) {
+            if (object.getId() == id) {
                 return true;
             }
         }
@@ -71,7 +70,7 @@ public class DataRepository<T , S> implements Repository<T , S> {
         Iterator<T> itr = data.iterator();
         while (itr.hasNext()) {
             T item = itr.next();
-            if (Integer.parseInt(id.toString()) == ((IModel) item).getId()) {
+            if (item.getId() == id) {
                 itr.remove();
                 return;
             }

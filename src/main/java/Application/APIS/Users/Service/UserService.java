@@ -38,6 +38,7 @@ public class UserService {
 
     public void addUser(User newUser) {
         try {
+            newUser.setId(userRepository.getNextId());
             userRepository.save(newUser);
         } catch (Exception e) {
             throw new IllegalStateException("User with id " + newUser.getId() + " already exists");

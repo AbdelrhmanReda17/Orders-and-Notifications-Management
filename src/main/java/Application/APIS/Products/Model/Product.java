@@ -2,7 +2,7 @@ package Application.APIS.Products.Model;
 import Application.Utilities.Database.IModel;
 
 
-public class Product implements IModel {
+public class Product implements IModel<Integer> {
     static int idCounter = 0;
     int serialNumber;
     String name;
@@ -55,11 +55,11 @@ public class Product implements IModel {
     }
     public String getCategory() { return category; }
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.serialNumber = id;
     }
     @Override
-    public int getId() {
+    public Integer getId() {
         return serialNumber;
     }
 

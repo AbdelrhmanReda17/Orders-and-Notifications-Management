@@ -2,6 +2,8 @@ package Application.APIS.Orders.Model;
 
 public enum OrderState {
     Placed,
-    Placement,
-    Cancelled,
+    Shipping,
+    Shipped,
+    CancelShipping,
+    Cancelled
 }

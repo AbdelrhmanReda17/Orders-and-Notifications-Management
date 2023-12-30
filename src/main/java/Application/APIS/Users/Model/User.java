@@ -10,14 +10,21 @@ import java.util.List;
 
 
 
-public class User implements IModel{
+public class User implements IModel<Integer>{
     int id;
     List<Integer> notifications;
     UserCredentials userCredentials;
     IPayment payment;
     String language;
     String template;
-    public User(int id,UserCredentials userCredentials,IPayment payment, String language , String template) {
+    public User(UserCredentials userCredentials,IPayment payment, String language , String template) {
+        this.userCredentials = userCredentials;
+        this.payment = payment;
+        this.language = language;
+        this.template = template;
+        this.notifications = new LinkedList<>();
+    }
+    public User(int id ,UserCredentials userCredentials,IPayment payment, String language , String template) {
         this.id = id;
         this.userCredentials = userCredentials;
         this.payment = payment;
@@ -25,7 +32,8 @@ public class User implements IModel{
         this.template = template;
         this.notifications = new LinkedList<>();
     }
-    public int getId() {
+    @Override
+    public Integer getId() {
         return id;
     }
     public List<Integer> getNotifications() {
@@ -38,10 +46,9 @@ public class User implements IModel{
         this.notifications.add(notificationId);
     }
     @Override
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id=id;
     }
-
     public UserCredentials getUserCredentials() {
         return userCredentials;
     }

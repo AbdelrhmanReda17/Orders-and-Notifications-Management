@@ -37,4 +37,8 @@ public class EmailTemplateEN extends EmailTemplate {
                     "If you have questions, please contact support. Thank you.";
         }
     }
+    @Override
+    public String CancelShippingOrderMessage(String name, List<Product> products, boolean isTemp) {
+        return "CancelShippingOrderMessage";
+    }
 }

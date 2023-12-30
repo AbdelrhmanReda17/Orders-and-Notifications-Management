@@ -7,16 +7,20 @@ import java.util.List;
 public class CompoundOrder extends IOrder{
     private double price;
     private final List<ShoppingCartItem> products;
-
     public List<IOrder> orderList;
-    public CompoundOrder(int id , double price ,int userId , List<ShoppingCartItem> products , List<IOrder> orderList) {
-        super(id , userId);
+    public CompoundOrder(int id, int userId, double price, List<ShoppingCartItem> products , List<IOrder> orderList) {
+        super(id, userId);
+        this.price = price;
+        this.products = products;
+        this.orderList = orderList;
+    }
+    public CompoundOrder(double price ,int userId , List<ShoppingCartItem> products , List<IOrder> orderList) {
+        super(userId );
         this.price = price;
         this.products = products;
         this.userId = userId;
         this.orderList = orderList;
     }
-
     @Override
     public List<ShoppingCartItem> getProducts() {
         return products;
@@ -32,6 +36,19 @@ public class CompoundOrder extends IOrder{
         for (IOrder order :orderList) {
             order.setStatus(status);
         }
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Integer id) {
+         this.id = id;
+         for (IOrder order :orderList) {
+                order.setId(id);
+         }
     }
     public List<IOrder> getOrderList() {
         return orderList;

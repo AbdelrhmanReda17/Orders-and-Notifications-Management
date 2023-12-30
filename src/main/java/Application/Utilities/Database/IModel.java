@@ -1,6 +1,6 @@
 package Application.Utilities.Database;
 
-public interface IModel {
-    int getId();
-    void setId(int id);
+public interface IModel<T> {
+    T getId();
+    void setId(T id);
 }

@@ -8,21 +8,27 @@ import java.util.Date;
 import java.util.List;
 
 @JsonDeserialize(using = OrderDeserializer.class)
-public abstract class IOrder implements IModel {
+public abstract class IOrder implements IModel<Integer> {
     protected int id;
-    private final Date date;
+    private Date date;
     protected OrderState status;
     protected int userId;
     public IOrder() {
         this.date = new Date();
         this.status = OrderState.Placed;
     }
-    public IOrder(int id ,int userId) {
+    public IOrder(int id, int userId) {
         this.id = id;
+        this.userId = userId;
+        this.date = new Date();
+        this.status = OrderState.Placed;
+    }
+    public IOrder(int userId) {
         this.date = new Date();
         this.status = OrderState.Placed;
         this.userId = userId;
     }
+
     public abstract List<ShoppingCartItem> getProducts();
     public abstract double getPrice();
     public abstract void setPrice(double price);
@@ -38,13 +44,9 @@ public abstract class IOrder implements IModel {
         return userId;
     }
     @Override
-    public int getId() {
-        return id;
-    }
+    public abstract Integer getId();
     @Override
-    public void setId(int id) {
-        this.id = id;
-    }
+    public abstract void setId(Integer id);
     @Override
     public abstract String toString();
 

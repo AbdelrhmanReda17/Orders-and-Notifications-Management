@@ -21,4 +21,8 @@ public class PhoneTemplateEN extends PhoneTemplate {
         StringBuilder productsString = GetProductList(products);
         return "We regret to inform you that your order for the item" + (products.size() == 1 ? " " : "s ")  + productsString  +" has been canceled. If you have questions, please contact support. Thank you.";
     }
+    @Override
+    public String CancelShippingOrderMessage(String name, List<Product> products, boolean isTemp) {
+        return "CancelShippingOrderMessage";
+    }
 }
