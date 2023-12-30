@@ -10,7 +10,7 @@ public class OrderCommandFactory {
             case Placed -> new PlaceOrderCommand();
             case Cancelled -> new CancelOrderCommand();
             case Shipping -> new ShippingOrderCommand();
-            case CancelShipping -> new CancelShipmentOrder();
+            case CancelShipping -> new CancelShipmentOrderCommand();
             case Shipped -> new ShippedOrderCommand();
             default -> null;
         };
