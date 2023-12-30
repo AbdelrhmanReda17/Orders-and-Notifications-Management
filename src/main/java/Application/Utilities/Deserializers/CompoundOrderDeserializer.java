@@ -5,7 +5,7 @@ import Application.APIS.Orders.Model.IOrder;
 import com.fasterxml.jackson.databind.JsonNode;
 
 
-public class CompoundOrderDeserializer extends Deserializer {
+public class CompoundOrderDeserializer extends IOrderDeserializer {
     public IOrder deserialize(JsonNode node){
         return new CompoundOrder(
                 node.get("id").asInt(),

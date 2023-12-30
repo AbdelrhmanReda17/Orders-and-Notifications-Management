@@ -77,8 +77,7 @@ public abstract class ApplicationManager {
     public abstract void CancelHandler(IOrder order, boolean isCompound);
     public abstract void Process(IOrder order , boolean isCompound, User user);
     public static void createOrderNotification(OrderState Type, List<Product> products, User user) {
-        ITemplate template = TemplateFactory.createTemplate(user.getTemplate() , user.getLanguage());
-        Notification notification = NotificationFactory.CreateNotification(Type , template , products , user.getUserCredentials().getUsername() );
+        Notification notification = NotificationFactory.CreateNotification(Type , products , user);
         user.addNotification(notification.getId());
         ApplicationManager.addNotification(notification);
     }

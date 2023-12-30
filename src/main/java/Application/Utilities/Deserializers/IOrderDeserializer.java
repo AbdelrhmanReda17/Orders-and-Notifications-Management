@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.List;
 
-public abstract class Deserializer {
+public abstract class IOrderDeserializer {
     public abstract IOrder deserialize(JsonNode node) throws IOException;
     public static List<ShoppingCartItem> deserializeProducts(JsonNode products) {
         ObjectMapper mapper = new ObjectMapper();

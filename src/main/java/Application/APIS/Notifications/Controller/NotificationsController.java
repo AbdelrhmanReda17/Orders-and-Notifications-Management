@@ -9,7 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/notifications")
-public class NotificationsController  {
+public class    NotificationsController  {
     static NotificationsService notificationsService;
     public NotificationsController(NotificationsService NotificationsService) {
         notificationsService = NotificationsService;

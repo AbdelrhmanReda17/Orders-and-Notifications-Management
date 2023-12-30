@@ -4,7 +4,7 @@ import Application.APIS.Orders.Model.SimpleOrder;
 import com.fasterxml.jackson.databind.JsonNode;
 
 
-public class SimpleOrderDeserializer extends Deserializer{
+public class SimpleOrderDeserializer extends IOrderDeserializer {
     public SimpleOrder deserialize(JsonNode node) {
         return new SimpleOrder(
                 node.get("id").asInt(),
