@@ -4,9 +4,9 @@ import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Users.Model.User;
 import Application.Managers.OrderManager.OrderManager;
 
-public class PlacementOrderCommand implements OrderCommand {
+public class ShippingOrderCommand implements OrderCommand {
     @Override
     public void execute(OrderManager orderManager, IOrder newOrder, User user) {
-        orderManager.PlacementOrder(newOrder, user);
+        orderManager.ShippingOrder(newOrder, user);
     }
 }

@@ -9,22 +9,23 @@ import Application.APIS.Users.Model.User;
 import Application.APIS.Users.UserRepository;
 import Application.Managers.NotificationManager.NotificationManager;
 import Application.Managers.OrderManager.Factory.OrderManagerFactory;
+import Application.Managers.OrderManager.OrderCommands.Factory.OrderCommandFactory;
 import Application.Managers.OrderManager.OrderManager;
 import Application.Managers.ProductManager.ProductManager;
+import Application.Managers.UserManager.UserManager;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.List;
 
 public abstract class ApplicationManager {
-    static UserRepository userRepository = new UserRepository();
     public static int numberOfOrders = 1;
     public static void ManageOrder(IOrder newOrder , OrderState status){
         try{
-            User user = userRepository.findById(newOrder.getUserId());
+            User user = UserManager.getUser(newOrder);
             List<Product> products = ProductManager.getProducts(newOrder.getProducts());
             OrderManager orderManager = OrderManagerFactory.CreateOrderProcessor(newOrder , numberOfOrders);
-            OrderManagerFactory.CreateCommand(status).execute(orderManager , newOrder  , user);
+            OrderCommandFactory.CreateCommand(status).execute(orderManager , newOrder  , user);
             NotificationManager.createOrderNotification(status, products , user);
         }catch (Exception e){
             throw new IllegalStateException(e.getMessage());

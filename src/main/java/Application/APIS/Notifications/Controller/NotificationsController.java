@@ -14,7 +14,7 @@ public class    NotificationsController  {
     public NotificationsController(NotificationsService NotificationsService) {
         notificationsService = NotificationsService;
     }
-    @RequestMapping("/getMostNotifications")
+    @RequestMapping("/getMostNotifications/")
     public ResponseEntity<Object> getMostNotifications() {
         try {
             return ResponseEntity.ok(notificationsService.getMostNotifications());

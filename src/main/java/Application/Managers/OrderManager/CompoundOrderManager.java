@@ -6,6 +6,9 @@ import Application.APIS.Orders.Model.OrderState;
 import Application.APIS.Users.Model.User;
 import Application.Managers.ApplicationManager;
 import Application.Managers.ProductManager.ProductManager;
+import Application.Managers.UserManager.UserManager;
+
+import java.util.concurrent.TimeUnit;
 
 public class CompoundOrderManager extends OrderManager {
 
@@ -20,7 +23,7 @@ public class CompoundOrderManager extends OrderManager {
             throw new IllegalStateException("Insufficient Funds for " + user.getUserCredentials().getUsername() + " who has id (" + user.getId() + ")");
         }
         for (IOrder order : ((CompoundOrder) newOrder).getOrderList()) {
-            User dummmyUser = userRepository.findById(order.getUserId());
+            User dummmyUser = UserManager.getUser(order);
             if (dummmyUser.getPayment().getBalance() < order.getPrice()) {
                 throw new IllegalStateException("Insufficient Funds for " + dummmyUser.getUserCredentials().getUsername() + " who has id (" + dummmyUser.getId() + ")");
             }
@@ -76,5 +79,28 @@ public class CompoundOrderManager extends OrderManager {
         }
         order.setStatus(OrderState.CancelShipping);
     }
+    @Override
+    public void ShippingOrder(IOrder order , User user){
+        if(order.getStatus() != OrderState.Placed) throw new IllegalStateException("Order is already " + order.getStatus().toString() + " and can't be placed");
+        for (int i = 0; i < ((CompoundOrder) order).getOrderList().size(); i++) {
+            ApplicationManager.numberOfOrders = ((CompoundOrder) order).getOrderList().size() + 1;
+            ApplicationManager.ManageOrder(((CompoundOrder) order).getOrderList().get(i), OrderState.Shipping);
+        }
+        order.setStatus(OrderState.Shipping);
+        executorService.schedule(() -> {
+            if (order.getStatus().equals(OrderState.Shipping)) {
+                ApplicationManager.ManageOrder(order, OrderState.Shipped);
+            }
+        }, 4, TimeUnit.SECONDS);
+    }
 
+    @Override
+    public void ShippedOrder(IOrder order, User user ){
+        if(order.getStatus() != OrderState.Shipping) throw new IllegalStateException("Order is already " + order.getStatus().toString() + " and can't be shipped");
+        for (int i = 0; i < ((CompoundOrder) order).getOrderList().size(); i++) {
+            ApplicationManager.numberOfOrders = ((CompoundOrder) order).getOrderList().size() + 1;
+            ApplicationManager.ManageOrder(((CompoundOrder) order).getOrderList().get(i), OrderState.Shipped);
+        }
+        order.setStatus(OrderState.Shipped);
+    }
 }

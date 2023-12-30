@@ -15,13 +15,4 @@ public class OrderManagerFactory {
             default -> null;
         };
     }
-    public static OrderCommand CreateCommand(OrderState state) {
-        return switch (state) {
-            case Placed -> new PlaceOrderCommand();
-            case Cancelled -> new CancelOrderCommand();
-            case Shipping -> new PlacementOrderCommand();
-            case CancelShipping -> new CancelShipmentOrder();
-            default -> null;
-        };
-    }
 }

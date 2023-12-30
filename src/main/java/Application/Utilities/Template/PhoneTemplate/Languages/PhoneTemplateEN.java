@@ -9,20 +9,47 @@ public class PhoneTemplateEN extends PhoneTemplate {
     @Override
     public String PlaceOrderMessage(String name, List<Product> products, boolean isTemp) {
         StringBuilder productsString = GetProductList(products);
+        if (isTemp)
+            return "Hello {x}, we inform you that your order for the item {y} is confirmed. Thank you for shopping with us!";
+        else
+            return "Hello " + name + ", we inform you that your order for the item" + (products.size() == 1 ? "" : "s") +
+                    " " + productsString + " is confirmed. Thank you for shopping with us!";
+    }
 
-        return " your booking of the item" + (products.size() == 1 ? " " : "s ")  + productsString  +" is confirmed.";
-    }
     @Override
-    public String PlacementOrderMessage(String name, List<Product> products , boolean isTemp) {
-        return "Hello " + name + ", your order has been successfully completed. Thank you for shopping with us!";
-    }
-    @Override
-    public String CancelOrderMessage(String name, List<Product> products , boolean isTemp) {
+    public String ShippingOrderMessage(String name, List<Product> products, boolean isTemp) {
         StringBuilder productsString = GetProductList(products);
-        return "We regret to inform you that your order for the item" + (products.size() == 1 ? " " : "s ")  + productsString  +" has been canceled. If you have questions, please contact support. Thank you.";
+        if (isTemp)
+            return "Hello {x}, we inform you that your order for the item {y} is in the shipping process. Thank you for shopping with us!";
+        else
+            return "Hello " + name + ", we inform you that your order for the item" + (products.size() == 1 ? "" : "s") +
+                    " " + productsString + " is in the shipping process. Thank you for shopping with us!";
+    }
+    @Override
+    public String CancelOrderMessage(String name, List<Product> products, boolean isTemp) {
+        StringBuilder productsString = GetProductList(products);
+        if (isTemp)
+            return "Hello {x}, we regret to inform you that your order for the item {y} has been canceled. If you have questions, please contact support. Thank you.";
+        else
+            return "Hello " + name + ", we regret to inform you that your order for the item" + (products.size() == 1 ? "" : "s") +
+                    " " + productsString + " has been canceled. If you have questions, please contact support. Thank you.";
     }
     @Override
     public String CancelShippingOrderMessage(String name, List<Product> products, boolean isTemp) {
-        return "CancelShippingOrderMessage";
+        StringBuilder productsString = GetProductList(products);
+        if (isTemp)
+            return "Hello {x}, we inform you that you canceled the shipment process for your order that has the item {y}. Thank you for choosing us!";
+        else
+            return "Hello " + name + ", we inform you that you canceled the shipment process for your order that has the item" + (products.size() == 1 ? "" : "s") +
+                    " " + productsString + ". Thank you for choosing us!";
+    }
+    @Override
+    public String ShippedOrderMessage(String name, List<Product> products, boolean isTemp) {
+        StringBuilder productsString = GetProductList(products);
+        if (isTemp)
+            return "Hello {x}, we inform you that your order for the item {y} is shipped. Thank you for choosing us!";
+        else
+            return "Hello " + name + ", we inform you that your order for the item" + (products.size() == 1 ? "" : "s") +
+                    " " + productsString + " is shipped. Thank you for choosing us!";
     }
 }
