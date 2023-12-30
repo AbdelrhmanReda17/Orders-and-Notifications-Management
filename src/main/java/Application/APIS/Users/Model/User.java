@@ -17,6 +17,7 @@ public class User implements IModel<Integer>{
     IPayment payment;
     String language;
     String template;
+    public User(){}
     public User(UserCredentials userCredentials,IPayment payment, String language , String template) {
         this.userCredentials = userCredentials;
         this.payment = payment;

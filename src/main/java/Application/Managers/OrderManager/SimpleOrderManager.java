@@ -2,8 +2,8 @@ package Application.Managers.OrderManager;
 
 import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.OrderState;
+import Application.APIS.Products.Service.ProductService;
 import Application.APIS.Users.Model.User;
-import Application.Managers.ProductManager.ProductManager;
 
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +26,7 @@ public class SimpleOrderManager extends OrderManager {
 
     @Override
     public void VerifyOrder(IOrder order, User user) {
-        ProductManager.ValidateProduct(order);
+        ProductService.ValidateProduct(order);
         if (user.getPayment().getBalance() < order.getPrice()) {
             throw new IllegalStateException("Insufficient Funds for " + user.getUserCredentials().getUsername() + " who has id (" + user.getId() + ")");
         }
@@ -39,7 +39,7 @@ public class SimpleOrderManager extends OrderManager {
             VerifyOrder(newOrder, user);
             user.getPayment().WithDraw(user,newOrder.getPrice() + (numberOfOrders != 1 ? 0 : this.orderFee));
             newOrder.setPrice(newOrder.getPrice() + (numberOfOrders != 1 ? 0 : this.orderFee));
-            ProductManager.UpdateProducts(newOrder, ProductManager.getProducts(newOrder.getProducts()), OrderState.Placed);
+            ProductService.UpdateProducts(newOrder, ProductService.getProducts(newOrder.getProducts()), OrderState.Placed);
         }
         catch (Exception e) {
             throw new IllegalStateException(e.getMessage());

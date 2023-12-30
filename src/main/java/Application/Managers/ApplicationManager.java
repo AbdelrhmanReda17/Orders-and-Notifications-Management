@@ -1,18 +1,16 @@
 package Application.Managers;
 
 import Application.APIS.Notifications.Model.Notification;
+import Application.APIS.Notifications.Service.NotificationsService;
 import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.OrderState;
 import Application.APIS.Products.Model.Product;
-import Application.APIS.Products.ProductRepository;
+import Application.APIS.Products.Service.ProductService;
 import Application.APIS.Users.Model.User;
-import Application.APIS.Users.UserRepository;
-import Application.Managers.NotificationManager.NotificationManager;
+import Application.APIS.Users.Service.UserService;
 import Application.Managers.OrderManager.Factory.OrderManagerFactory;
 import Application.Managers.OrderManager.OrderCommands.Factory.OrderCommandFactory;
 import Application.Managers.OrderManager.OrderManager;
-import Application.Managers.ProductManager.ProductManager;
-import Application.Managers.UserManager.UserManager;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -22,11 +20,11 @@ public abstract class ApplicationManager {
     public static int numberOfOrders = 1;
     public static void ManageOrder(IOrder newOrder , OrderState status){
         try{
-            User user = UserManager.getUser(newOrder);
-            List<Product> products = ProductManager.getProducts(newOrder.getProducts());
+            User user = UserService.getUser(newOrder);
+            List<Product> products = ProductService.getProducts(newOrder.getProducts());
             OrderManager orderManager = OrderManagerFactory.CreateOrderProcessor(newOrder , numberOfOrders);
             OrderCommandFactory.CreateCommand(status).execute(orderManager , newOrder  , user);
-            NotificationManager.createOrderNotification(status, products , user);
+            NotificationsService.createOrderNotification(status, products , user);
         }catch (Exception e){
             throw new IllegalStateException(e.getMessage());
         }

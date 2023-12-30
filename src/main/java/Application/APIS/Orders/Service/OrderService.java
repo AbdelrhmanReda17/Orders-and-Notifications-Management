@@ -4,13 +4,14 @@ import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.OrderState;
 import Application.APIS.Orders.OrderRepository;
 import Application.Managers.ApplicationManager;
+import Application.Utilities.Database.DataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 @Service
 public class OrderService {
-    private final OrderRepository orderRepository;
+    private final DataRepository<IOrder, Integer> orderRepository;
     @Autowired
     public OrderService(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
@@ -20,13 +21,13 @@ public class OrderService {
     }
     public IOrder getUserOrders(int userId) {
          try {
-                return orderRepository.findByUserId(userId);
+                return ((OrderRepository) orderRepository).findByUserId(userId);
             } catch (Exception e) {
                 throw new IllegalStateException("Could not get orders");
          }
     }
     public void addOrder(IOrder newOrder) {
-        newOrder.setId(orderRepository.getNextId());
+        newOrder.setId(((OrderRepository) orderRepository).getNextId());
         ApplicationManager.ManageOrder(newOrder ,OrderState.Placed);
         orderRepository.save(newOrder);
     }

@@ -19,3 +19,4 @@ Dear Atef, we inform you that your order for the items Product 2, Product 5 is c
 عزيزي Ahmed، نأسف لإبلاغك بأن طلبك الذي يحتوي على المنتج Product 3 تم إلغاؤه. إذا كانت لديك أسئلة، يرجى التواصل مع الدعم. شكرًا لك.
 Dear Atef, we regret to inform you that your order for the items Product 2, Product 5 has been canceled.
 If you have questions, please contact support. Thank you.
+مرحبًا Yassin، نود إعلامك تم تأكيد حجز الطلب الذي يحتوي على المنتجات Product 3, Product 4.

@@ -1,23 +1,28 @@
 package Application.APIS.Users.Service;
 
+import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Users.Model.User;
 import Application.APIS.Users.UserRepository;
+import Application.Utilities.Database.DataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+    private static DataRepository<User, Integer> userRepository;
 
     @Autowired
     public UserService(UserRepository userRepository ) {
-        this.userRepository = userRepository;
+        UserService.userRepository = userRepository;
     }
 
     public Iterable<User> getUsers() {
         return userRepository.findAll();
     }
 
+    public static User getUser(IOrder order){
+        return userRepository.findById(order.getUserId());
+    }
     public void deleteUser(int id) {
         if(!userRepository.existsById(id)) {
             throw new IllegalStateException("User with id " + id + " does not exist");
@@ -38,7 +43,7 @@ public class UserService {
 
     public void addUser(User newUser) {
         try {
-            newUser.setId(userRepository.getNextId());
+            newUser.setId(((UserRepository)userRepository).getNextId());
             userRepository.save(newUser);
         } catch (Exception e) {
             throw new IllegalStateException("User with id " + newUser.getId() + " already exists");

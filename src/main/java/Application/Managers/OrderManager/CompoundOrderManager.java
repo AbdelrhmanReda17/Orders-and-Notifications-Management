@@ -3,10 +3,10 @@ package Application.Managers.OrderManager;
 import Application.APIS.Orders.Model.CompoundOrder;
 import Application.APIS.Orders.Model.IOrder;
 import Application.APIS.Orders.Model.OrderState;
+import Application.APIS.Products.Service.ProductService;
 import Application.APIS.Users.Model.User;
+import Application.APIS.Users.Service.UserService;
 import Application.Managers.ApplicationManager;
-import Application.Managers.ProductManager.ProductManager;
-import Application.Managers.UserManager.UserManager;
 
 import java.util.concurrent.TimeUnit;
 
@@ -18,12 +18,12 @@ public class CompoundOrderManager extends OrderManager {
 
     @Override
     public void VerifyOrder(IOrder newOrder, User user) {
-        ProductManager.ValidateProduct(newOrder);
+        ProductService.ValidateProduct(newOrder);
         if (newOrder.getPrice() > user.getPayment().getBalance()) {
             throw new IllegalStateException("Insufficient Funds for " + user.getUserCredentials().getUsername() + " who has id (" + user.getId() + ")");
         }
         for (IOrder order : ((CompoundOrder) newOrder).getOrderList()) {
-            User dummmyUser = UserManager.getUser(order);
+            User dummmyUser = UserService.getUser(order);
             if (dummmyUser.getPayment().getBalance() < order.getPrice()) {
                 throw new IllegalStateException("Insufficient Funds for " + dummmyUser.getUserCredentials().getUsername() + " who has id (" + dummmyUser.getId() + ")");
             }
@@ -61,7 +61,7 @@ public class CompoundOrderManager extends OrderManager {
                 ApplicationManager.numberOfOrders = ((CompoundOrder) newOrder).getOrderList().size() + 1;
                 ApplicationManager.ManageOrder(order, OrderState.Placed);
             }
-            ProductManager.UpdateProducts(newOrder, ProductManager.getProducts(newOrder.getProducts()), OrderState.Placed);
+            ProductService.UpdateProducts(newOrder, ProductService.getProducts(newOrder.getProducts()), OrderState.Placed);
         } catch (Exception e) {
             throw new IllegalStateException(e.getMessage());
         }
