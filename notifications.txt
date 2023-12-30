@@ -1,0 +1,8 @@
+عزيزيAhmed، تم تأكيد حجز الطلب للمنتجات Product 2, Product 3.
+ تم تأكيد حجز الطلب للمنتج Product 2.
+Dear Atef, Your booking of the item Product 3 is confirmed, Thank you for shopping with us!
+ تم تأكيد حجز الطلب للمنتجات Product 2, Product 5.
+عزيزيAhmed، تم إكمال طلبك للمنتجات Product 2, Product 3 بنجاح. شكرًا لتسوقك معنا!
+Dear Atef, Your booking of the item Product 3 is Shipped . Thank you for choosing us!
+، تم إكمال طلبك للمنتج Product 2 بنجاح. شكرًا لتسوقك معنا!
+، تم إكمال طلبك للمنتجات Product 2, Product 5 بنجاح. شكرًا لتسوقك معنا!

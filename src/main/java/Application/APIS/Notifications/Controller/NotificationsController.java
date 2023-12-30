@@ -15,7 +15,7 @@ public class    NotificationsController  {
         notificationsService = NotificationsService;
     }
     @RequestMapping("/getMostNotifications")
-    public ResponseEntity<Object> getMostNoficaitions() {
+    public ResponseEntity<Object> getMostNotifications() {
         try {
             return ResponseEntity.ok(notificationsService.getMostNotifications());
         } catch (Exception e) {
@@ -23,7 +23,7 @@ public class    NotificationsController  {
         }
     }
     @RequestMapping("/")
-    public ResponseEntity<Map<String,Integer>> getNoficaitions() {
+    public ResponseEntity<Map<String,Integer>> getNotifications() {
         try {
             return ResponseEntity.ok(notificationsService.getNotifications());
         } catch (Exception e) {

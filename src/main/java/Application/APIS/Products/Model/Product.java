@@ -7,17 +7,19 @@ public class Product implements IModel {
     int serialNumber;
     String name;
     String vendor;
+    String category;
     double price;
     int quantity;
     public Product() {
         this.serialNumber = idCounter++;
     }
-    public Product( String name, String vendor, double price, int quantity) {
+    public Product( String name, String vendor,String category, double price, int quantity) {
         this.serialNumber = idCounter++;
         this.name = name;
         this.vendor = vendor;
         this.price = price;
         this.quantity = quantity;
+        this.category = category;
     }
     public Product(int serialNumber, String name, String vendor, double price, int quantity) {
         this.serialNumber = serialNumber;
@@ -51,6 +53,7 @@ public class Product implements IModel {
     public double getPrice() {
         return price;
     }
+    public String getCategory() { return category; }
     @Override
     public void setId(int id) {
         this.serialNumber = id;

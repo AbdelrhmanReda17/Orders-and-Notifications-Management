@@ -14,9 +14,11 @@ public class DataRepository<T , S> implements Repository<T , S> {
     public void save(T object) {
         for (T item : data) {
             if (((IModel) object).getId() == ((IModel) item).getId()) {
+
                 throw new IllegalStateException("Object is  already exists");
             }
         }
+
         data.add(object);
     }
 

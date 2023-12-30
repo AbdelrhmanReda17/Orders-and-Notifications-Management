@@ -29,7 +29,7 @@ public class UserService {
         try{
             User existingUser = userRepository.findById(id);
             existingUser.getUserCredentials().copy(newUser.getUserCredentials());
-            userRepository.save(existingUser);
+            userRepository.update(existingUser);
         }catch (Exception e){
             throw new IllegalStateException("User with id " + id + " does not exist");
         }
