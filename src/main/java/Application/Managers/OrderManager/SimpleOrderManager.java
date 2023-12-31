@@ -62,7 +62,7 @@ public class SimpleOrderManager extends OrderManager {
                 if (order.getStatus().equals(OrderState.Shipping)) {
                     order.setStatus(OrderState.Shipped);
                 }
-            }, 4, TimeUnit.SECONDS);
+            }, 7, TimeUnit.SECONDS);
         }
     }
     @Override

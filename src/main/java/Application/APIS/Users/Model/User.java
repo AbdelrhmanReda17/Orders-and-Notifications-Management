@@ -53,6 +53,13 @@ public class User implements IModel<Integer>{
     public UserCredentials getUserCredentials() {
         return userCredentials;
     }
+    public void copy(User newUser) {
+        this.notifications = newUser.getNotifications();
+        this.userCredentials = newUser.getUserCredentials();
+        this.payment = newUser.getPayment();
+        this.language = newUser.getLanguage();
+        this.template = newUser.getTemplate();
+    }
     public IPayment getPayment() {
         return payment;
     }

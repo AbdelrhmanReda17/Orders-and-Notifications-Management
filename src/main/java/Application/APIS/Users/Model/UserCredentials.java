@@ -19,16 +19,6 @@ public class UserCredentials {
         this.city = city;
     }
 
-    public void copy(UserCredentials newUserCredentials) {
-        this.username = newUserCredentials.getUsername();
-        this.password = newUserCredentials.getPassword();
-        this.phoneNumber = newUserCredentials.getPhoneNumber();
-        this.address = newUserCredentials.getAddress();
-        this.country = newUserCredentials.getCountry();
-        this.city = newUserCredentials.getCity();
-        this.email = newUserCredentials.getEmail();
-    }
-
     public String getPassword() {
         return password;
     }

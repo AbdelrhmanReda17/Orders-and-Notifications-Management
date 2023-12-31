@@ -1,5 +1,6 @@
 package Application.APIS.Notifications;
 
+import Application.APIS.Users.Model.User;
 import Application.Managers.ApplicationManager;
 import Application.Utilities.Database.DataRepository;
 import Application.APIS.Notifications.Model.Notification;
@@ -20,23 +21,26 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
     }
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     private static final Map<Notification , Integer> notificationsSentQueue = new HashMap<>();
+    private static final Map<User,Integer> mostNotifiedUsers = new HashMap<>();
 
-    public void save(Notification notification) {
+    public void save(Notification notification, User user) {
         ApplicationManager.AppendToFile(notification);
         data.add(notification);
-        executorService.schedule(() -> popNotification(notification), 2, TimeUnit.SECONDS);
+        executorService.schedule(() -> popNotification(notification,user), 2, TimeUnit.SECONDS);
     }
-    public void popNotification(Notification notification) {
+    public void popNotification(Notification notification,User user) {
         data.remove(notification);
         notification.setNotificationMessage(null);
         notification.setId(0);
         for (Notification n : notificationsSentQueue.keySet()){
             if(Objects.equals(n.getNotificationMessage(), notification.getNotificationMessage())) {
                 notificationsSentQueue.put(n, notificationsSentQueue.get(n) + 1);
+                mostNotifiedUsers.put(user, mostNotifiedUsers.get(user) + 1);
                 return;
             }
         }
         notificationsSentQueue.put(notification , 1);
+        mostNotifiedUsers.put(user , 1);
     }
     public Notification getMostNotification() {
         Notification notification = null;
@@ -50,6 +54,20 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
             }
         }
         return notification;
+    }
+
+    public User getMostNotifiedUser() {
+        User user = null;
+        for (User u :  mostNotifiedUsers.keySet()){
+            if(user == null){
+                user = u;
+            }else{
+                if(mostNotifiedUsers.get(u) > mostNotifiedUsers.get(user)){
+                    user = u;
+                }
+            }
+        }
+        return user;
     }
     public Map<String , Integer> getAll() {
         Map<String , Integer> notificationsSent = new HashMap<>();

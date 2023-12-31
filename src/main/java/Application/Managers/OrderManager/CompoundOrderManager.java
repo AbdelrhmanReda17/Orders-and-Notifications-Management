@@ -91,7 +91,7 @@ public class CompoundOrderManager extends OrderManager {
             if (order.getStatus().equals(OrderState.Shipping)) {
                 ApplicationManager.ManageOrder(order, OrderState.Shipped);
             }
-        }, 4, TimeUnit.SECONDS);
+        }, 7, TimeUnit.SECONDS);
     }
 
     @Override

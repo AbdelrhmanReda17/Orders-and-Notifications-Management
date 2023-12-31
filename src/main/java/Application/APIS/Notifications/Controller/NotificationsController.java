@@ -22,6 +22,14 @@ public class    NotificationsController  {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @RequestMapping("/getMostNotifiedUser/")
+    public ResponseEntity<Object> getMostNotifiedUser() {
+        try {
+            return ResponseEntity.ok(notificationsService.getMostNotifiedUser());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
     @RequestMapping("/")
     public ResponseEntity<Map<String,Integer>> getNotifications() {
         try {

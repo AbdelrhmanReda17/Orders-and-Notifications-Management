@@ -24,17 +24,17 @@ public class Common {
     );
     public static List<Product> products = new LinkedList<Product>(
        List.of(
-            new Product( "Product 1", "Vendor","category 1", 100, 10),
-            new Product( "Product 2", "Vendor","category 1", 200, 20),
-            new Product( "Product 3", "Vendor","category 1", 300, 30),
-            new Product( "Product 4", "Vendor","category 2", 400, 40),
-            new Product( "Product 5", "Vendor","category 1", 500, 50),
-            new Product( "Product 6", "Vendor","category 3", 600, 60),
-            new Product( "Product 7", "Vendor","category 1", 700, 70),
-            new Product("Product 8", "Vendor","category 1", 800, 80),
-            new Product( "Product 9", "Vendor","category 4", 900, 90),
-            new Product( "Product 10", "Vendor","category 1", 1000, 100),
-            new Product( "Product 11", "Vendor","category 5", 1100, 110)
+            new Product( "Product 1", "Vendor","category1", 100, 10),
+            new Product( "Product 2", "Vendor","category1", 200, 20),
+            new Product( "Product 3", "Vendor","category1", 300, 30),
+            new Product( "Product 4", "Vendor","category2", 400, 40),
+            new Product( "Product 5", "Vendor","category1", 500, 50),
+            new Product( "Product 6", "Vendor","category3", 600, 60),
+            new Product( "Product 7", "Vendor","category1", 700, 70),
+            new Product("Product 8", "Vendor","category1", 800, 80),
+            new Product( "Product 9", "Vendor","category4", 900, 90),
+            new Product( "Product 10", "Vendor","category1", 1000, 100),
+            new Product( "Product 11", "Vendor","category5", 1100, 110)
        )
     );
 

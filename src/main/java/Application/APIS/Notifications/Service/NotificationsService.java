@@ -20,7 +20,7 @@ public class NotificationsService {
     public static void createOrderNotification(OrderState Type, List<Product> products, User user) {
         Notification notification = NotificationFactory.CreateNotification(Type , products , user);
         user.addNotification(notification.getId());
-        ((NotificationsRepository)notificationsRepository).save(notification);
+        ((NotificationsRepository)notificationsRepository).save(notification,user);
     }
 
     @Autowired
@@ -29,6 +29,14 @@ public class NotificationsService {
     }
     public Map<String, Integer> getNotifications() {
         return ((NotificationsRepository) notificationsRepository).getAll();
+    }
+    public User getMostNotifiedUser() {
+        User user = ((NotificationsRepository)notificationsRepository).getMostNotifiedUser();
+        if(user == null){
+            throw new IllegalArgumentException("No notifications found");
+        }else{
+            return user;
+        }
     }
     public Notification getMostNotifications() {
         Notification ntf = ((NotificationsRepository)notificationsRepository).getMostNotification();

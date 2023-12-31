@@ -31,6 +31,7 @@ public class Product implements IModel<Integer> {
     public void copy(Product newProduct) {
         this.vendor = newProduct.getVendor();
         this.name = newProduct.getName();
+        this.category = newProduct.getCategory();
         this.price = newProduct.getPrice();
         this.quantity = newProduct.getQuantity();
     }
