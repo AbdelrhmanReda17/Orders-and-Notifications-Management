@@ -1,12 +1,15 @@
 package Application.APIS.Notifications;
 
 import Application.APIS.Users.Model.User;
+import Application.APIS.Users.Service.UserService;
+import Application.APIS.Users.UserRepository;
 import Application.Managers.ApplicationManager;
 import Application.Utilities.Database.DataRepository;
 import Application.APIS.Notifications.Model.Notification;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executors;
@@ -21,7 +24,6 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
     }
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     private static final Map<Notification , Integer> notificationsSentQueue = new HashMap<>();
-    private static final Map<User,Integer> mostNotifiedUsers = new HashMap<>();
 
     public void save(Notification notification, User user) {
         ApplicationManager.AppendToFile(notification);
@@ -35,12 +37,10 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
         for (Notification n : notificationsSentQueue.keySet()){
             if(Objects.equals(n.getNotificationMessage(), notification.getNotificationMessage())) {
                 notificationsSentQueue.put(n, notificationsSentQueue.get(n) + 1);
-                mostNotifiedUsers.put(user, mostNotifiedUsers.get(user) + 1);
                 return;
             }
         }
         notificationsSentQueue.put(notification , 1);
-        mostNotifiedUsers.put(user , 1);
     }
     public Notification getMostNotification() {
         Notification notification = null;
@@ -57,12 +57,13 @@ public class NotificationsRepository extends DataRepository<Notification, Intege
     }
 
     public User getMostNotifiedUser() {
+        Iterable<User> userList = UserService.getUsers();
         User user = null;
-        for (User u :  mostNotifiedUsers.keySet()){
+        for (User u :  userList){
             if(user == null){
                 user = u;
             }else{
-                if(mostNotifiedUsers.get(u) > mostNotifiedUsers.get(user)){
+                if(u.getNotifications().size() > user.getNotifications().size()){
                     user = u;
                 }
             }
